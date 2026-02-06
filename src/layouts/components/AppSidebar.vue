@@ -59,7 +59,7 @@ function generateMenuFromParentName(routes: AppRouteRecordRaw[]): MenuOption[] {
 
     const menuItem: MenuOption = {
       label: r.meta?.title || r.name!,
-      key: r.name! as string, // ✅ 用路由 name 作为 key
+      key: r.name! as string, //  用路由 name 作为 key
       icon: renderIconUtil(r.meta?.icon) as () => VNodeChild,
       children: []
     }
@@ -116,6 +116,12 @@ function generateMenuFromParentName(routes: AppRouteRecordRaw[]): MenuOption[] {
 
   img {
     height: 70%;
+  }
+
+  h2 {
+    color: #36ad6a;
+    letter-spacing: 0.5rem;
+    text-decoration: underline;
   }
 }
 
