@@ -40,11 +40,13 @@ interface LoginForm {
 const formRef = ref<FormInst | null>(null)
 const loading = ref(false)
 
+// 菜单数据
 const form = ref<LoginForm>({
   username: '',
   password: ''
 })
 
+// 菜单校验
 const rules: FormRules = {
   username: [{ required: true, message: '请输入用户名', trigger: ['blur', 'input'] }],
   password: [{ required: true, message: '请输入密码', trigger: ['blur', 'input'] }]
@@ -74,6 +76,14 @@ const handleLogin = throttle(async () => {
     loading.value = false
   }
 }, 2000)
+
+onMounted(() => {
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLogin()
+    }
+  })
+})
 </script>
 
 <style scoped>

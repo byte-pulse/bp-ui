@@ -51,7 +51,7 @@ class HttpClient {
         return response.data
       },
       (error) => {
-        console.error('HTTP Error:', error)
+        $message.error('服务器连接异常, 请假查网络连接')
         return Promise.reject(error)
       }
     )

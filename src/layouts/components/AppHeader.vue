@@ -8,7 +8,7 @@
 .n-layout-header {
   background: var(--n-color);
   transition: background-color 0.3s;
-  height: 64px !important;
+  height: vv.$header-heigth !important;
   box-shadow: 0px 11px 30px #919191;
 }
 </style>

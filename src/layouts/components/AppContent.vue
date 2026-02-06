@@ -25,7 +25,7 @@
 }
 
 .content {
-  height: calc(100vh - 64px);
+  height: calc(100vh - vv.$header-heigth);
   padding: vv.$primary-padding;
 }
 </style>

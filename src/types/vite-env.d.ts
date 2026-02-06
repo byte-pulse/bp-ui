@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_LANGUAGE: string
   readonly VITE_APP_PORT: string
   readonly VITE_APP_API_BASE_URL: string
+  readonly VITE_APP_HAPPY_URL: string
 }
 
 interface ImportMeta {

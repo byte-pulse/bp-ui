@@ -12,12 +12,34 @@ export const baseRoutes: AppRouteRecordRaw[] = [
     },
     children: [
       {
+        path: '404',
+        component: () => import('@/components/exception/NotFound.vue'),
+        meta: {
+          title: '404',
+          hidden: true
+        }
+      },
+      {
+        path: '403',
+        component: () => import('@/components/exception/Forbidden.vue'),
+        meta: {
+          title: '403',
+          hidden: true
+        }
+      },
+      {
         path: '',
         component: () => import('@/views/home/Index.vue'),
         meta: {
-          title: '首页',
-          hidden: false,
-          enabled: true
+          title: '首页'
+        }
+      },
+      {
+        path: 'happy',
+        component: () => import('@/views/happy/Index.vue'),
+        meta: {
+          title: 'happy',
+          permissions: ['happy']
         }
       }
     ]
@@ -25,5 +47,9 @@ export const baseRoutes: AppRouteRecordRaw[] = [
   {
     path: '/login',
     component: () => import('@/views/login/Index.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
   }
 ]

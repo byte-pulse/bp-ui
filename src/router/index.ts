@@ -7,6 +7,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _) => {
+  $loadingBar.start()
   const authStore = useAuthStore()
   const token = authStore.token
   if (!token && to.path !== '/login') {
@@ -17,9 +18,23 @@ router.beforeEach((to, _) => {
       }
     }
   }
-  // ...
-  // 返回 false 以取消导航
+  const metaPerm = to.meta.permissions as string[]
+  if (metaPerm) {
+    const hasAuth = metaPerm.every((p) => authStore.permission.includes(p))
+
+    if (!hasAuth) {
+      return '/403'
+    }
+  }
   return true
+})
+
+router.afterEach((to, _) => {
+  if (to.path === '/404' || to.path === '/403') {
+    $loadingBar.error()
+    return
+  }
+  $loadingBar.finish()
 })
 
 export default router

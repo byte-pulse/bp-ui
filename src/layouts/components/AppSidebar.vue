@@ -10,17 +10,20 @@
     @collapse="collapsed = true"
     @expand="collapsed = false"
   >
-    <div class="h-16 flex items-center justify-center border-b">
-      <!-- <img v-if="!collapsed" src="/logo.png" alt="Logo" class="h-8" /> -->
+    <div class="h-16 flex items-center justify-center border-b logo-div">
+      <img v-if="!collapsed" src="@/assets/images/github.png" alt="Logo" />
     </div>
-
-    <n-menu
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :options="menuOptions"
-      :value="activeKey"
-    />
+    <div class="menu-div">
+      <n-scrollbar>
+        <n-menu
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+          :value="activeKey"
+        />
+      </n-scrollbar>
+    </div>
   </n-layout-sider>
 </template>
 
@@ -72,13 +75,33 @@ const menuOptions = computed(() => [
   {
     label: () => h(RouterLink, { to: '/system' }, { default: () => '系统设置' }),
     key: 'system'
+  },
+  {
+    label: () => h(RouterLink, { to: '/happy' }, { default: () => '找点乐子' }),
+    key: 'happy'
   }
 ])
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* 自定义侧边栏样式 */
 .n-layout-sider {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-div {
+  height: vv.$header-heigth;
+  display: flex;
+  align-items: center;
+  padding: 0 vv.$primary-padding;
+
+  img {
+    height: 80%;
+  }
+}
+
+.menu-div {
+  width: 100%;
+  height: calc(100vh - vv.$header-heigth);
 }
 </style>
