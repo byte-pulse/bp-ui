@@ -12,7 +12,7 @@ export const baseRoutes: AppRouteRecordRaw[] = [
     },
     children: [
       {
-        path: '404',
+        path: '/404',
         name: '404',
         component: () => import('@/components/exception/NotFound.vue'),
         meta: {
@@ -21,7 +21,7 @@ export const baseRoutes: AppRouteRecordRaw[] = [
         }
       },
       {
-        path: '403',
+        path: '/403',
         name: '403',
         component: () => import('@/components/exception/Forbidden.vue'),
         meta: {
