@@ -20,8 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
-
 const rows = 8
 const cols = 8
 const bombsCount = 10
@@ -206,10 +204,12 @@ const resetGame = () => {
 
 .cell-unrevealed {
   background-color: #ddd;
+  color: black;
 }
 
 .cell-safe {
-  background-color: #b2f2bb;
+  background-color: #1d4fd8a8;
+  color: rgb(255, 255, 255);
 }
 
 .cell-bomb {

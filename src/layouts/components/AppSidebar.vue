@@ -112,14 +112,14 @@ function generateMenuFromParentName(routes: AppRouteRecordRaw[]): MenuOption[] {
   display: flex;
   align-items: center;
   padding: 0 vv.$primary-padding;
-  box-shadow: 0px -30px 40px #0000008c;
+  box-shadow: 0px -30px 40px #000000cc;
 
   img {
     height: 70%;
   }
 
   h2 {
-    color: #36ad6a;
+    color: #1e40af;
     letter-spacing: 0.5rem;
     text-decoration: underline;
   }
