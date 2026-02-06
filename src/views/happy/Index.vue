@@ -60,6 +60,15 @@ const createGrid = (): Cell[] => {
     grid[i]!.nearby = neighbors.filter((n) => grid[n]!.isBomb).length
   }
 
+  console.log(
+    '💣 菜鸟, 来找正确答案吗 ->:',
+    grid
+      .map((cell, index) =>
+        cell.isBomb ? { row: Math.floor(index / cols) + 1, col: (index % cols) + 1 } : null
+      )
+      .filter(Boolean)
+  )
+
   return grid
 }
 
@@ -99,6 +108,18 @@ const floodReveal = (grid: Cell[], index: number) => {
 // 响应式棋盘
 const grid = reactive<Cell[]>(createGrid())
 
+// 检查是否胜利
+const checkWin = () => {
+  // 条件1: 所有非炸弹格子都揭示了
+  const allSafeRevealed = grid.every((cell) => cell.isBomb || cell.revealed)
+  // 条件2: 所有炸弹都被标记
+  const allBombFlagged = grid.every((cell) => !cell.isBomb || cell.flagged)
+  if (allSafeRevealed || allBombFlagged) {
+    $message.success('🎉 恭喜，你找到了所有炸弹！')
+    revealAllBombs() // 展示完整雷区
+  }
+}
+
 // 点击格子
 const revealCell = (index: number) => {
   const cell = grid[index]!
@@ -111,12 +132,14 @@ const revealCell = (index: number) => {
   } else {
     cell.revealed = true
   }
+  checkWin()
 }
 
 // 标记旗子
 const toggleFlag = (index: number) => {
   const cell = grid[index]!
   if (!cell.revealed) cell.flagged = !cell.flagged
+  checkWin()
 }
 
 // 显示格子内容

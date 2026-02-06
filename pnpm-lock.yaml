@@ -23,6 +23,12 @@ importers:
 
   .:
     dependencies:
+      '@vicons/antd':
+        specifier: ^0.13.0
+        version: 0.13.0
+      '@vicons/ionicons5':
+        specifier: ^0.13.0
+        version: 0.13.0
       axios:
         specifier: ^1.13.4
         version: 1.13.4
@@ -57,9 +63,6 @@ importers:
       '@types/qs':
         specifier: ^6.14.0
         version: 6.14.0
-      '@vicons/ionicons5':
-        specifier: ^0.13.0
-        version: 0.13.0
       '@vitejs/plugin-vue':
         specifier: ^6.0.3
         version: 6.0.4(vite@8.0.0-beta.12(@types/node@25.2.0)(esbuild@0.27.2)(jiti@2.6.1)(sass@1.97.3)(yaml@2.8.2))(vue@3.6.0-beta.5(typescript@5.9.3))
@@ -1109,6 +1112,9 @@ packages:
   '@typescript-eslint/visitor-keys@8.54.0':
     resolution: {integrity: sha512-VFlhGSl4opC0bprJiItPQ1RfUhGDIBokcPwaFH4yiBCaNPeld/9VeXbiPO1cLyorQi1G1vL+ecBk1x8o1axORA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@vicons/antd@0.13.0':
+    resolution: {integrity: sha512-yrUGoUSz2BbGupk9ghQOahc04n5H3MwUDM9pVPsLh9U1uqB47oRWZvYRiZaT1JKPqgTgSE6BXcVw4i9MOF4M+g==}
 
   '@vicons/ionicons5@0.13.0':
     resolution: {integrity: sha512-zvZKBPjEXKN7AXNo2Na2uy+nvuv6SP4KAMQxpKL2vfHMj0fSvuw7JZcOPCjQC3e7ayssKnaoFVAhbYcW6v41qQ==}
@@ -3691,6 +3697,8 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.54.0
       eslint-visitor-keys: 4.2.1
+
+  '@vicons/antd@0.13.0': {}
 
   '@vicons/ionicons5@0.13.0': {}
 

@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import { toLogin } from '@/api/login'
+import { initRouter } from '@/router'
 import { type FormInst, type FormRules } from 'naive-ui'
 
 interface LoginForm {
@@ -67,6 +68,7 @@ const handleLogin = throttle(async () => {
     const { code, data } = await toLogin({ ...form.value })
     if (code === 200) {
       authStore.token = data.token
+      initRouter()
       $message.success('登录成功')
       const redirect = (route.query.redirect as string) || '/'
       router.replace(redirect)

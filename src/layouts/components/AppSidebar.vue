@@ -6,7 +6,7 @@
     :width="240"
     :collapsed="collapsed"
     :native-scrollbar="false"
-    show-trigger
+    show-trigger="bar"
     @collapse="collapsed = true"
     @expand="collapsed = false"
   >
@@ -28,63 +28,77 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, h, computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import type { MenuOption } from 'naive-ui'
+import type { AppRouteRecordRaw } from '@/router/types' // 你的自定义路由类型
+import type { VNodeChild } from 'vue'
 
+const router = useRouter()
+const route = useRoute()
 const collapsed = ref(false)
-const activeKey = ref('dashboard')
+const activeKey = computed(() => route.name as string)
 
-// 菜单配置
-const menuOptions = computed(() => [
-  {
-    label: () => h(RouterLink, { to: '/dashboard' }, { default: () => '仪表盘' }),
-    key: 'dashboard'
-  },
-  {
-    label: '用户管理',
-    key: 'user',
-    children: [
-      {
-        label: () => h(RouterLink, { to: '/user/list' }, { default: () => '用户列表' }),
-        key: 'user-list'
-      },
-      {
-        label: () => h(RouterLink, { to: '/user/add' }, { default: () => '添加用户' }),
-        key: 'user-add'
-      }
-    ]
-  },
-  {
-    label: '内容管理',
-    key: 'content',
-    children: [
-      {
-        label: () => h(RouterLink, { to: '/content/list' }, { default: () => '文章列表' }),
-        key: 'content-list'
-      },
-      {
-        label: () => h(RouterLink, { to: '/content/category' }, { default: () => '分类管理' }),
-        key: 'content-category'
-      }
-    ]
-  },
-  {
-    label: () => h(RouterLink, { to: '/statistics' }, { default: () => '数据统计' }),
-    key: 'statistics'
-  },
-  {
-    label: () => h(RouterLink, { to: '/system' }, { default: () => '系统设置' }),
-    key: 'system'
-  },
-  {
-    label: () => h(RouterLink, { to: '/happy' }, { default: () => '找点乐子' }),
-    key: 'happy'
+// 从平铺路由生成多级菜单（通过 parentName）
+const menuOptions = computed<MenuOption[]>(() => {
+  const mainRoute = router.options.routes.find((r) => r.path === '/')
+  if (!mainRoute?.children) return []
+  return generateMenuFromParentName(mainRoute.children as AppRouteRecordRaw[])
+})
+
+function generateMenuFromParentName(routes: AppRouteRecordRaw[]): MenuOption[] {
+  const router = useRouter()
+  const routerMap = new Map<string, AppRouteRecordRaw>()
+  const menuMap = new Map<string, MenuOption>()
+
+  // 先生成所有菜单项
+  routes.forEach((r) => {
+    if (r.meta?.enabled === false || r.meta?.hidden === true) return
+
+    const menuItem: MenuOption = {
+      label: r.meta?.title || r.name!,
+      key: r.name! as string, // ✅ 用路由 name 作为 key
+      icon: renderIconUtil(r.meta?.icon) as () => VNodeChild,
+      children: []
+    }
+
+    // 点击逻辑
+    menuItem.onClick = () => {
+      const target = routerMap.get(r.name! as string)
+      if (!target) return
+      if (target.redirect) router.push(target.redirect as string)
+      else if (target.path) router.push(target.path)
+    }
+
+    menuMap.set(r.name! as string, menuItem)
+    routerMap.set(r.name! as string, r)
+  })
+
+  const menuTree: MenuOption[] = []
+
+  // 构建多级菜单
+  menuMap.forEach((menuItem, name) => {
+    const route = routerMap.get(name)!
+    const parentName = route.meta?.parentName
+    if (parentName && menuMap.has(parentName as string)) {
+      menuMap.get(parentName as string)!.children!.push(menuItem)
+    } else {
+      menuTree.push(menuItem)
+    }
+  })
+
+  // 清理空 children，让 Naive UI 判断目录
+  const cleanChildren = (items: MenuOption[]) => {
+    items.forEach((i) => {
+      if (i.children?.length === 0) delete i.children
+      else cleanChildren(i.children as MenuOption[])
+    })
   }
-])
+  cleanChildren(menuTree)
+
+  return menuTree
+}
 </script>
 
 <style lang="scss" scoped>
-/* 自定义侧边栏样式 */
 .n-layout-sider {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
