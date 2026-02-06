@@ -30,7 +30,7 @@ export const baseRoutes: AppRouteRecordRaw[] = [
         }
       },
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         component: () => import('@/views/home/Index.vue'),
         meta: {
@@ -39,7 +39,7 @@ export const baseRoutes: AppRouteRecordRaw[] = [
         }
       },
       {
-        path: 'happy',
+        path: '/home/happy',
         name: 'happy',
         component: () => import('@/views/happy/Index.vue'),
         meta: {
@@ -49,7 +49,7 @@ export const baseRoutes: AppRouteRecordRaw[] = [
         }
       },
       {
-        path: 'icon',
+        path: '/icon',
         name: 'icon',
         component: () => import('@/views/icon/Index.vue'),
         meta: {
