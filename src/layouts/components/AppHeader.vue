@@ -9,6 +9,6 @@
   background: var(--n-color);
   transition: background-color 0.3s;
   height: vv.$header-heigth !important;
-  box-shadow: 0px 11px 30px #919191;
+  box-shadow: 0px -30px 40px #0000008c;
 }
 </style>

@@ -10,8 +10,12 @@
     @collapse="collapsed = true"
     @expand="collapsed = false"
   >
-    <div class="h-16 flex items-center justify-center border-b logo-div">
-      <img v-if="!collapsed" src="@/assets/images/github.png" alt="Logo" />
+    <div
+      class="h-16 flex items-center justify-center border-b logo-div"
+      :style="{ justifyContent: collapsed ? 'center' : 'space-around' }"
+    >
+      <img src="@/assets/images/github.png" alt="Logo" />
+      <h2 v-if="!collapsed">前端模板</h2>
     </div>
     <div class="menu-div">
       <n-scrollbar>
@@ -29,7 +33,7 @@
 
 <script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
-import type { AppRouteRecordRaw } from '@/router/types' // 你的自定义路由类型
+import type { AppRouteRecordRaw } from '@/router/types' // 自定义路由类型
 import type { VNodeChild } from 'vue'
 
 const router = useRouter()
@@ -108,9 +112,10 @@ function generateMenuFromParentName(routes: AppRouteRecordRaw[]): MenuOption[] {
   display: flex;
   align-items: center;
   padding: 0 vv.$primary-padding;
+  box-shadow: 0px -30px 40px #0000008c;
 
   img {
-    height: 80%;
+    height: 70%;
   }
 }
 
