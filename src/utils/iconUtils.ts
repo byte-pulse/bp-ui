@@ -37,3 +37,27 @@ export function renderIconUtil(icon?: string | unknown): Component {
 
   return () => h(NIcon, null, { default: () => h(iconComp) })
 }
+
+// 不包裹NIcon
+export function renderIconUtilNoNIcon(icon?: string | unknown): Component {
+  if (!icon) {
+    icon = 'antd/BarsOutlined'
+  }
+
+  if (typeof icon !== 'string') {
+    return () => h(iconMaps['ionicons5']?.['Apps'] as Component)
+  }
+
+  let [lib, iconName] = icon.split('/')
+  if (!lib || !iconName) {
+    lib = 'ionicons5'
+    iconName = 'Apps'
+  }
+
+  const iconComp = iconMaps[lib]?.[iconName]
+  if (!iconComp) {
+    return () => h(iconMaps['ionicons5']?.['Apps'] as Component)
+  }
+
+  return () => h(iconComp)
+}

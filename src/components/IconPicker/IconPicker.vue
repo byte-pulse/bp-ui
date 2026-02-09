@@ -14,7 +14,7 @@
                 class="icon-item"
                 @click="copyIcon(lib.key, item.name)"
               >
-                <n-icon size="28">
+                <n-icon size="20">
                   <component :is="item.component" />
                 </n-icon>
                 <div class="icon-name">{{ item.name }}</div>
@@ -46,10 +46,6 @@ import type { Component } from 'vue'
 import * as ionicons5 from '@vicons/ionicons5'
 import * as antd from '@vicons/antd'
 
-defineOptions({
-  name: 'MyComponent'
-})
-
 const props = withDefaults(
   defineProps<{
     preview?: boolean
@@ -59,7 +55,7 @@ const props = withDefaults(
   }
 )
 
-// 时间回调
+// 事件回调
 const emit = defineEmits<{
   (e: 'select', value: string): void
 }>()
@@ -121,6 +117,7 @@ const previewIcon = computed(() => {
 .icon-picker {
   display: flex;
   height: 100%;
+  width: 100%;
   gap: 16px;
 }
 
@@ -141,7 +138,9 @@ const previewIcon = computed(() => {
 .search-input {
   margin-bottom: 12px;
 }
-
+.n-tabs {
+  height: 82%;
+}
 .icon-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
