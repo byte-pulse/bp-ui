@@ -29,7 +29,9 @@ const router = createRouter({
   ],
 })
 
+// 前置守卫
 router.beforeEach((to, _from) => {
+  $loadingBar.start()
   const path = to.path
   if (path === '/login') {
     return true
@@ -40,6 +42,15 @@ router.beforeEach((to, _from) => {
   } else {
     return '/login'
   }
+})
+
+// 后置守卫
+router.afterEach((to, _) => {
+  if (to.path === '/404' || to.path === '/403') {
+    $loadingBar.error()
+    return
+  }
+  $loadingBar.finish()
 })
 
 export default router

@@ -46,3 +46,16 @@ body,
   opacity: 0;
   transform: translateX(-20px);
 }
+
+/* 加载条 */
+.n-loading-bar-container .n-loading-bar.n-loading-bar--starting {
+  background-color: #3b82f6;
+}
+
+.n-loading-bar-container .n-loading-bar.n-loading-bar--finishing {
+  background-color: #3b82f6;
+}
+
+.n-loading-bar-container .n-loading-bar.n-loading-bar--error {
+  background-color: #f63b3b;
+}
