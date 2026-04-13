@@ -19,7 +19,7 @@ export default defineConfig(({ command }) => {
     // 从环境变量中获取端口
     envPort = Number(devEnv['VITE_APP_PORT'])
     // 从环境变量中获取是否启用 mock 数据
-    useMock = devEnv['VITE_USE_MOCK'] === 'true'
+    useMock = devEnv['VITE_APP_USE_MOCK'] === 'true'
   }
 
   /** @type {import('vite').UserConfig} */
@@ -48,7 +48,7 @@ export default defineConfig(({ command }) => {
       // 组件自动导入
       Components({
         resolvers: [NaiveUiResolver()],
-        dirs: ['./src/components/**', './src/layouts/components/**'],
+        dirs: ['./src/components/**', './src/layout/components/**'],
         dts: './types/auto-components.d.ts',
         syncMode: 'overwrite',
       }),

@@ -6,7 +6,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'layout',
-      component: () => import('@/components/layout/Layout.vue'),
+      redirect: '/dashboard',
+      component: () => import('@/layout/Layout.vue'),
+      children: [
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          component: () => import('@/views/workbench/Dashboard.vue'),
+        },
+        {
+          path: '/workspace',
+          name: 'workspace',
+          component: () => import('@/views/workbench/Workspace.vue'),
+        },
+      ],
     },
     {
       path: '/login',

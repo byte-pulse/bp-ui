@@ -11,18 +11,20 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Breadcrumb: typeof import('./../src/layout/components/Breadcrumb.vue')['default']
+    Footer: typeof import('./../src/layout/components/Footer.vue')['default']
     ForbiddenPage: typeof import('./../src/components/exception/ForbiddenPage.vue')['default']
-    Layout: typeof import('./../src/components/layout/Layout.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
-    NCheckbox: typeof import('naive-ui')['NCheckbox']
+    Header: typeof import('./../src/layout/components/Header.vue')['default']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
-    NDivider: typeof import('naive-ui')['NDivider']
-    NForm: typeof import('naive-ui')['NForm']
-    NFormItem: typeof import('naive-ui')['NFormItem']
-    NInput: typeof import('naive-ui')['NInput']
+    NLayout: typeof import('naive-ui')['NLayout']
+    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
+    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
+    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
+    NMenu: typeof import('naive-ui')['NMenu']
     NotFound: typeof import('./../src/components/exception/NotFound.vue')['default']
-    NSpace: typeof import('naive-ui')['NSpace']
+    NScrollbar: typeof import('naive-ui')['NScrollbar']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('./../src/layout/components/Sidebar.vue')['default']
   }
 }

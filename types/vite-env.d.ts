@@ -11,7 +11,7 @@ declare global {
     // 标题
     readonly VITE_APP_TITLE: string
     // 公司名
-    readonly VITE_COMPANY_NAME: string
+    readonly VITE_APP_COMPANY_NAME: string
     // 语言
     readonly VITE_APP_LANGUAGE: string
     // 端口
@@ -19,7 +19,7 @@ declare global {
     // API 基础路径
     readonly VITE_APP_API_BASE_URL: string
     // 是否启用 mock 数据
-    readonly VITE_USE_MOCK: boolean
+    readonly VITE_APP_USE_MOCK: boolean
   }
 
   interface ImportMeta {
