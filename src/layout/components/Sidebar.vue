@@ -3,8 +3,19 @@ import type { MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
 import { h, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const menuOptions: MenuOption[] = [
+  {
+    label: '工作空间',
+    key: 'workspace',
+    href: '/workspace',
+  },
+  {
+    label: '仪表盘',
+    key: 'dashboard',
+    href: '/dashboard',
+  },
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
@@ -76,11 +87,7 @@ const menuOptions: MenuOption[] = [
 
 function renderMenuLabel(option: MenuOption) {
   if ('href' in option) {
-    return h(
-      'a',
-      { href: option.href, target: '_blank' },
-      option.label as string,
-    )
+    return h(RouterLink, { to: option.href as string }, option.label as string)
   }
   return option.label as string
 }
@@ -131,7 +138,8 @@ onMounted(() => {
         :render-label="renderMenuLabel"
         :render-icon="renderMenuIcon"
         :expand-icon="expandIcon"
-      />
+      >
+      </n-menu>
     </n-scrollbar>
   </div>
 </template>
