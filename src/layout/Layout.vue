@@ -1,6 +1,13 @@
 <script lang="ts" setup>
 const layoutStore = useLayoutStore()
 
+const authStore = useAuthStore()
+
+const clearToken = () => {
+  authStore.token = ''
+  $message.success('清除token成功')
+}
+
 onMounted(() => {})
 </script>
 
@@ -20,8 +27,10 @@ onMounted(() => {})
     <!-- 主内容区域 -->
     <n-layout>
       <!-- 头部区域 -->
-      <n-layout-header class="h-15 border-b w-full border-gray-200 px-4">
-        颐和园路
+      <n-layout-header
+        class="h-15 border-b w-full border-gray-200 px-4 flex items-center"
+      >
+        <n-button type="primary" @click="clearToken">清除token</n-button>
       </n-layout-header>
       <!-- 内容区域，路由出口位置 -->
       <n-layout-content class="p-4 h-[calc(100vh-60px)]" ref="contentRef">
