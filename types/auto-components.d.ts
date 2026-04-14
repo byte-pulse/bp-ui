@@ -12,7 +12,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Breadcrumb: typeof import('./../src/layout/components/Breadcrumb.vue')['default']
-    Footer: typeof import('./../src/layout/components/Footer.vue')['default']
     ForbiddenPage: typeof import('./../src/components/exception/ForbiddenPage.vue')['default']
     Header: typeof import('./../src/layout/components/Header.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
@@ -28,6 +27,7 @@ declare module 'vue' {
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NMenu: typeof import('naive-ui')['NMenu']
     NotFound: typeof import('./../src/components/exception/NotFound.vue')['default']
+    NResult: typeof import('naive-ui')['NResult']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']

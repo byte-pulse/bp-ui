@@ -10,6 +10,16 @@ const router = createRouter({
       component: () => import('@/layout/Layout.vue'),
       children: [
         {
+          path: '404',
+          name: '404',
+          component: () => import('@/components/exception/NotFound.vue'),
+        },
+        {
+          path: '/403',
+          name: '403',
+          component: () => import('@/components/exception/ForbiddenPage.vue'),
+        },
+        {
           path: '/dashboard',
           name: 'dashboard',
           component: () => import('@/views/workbench/Dashboard.vue'),
@@ -25,6 +35,14 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/login/Login.vue'),
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'ereryPath',
+      redirect: '/404',
+      meta: {
+        hidden: true,
+      },
     },
   ],
 })
