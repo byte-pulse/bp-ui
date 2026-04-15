@@ -5,6 +5,7 @@ import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
 import { h, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { getMenuTree } from '@/api/menu'
 
 const menuOptions: MenuOption[] = [
   {
@@ -118,6 +119,7 @@ const company = ref('')
 onMounted(() => {
   // 从环境变量中获取公司名称
   company.value = import.meta.env.VITE_APP_COMPANY_NAME
+  getMenuTree()
 })
 </script>
 
