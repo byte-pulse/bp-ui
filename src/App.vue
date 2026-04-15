@@ -2,16 +2,20 @@
 import { type GlobalTheme } from 'naive-ui'
 import { darkTheme } from 'naive-ui'
 import { defaultTheme } from '@/assets/themes/default'
+import { blackWhiteTheme } from '@/assets/themes/blackWhite'
 
-// 是否暗色模式
-const isDark = ref(false)
-// const themeName = ref('default')
+const layoutStore = useLayoutStore()
+
 const theme = computed(() => {
-  if (isDark.value) {
+  if (layoutStore.isDark) {
     return darkTheme
   }
-  const t = defaultTheme
-  return t as GlobalTheme
+  switch (layoutStore.themeName) {
+    case 'blackWhite':
+      return blackWhiteTheme as GlobalTheme
+    default:
+      return defaultTheme as GlobalTheme
+  }
 })
 </script>
 

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
 import { h, ref } from 'vue'
@@ -19,7 +20,7 @@ const menuOptions: MenuOption[] = [
   {
     label: '且听风吟',
     key: 'hear-the-wind-sing',
-    href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F/3199',
+    href: '/404',
   },
   {
     label: '1973年的弹珠玩具',
@@ -63,7 +64,7 @@ const menuOptions: MenuOption[] = [
           {
             label: '威士忌',
             key: 'whisky',
-            href: 'https://baike.baidu.com/item/%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92/2959816?fromtitle=%E5%A8%81%E5%A3%AB%E5%BF%8C&fromid=573&fr=aladdin',
+            href: '/403',
           },
         ],
       },
@@ -87,9 +88,15 @@ const menuOptions: MenuOption[] = [
 
 function renderMenuLabel(option: MenuOption) {
   if ('href' in option) {
-    return h(RouterLink, { to: option.href as string }, option.label as string)
+    return h(
+      RouterLink,
+      { to: option.href as string },
+      {
+        default: () => option.label as VNodeChild,
+      },
+    )
   }
-  return option.label as string
+  return option.label as VNodeChild
 }
 
 function renderMenuIcon(option: MenuOption) {
