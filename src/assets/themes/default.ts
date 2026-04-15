@@ -2,67 +2,71 @@ import { type GlobalThemeOverrides } from 'naive-ui'
 import { lightTheme } from 'naive-ui'
 
 /**
- * 高级冷调蓝主题
+ * Tailwind v4 高级冷调蓝主题
  */
 export const defaultTheme: GlobalThemeOverrides = {
   common: {
     ...lightTheme.common,
 
-    /* ========== 主色(高级蓝) ========== */
+    /* ========== 主色 (Brand Blue) ========== */
 
     baseColor: '#ffffff',
 
-    primaryColor: '#2563eb', // 更深一点的蓝
-    primaryColorHover: '#1d4ed8',
-    primaryColorPressed: '#1e40af',
-    primaryColorSuppl: '#93c5fd',
+    primaryColor: '#3b82f6', // blue-500
+    primaryColorHover: '#2563eb', // blue-600
+    primaryColorPressed: '#1d4ed8', // blue-700
+    primaryColorSuppl: '#93c5fd', // blue-300
 
-    /* info (稍微偏青一点) */
-    infoColor: '#3b82f6',
-    infoColorHover: '#2563eb',
-    infoColorPressed: '#1d4ed8',
-    infoColorSuppl: '#bfdbfe',
+    /* ========== info (Sky, 区分主色) ========== */
 
-    /* success */
-    successColor: '#059669',
-    successColorHover: '#047857',
-    successColorPressed: '#065f46',
+    infoColor: '#0ea5e9', // sky-500
+    infoColorHover: '#0284c7', // sky-600
+    infoColorPressed: '#0369a1', // sky-700
+    infoColorSuppl: '#7dd3fc', // sky-300
+
+    /* ========== success (emerald) ========== */
+
+    successColor: '#10b981', // emerald-500
+    successColorHover: '#059669', // emerald-600
+    successColorPressed: '#047857', // emerald-700
     successColorSuppl: '#6ee7b7',
 
-    /* warning */
-    warningColor: '#d97706',
-    warningColorHover: '#b45309',
-    warningColorPressed: '#92400e',
+    /* ========== warning (amber) ========== */
+
+    warningColor: '#f59e0b', // amber-500
+    warningColorHover: '#d97706', // amber-600
+    warningColorPressed: '#b45309', // amber-700
     warningColorSuppl: '#fcd34d',
 
-    /* error */
-    errorColor: '#dc2626',
-    errorColorHover: '#b91c1c',
-    errorColorPressed: '#991b1b',
+    /* ========== error (red) ========== */
+
+    errorColor: '#ef4444', // red-500
+    errorColorHover: '#dc2626', // red-600
+    errorColorPressed: '#b91c1c', // red-700
     errorColorSuppl: '#fca5a5',
 
-    /* ========== 文本(偏冷灰) ========== */
+    /* ========== 文本 (slate 更高级) ========== */
 
-    textColorBase: '#0b1220',
-    textColor1: '#0b1220',
-    textColor2: '#334155',
-    textColor3: '#64748b',
-    textColorDisabled: '#94a3b8',
+    textColorBase: '#0f172a', // slate-900
+    textColor1: '#0f172a',
+    textColor2: '#334155', // slate-700
+    textColor3: '#64748b', // slate-500
+    textColorDisabled: '#94a3b8', // slate-400
 
     placeholderColor: '#94a3b8',
     placeholderColorDisabled: '#cbd5e1',
 
     iconColor: '#64748b',
-    iconColorHover: '#1e293b',
-    iconColorPressed: '#0b1220',
+    iconColorHover: '#334155',
+    iconColorPressed: '#0f172a',
     iconColorDisabled: '#cbd5e1',
 
-    /* ========== 边框(更细腻) ========== */
+    /* ========== 边框 ========== */
 
-    dividerColor: '#e6eaf0',
-    borderColor: '#e6eaf0',
+    dividerColor: '#e2e8f0', // slate-200
+    borderColor: '#e2e8f0',
 
-    /* ========== 关闭 / 清除 ========== */
+    /* ========== 操作类 ========== */
 
     closeIconColor: '#94a3b8',
     closeIconColorHover: '#64748b',
@@ -87,7 +91,7 @@ export const defaultTheme: GlobalThemeOverrides = {
 
     /* ========== 容器 ========== */
 
-    bodyColor: '#f6f8fb', // 微微带蓝灰
+    bodyColor: '#f8fafc', // slate-50
     cardColor: '#ffffff',
     modalColor: '#ffffff',
     popoverColor: '#ffffff',
@@ -95,7 +99,7 @@ export const defaultTheme: GlobalThemeOverrides = {
 
     tagColor: '#f1f5f9',
     avatarColor: '#e2e8f0',
-    invertedColor: '#0b1220',
+    invertedColor: '#0f172a',
 
     inputColor: '#ffffff',
     inputColorDisabled: '#f1f5f9',
@@ -103,17 +107,17 @@ export const defaultTheme: GlobalThemeOverrides = {
     codeColor: '#f1f5f9',
     tabColor: '#f8fafc',
 
-    /* ========== 状态(关键优化) ========== */
+    /* ========== 状态 (带主色调) ========== */
 
-    hoverColor: 'rgba(37,99,235,0.06)', // 带主色!!!
-    pressedColor: 'rgba(37,99,235,0.12)',
+    hoverColor: 'rgba(59,130,246,0.08)', // blue-500
+    pressedColor: 'rgba(59,130,246,0.15)',
     actionColor: '#f8fafc',
 
-    tableColorHover: 'rgba(37,99,235,0.05)',
+    tableColorHover: 'rgba(59,130,246,0.05)',
     tableColorStriped: '#f1f5f9',
     tableHeaderColor: '#f8fafc',
 
-    /* ========== 按钮 secondary ========== */
+    /* ========== 次按钮 ========== */
 
     buttonColor2: '#f1f5f9',
     buttonColor2Hover: '#e2e8f0',

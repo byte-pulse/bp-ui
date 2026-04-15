@@ -1,26 +1,31 @@
 <script lang="ts" setup>
-import { type GlobalTheme } from 'naive-ui'
 import { darkTheme } from 'naive-ui'
+import type { GlobalThemeOverrides } from 'naive-ui'
 import { defaultTheme } from '@/assets/themes/default'
 import { blackWhiteTheme } from '@/assets/themes/blackWhite'
+import { setupDiscreteApiTheme } from '@/utils/navie'
 
 const layoutStore = useLayoutStore()
 
-const theme = computed(() => {
+const theme = computed(() => (layoutStore.isDark ? darkTheme : undefined))
+
+const themeOverrides = computed<GlobalThemeOverrides>(() => {
   if (layoutStore.isDark) {
-    return darkTheme
+    return {}
   }
   switch (layoutStore.themeName) {
     case 'blackWhite':
-      return blackWhiteTheme as GlobalTheme
+      return blackWhiteTheme
     default:
-      return defaultTheme as GlobalTheme
+      return defaultTheme
   }
 })
+
+setupDiscreteApiTheme(theme, themeOverrides)
 </script>
 
 <template>
-  <n-config-provider :theme="theme">
+  <n-config-provider :theme="theme" :theme-overrides="themeOverrides">
     <div class="app-container w-screen h-screen scroll-smooth">
       <RouterView />
     </div>

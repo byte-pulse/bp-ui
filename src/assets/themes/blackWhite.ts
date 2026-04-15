@@ -2,79 +2,87 @@ import { type GlobalThemeOverrides } from 'naive-ui'
 import { lightTheme } from 'naive-ui'
 
 /**
- * 白底 + 黑主色主题 (完整补全版)
+ * Tailwind v4 黑白极简主题
  */
 export const blackWhiteTheme: GlobalThemeOverrides = {
   common: {
     ...lightTheme.common,
 
-    /* ========== 主色 ========== */
+    /* ========== 主色 (Neutral Black) ========== */
 
     baseColor: '#ffffff',
 
-    primaryColor: '#111111',
-    primaryColorHover: '#000000',
-    primaryColorPressed: '#000000',
-    primaryColorSuppl: '#525252',
+    primaryColor: '#171717', // neutral-900
+    primaryColorHover: '#0a0a0a', // neutral-950
+    primaryColorPressed: '#000000', // black
+    primaryColorSuppl: '#737373', // neutral-500
 
-    infoColor: '#374151',
-    infoColorHover: '#1f2937',
-    infoColorPressed: '#111827',
-    infoColorSuppl: '#9ca3af',
+    /* ========== info (slate, 做区分) ========== */
 
-    successColor: '#16a34a',
-    successColorHover: '#15803d',
-    successColorPressed: '#166534',
+    infoColor: '#475569', // slate-600
+    infoColorHover: '#334155', // slate-700
+    infoColorPressed: '#1e293b', // slate-800
+    infoColorSuppl: '#94a3b8', // slate-400
+
+    /* ========== success ========== */
+
+    successColor: '#22c55e', // green-500
+    successColorHover: '#16a34a', // green-600
+    successColorPressed: '#15803d', // green-700
     successColorSuppl: '#86efac',
 
-    warningColor: '#d97706',
-    warningColorHover: '#b45309',
-    warningColorPressed: '#92400e',
+    /* ========== warning ========== */
+
+    warningColor: '#f59e0b', // amber-500
+    warningColorHover: '#d97706', // amber-600
+    warningColorPressed: '#b45309', // amber-700
     warningColorSuppl: '#fcd34d',
 
-    errorColor: '#dc2626',
-    errorColorHover: '#b91c1c',
-    errorColorPressed: '#991b1b',
+    /* ========== error ========== */
+
+    errorColor: '#ef4444', // red-500
+    errorColorHover: '#dc2626', // red-600
+    errorColorPressed: '#b91c1c', // red-700
     errorColorSuppl: '#fca5a5',
 
-    /* ========== 文本系统 ========== */
+    /* ========== 文本 (neutral 统一) ========== */
 
-    textColorBase: '#111111',
+    textColorBase: '#0a0a0a', // neutral-950
     textColor1: '#000000',
-    textColor2: '#374151',
-    textColor3: '#6b7280',
-    textColorDisabled: '#9ca3af',
+    textColor2: '#404040', // neutral-700
+    textColor3: '#737373', // neutral-500
+    textColorDisabled: '#a3a3a3', // neutral-400
 
-    placeholderColor: '#9ca3af',
-    placeholderColorDisabled: '#d1d5db',
+    placeholderColor: '#a3a3a3',
+    placeholderColorDisabled: '#d4d4d4',
 
-    iconColor: '#6b7280',
-    iconColorHover: '#111111',
+    iconColor: '#737373',
+    iconColorHover: '#262626',
     iconColorPressed: '#000000',
-    iconColorDisabled: '#d1d5db',
+    iconColorDisabled: '#d4d4d4',
 
-    /* ========== 边框 / 分割 ========== */
+    /* ========== 边框 ========== */
 
-    dividerColor: '#e5e7eb',
-    borderColor: '#e5e7eb',
+    dividerColor: '#e5e5e5', // neutral-200
+    borderColor: '#e5e5e5',
 
-    /* ========== 关闭 / 清除 ========== */
+    /* ========== 操作类 ========== */
 
-    closeIconColor: '#9ca3af',
-    closeIconColorHover: '#374151',
-    closeIconColorPressed: '#111111',
+    closeIconColor: '#a3a3a3',
+    closeIconColorHover: '#525252',
+    closeIconColorPressed: '#171717',
 
     closeColorHover: '#f5f5f5',
     closeColorPressed: '#e5e5e5',
 
-    clearColor: '#9ca3af',
-    clearColorHover: '#374151',
-    clearColorPressed: '#111111',
+    clearColor: '#a3a3a3',
+    clearColorHover: '#525252',
+    clearColorPressed: '#171717',
 
     /* ========== 滚动条 ========== */
 
-    scrollbarColor: '#d4d4d4',
-    scrollbarColorHover: '#a3a3a3',
+    scrollbarColor: 'rgba(0,0,0,0.2)',
+    scrollbarColorHover: 'rgba(0,0,0,0.35)',
 
     /* ========== 轨道 ========== */
 
@@ -84,14 +92,14 @@ export const blackWhiteTheme: GlobalThemeOverrides = {
     /* ========== 容器 ========== */
 
     bodyColor: '#ffffff',
-    cardColor: '#fafafa',
+    cardColor: '#fafafa', // neutral-50
     modalColor: '#ffffff',
     popoverColor: '#ffffff',
     tableColor: '#ffffff',
 
     tagColor: '#f5f5f5',
     avatarColor: '#e5e5e5',
-    invertedColor: '#111111',
+    invertedColor: '#171717',
 
     inputColor: '#ffffff',
     inputColorDisabled: '#f5f5f5',
@@ -99,17 +107,17 @@ export const blackWhiteTheme: GlobalThemeOverrides = {
     codeColor: '#f5f5f5',
     tabColor: '#fafafa',
 
-    /* ========== 状态 ========== */
+    /* ========== 状态 (极简关键) ========== */
 
-    hoverColor: '#f5f5f5',
-    pressedColor: '#e5e5e5',
+    hoverColor: 'rgba(0,0,0,0.04)',
+    pressedColor: 'rgba(0,0,0,0.08)',
     actionColor: '#fafafa',
 
     tableColorHover: 'rgba(0,0,0,0.03)',
     tableColorStriped: '#f5f5f5',
-    tableHeaderColor: '#f9fafb',
+    tableHeaderColor: '#fafafa',
 
-    /* ========== secondary 按钮 ========== */
+    /* ========== 次按钮 ========== */
 
     buttonColor2: '#f5f5f5',
     buttonColor2Hover: '#e5e5e5',
@@ -119,6 +127,7 @@ export const blackWhiteTheme: GlobalThemeOverrides = {
 
     fontFamily:
       "'HarmonyOS Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif",
+
     fontFamilyMono: 'Menlo,Monaco,Consolas',
   },
 }

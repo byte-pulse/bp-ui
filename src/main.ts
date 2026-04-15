@@ -8,7 +8,6 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import App from './App.vue'
 import router from './router'
-import { setupDiscreteApiTheme } from '@/utils/navie'
 
 const app = createApp(App)
 
@@ -18,8 +17,5 @@ pinia.use(piniaPluginPersistedstate)
 
 app.use(pinia)
 app.use(router)
-
-// 设置 discrete api 主题
-setupDiscreteApiTheme()
 
 app.mount('#app')
