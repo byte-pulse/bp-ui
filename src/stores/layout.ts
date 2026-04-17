@@ -9,8 +9,10 @@ export const useLayoutStore = defineStore(
     const themeName = ref<string>('default')
     // 是否暗色模式
     const isDark = ref<boolean>(false)
+    // 展示标签页
+    const showTabs = ref<boolean>(false)
 
-    return { collapsed, themeName, isDark }
+    return { collapsed, themeName, isDark, showTabs }
   },
   {
     persist: true,

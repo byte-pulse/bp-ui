@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-// const authStore = useAuthStore()
+const authStore = useAuthStore()
 const layoutStore = useLayoutStore()
 
 const clearToken = () => {
-  // authStore.token = ''
+  authStore.token = ''
   $message.info('清除token成功')
   $message.success('清除token成功')
   $message.error('清除token成功')
@@ -19,10 +19,14 @@ const toggleDark = () => {
 const toggleTheme = (themeName: string) => {
   layoutStore.themeName = themeName
 }
+
+const toggleTabs = () => {
+  layoutStore.showTabs = !layoutStore.showTabs
+}
 </script>
 
 <template>
-  <div class="h-full w-full bg-amber-300 flex items-center gap-1.5">
+  <div class="h-full w-full flex items-center gap-1.5">
     <n-button type="primary" @click="clearToken">清除token</n-button>
     <n-button type="primary" @click="toggleDark">切换暗色模式</n-button>
     <n-button type="primary" @click="toggleTheme('default')">
@@ -31,6 +35,7 @@ const toggleTheme = (themeName: string) => {
     <n-button type="primary" @click="toggleTheme('blackWhite')">
       黑白主题
     </n-button>
+    <n-button type="primary" @click="toggleTabs"> 切换标签页显示 </n-button>
   </div>
 </template>
 

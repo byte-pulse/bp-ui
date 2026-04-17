@@ -17,6 +17,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
     "@types/mockjs": "^1.0.10",
+    "@vicons/antd": "^0.13.0",
     "@vicons/ionicons5": "^0.13.0",
     "axios": "^1.15.0",
     "es-toolkit": "^1.45.1",

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { FormInst, FormRules } from 'naive-ui'
+import { login } from '@/api/auth'
 
 // 公司名
 const companyName = ref('')
@@ -27,9 +28,11 @@ const toLogin = async () => {
     formRef.value.validate((errors) => {
       if (!errors) {
         // 登录成功
-        $message.success('登录成功')
-        authStore.token = 'test token'
-        router.replace('/')
+        login(formValue.value).then((res) => {
+          $message.success('登录成功')
+          authStore.token = res.token
+          router.replace('/')
+        })
       }
     })
   }
@@ -154,7 +157,14 @@ onMounted(() => {
         <!-- 登录方式按钮容器 -->
         <div class="w-full flex justify-between align-center gap-5">
           <!-- 微信登陆按钮 -->
-          <n-button type="success" ghost size="large" block style="flex: 1">
+          <n-button
+            type="success"
+            ghost
+            size="large"
+            block
+            style="flex: 1"
+            color="#03db6b"
+          >
             <span class="font-bold flex items-center gap-2">
               <svg
                 t=" 1776084525989"
@@ -178,7 +188,14 @@ onMounted(() => {
             </span>
           </n-button>
           <!-- 钉钉登陆按钮 -->
-          <n-button type="info" ghost size="large" block style="flex: 1">
+          <n-button
+            type="info"
+            ghost
+            size="large"
+            block
+            style="flex: 1"
+            color="#50a2ff"
+          >
             <span class="font-bold flex items-center gap-2">
               <svg
                 t="1776084473309"

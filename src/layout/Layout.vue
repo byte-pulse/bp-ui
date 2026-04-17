@@ -25,9 +25,17 @@ onMounted(() => {})
         <Header />
       </n-layout-header>
 
+      <div class="h-15 w-full px-4" v-if="layoutStore.showTabs">
+        <Tabs />
+      </div>
+
       <!-- 内容区域，路由出口位置 -->
       <n-layout-content
         class="p-4 h-[calc(100vh-60px)] w-full"
+        :class="{
+          'h-[calc(100vh-60px)]': !layoutStore.showTabs,
+          'h-[calc(100vh-120px)]': layoutStore.showTabs,
+        }"
         ref="contentRef"
       >
         <RouterView v-slot="{ Component, route }">

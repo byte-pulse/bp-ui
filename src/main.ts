@@ -7,7 +7,7 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import App from './App.vue'
-import router from './router'
+import router, { getDynamicRoutes } from './router'
 
 const app = createApp(App)
 
@@ -16,6 +16,9 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 app.use(pinia)
+
+// 先获取动态路由
+await getDynamicRoutes()
 app.use(router)
 
 app.mount('#app')

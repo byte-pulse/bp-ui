@@ -5,17 +5,14 @@ declare global {
     id: number
     parentId: number
     title: string
-    name?: string
-    path: string
+    routeName: string
     component?: string
     icon?: string
     sort: number
     hidden: boolean
-    type: 1 | 2 | 3
-    status: 0 | 1
+    tabShow?: boolean
+    type: 'C' | 'M' | 'B'
     permission?: string
     children?: Menu[]
-    createTime?: string
-    updateTime?: string
   }
 }
