@@ -10,13 +10,19 @@ const layoutStore = useLayoutStore()
 const theme = computed(() => (layoutStore.isDark ? darkTheme : undefined))
 
 const themeOverrides = computed<GlobalThemeOverrides>(() => {
-  if (layoutStore.isDark) {
+  if (layoutStore.isDark === true) {
+    layoutStore.cardColor = darkTheme.common.cardColor
+    layoutStore.themeColor = darkTheme.common || {}
     return {}
   }
   switch (layoutStore.themeName) {
     case 'blackWhite':
+      layoutStore.cardColor = blackWhiteTheme?.common?.cardColor
+      layoutStore.themeColor = blackWhiteTheme?.common || {}
       return blackWhiteTheme
     default:
+      layoutStore.cardColor = defaultTheme?.common?.cardColor
+      layoutStore.themeColor = defaultTheme?.common || {}
       return defaultTheme
   }
 })

@@ -14,10 +14,15 @@ const clearToken = () => {
 
 const toggleDark = () => {
   layoutStore.isDark = !layoutStore.isDark
+  if (layoutStore.isDark === true) {
+    layoutStore.themeName = 'dark'
+  }
 }
 
 const toggleTheme = (themeName: string) => {
-  layoutStore.themeName = themeName
+  if (layoutStore.isDark !== true) {
+    layoutStore.themeName = themeName
+  }
 }
 
 const toggleTabs = () => {

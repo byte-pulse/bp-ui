@@ -11,12 +11,18 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BackGround: typeof import('./../src/components/common/BackGround.vue')['default']
     Breadcrumb: typeof import('./../src/layout/components/Breadcrumb.vue')['default']
     ForbiddenPage: typeof import('./../src/components/exception/ForbiddenPage.vue')['default']
     Header: typeof import('./../src/layout/components/Header.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
+    NCheckbox: typeof import('naive-ui')['NCheckbox']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
+    NDivider: typeof import('naive-ui')['NDivider']
     NDropdown: typeof import('naive-ui')['NDropdown']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
@@ -24,6 +30,7 @@ declare module 'vue' {
     NMenu: typeof import('naive-ui')['NMenu']
     NotFound: typeof import('./../src/components/exception/NotFound.vue')['default']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
+    NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Sidebar: typeof import('./../src/layout/components/Sidebar.vue')['default']
