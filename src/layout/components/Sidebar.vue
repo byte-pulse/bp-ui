@@ -52,7 +52,7 @@ function transformMenu(list: Menu[]): MenuOption[] {
       key: item.routeName, // routeName -> key
       show: item.hidden !== true, // hidden -> show
       meta: rest, // 原始数据，但已经不包含 children
-
+      type: item.isGroup === true ? 'group' : 'item', // isGroup -> type
       // 2. 递归处理 children
       children: children?.length ? transformMenu(children) : undefined,
     }

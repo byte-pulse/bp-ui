@@ -7,6 +7,7 @@ declare global {
     title: string
     routeName: string
     component?: string
+    isGroup: boolean
     icon?: string
     sort: number
     hidden: boolean
