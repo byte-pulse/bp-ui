@@ -10,8 +10,8 @@ onMounted(() => {})
     <n-layout-sider
       v-model:collapsed="layoutStore.collapsed"
       collapse-mode="width"
-      :collapsed-width="80"
-      :width="240"
+      :collapsed-width="120"
+      :width="220"
       show-trigger="arrow-circle"
       class="h-screen"
     >
