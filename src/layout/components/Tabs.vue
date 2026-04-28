@@ -129,9 +129,18 @@ const closeLeft = (key: string) => {
 // 关闭全部标签
 const closeAll = () => {
   tabStore.tabs = []
-
-  // 一般你会跳首页, 不然会空白
-  router.push('/')
+  const routes = router.getRoutes()
+  const firstRoute = routes[0]!.meta as unknown as Menu
+  const label = firstRoute.title as string
+  const key = firstRoute.routeName as string
+  tabStore.tabs.push({
+    label,
+    key,
+  })
+  nextTick(() => {
+    // 一般你会跳首页, 不然会空白
+    router.push({ name: key })
+  })
 }
 
 // 处理右键菜单事件
@@ -144,7 +153,6 @@ const currentClickKey = ref('')
 // 处理右键菜单选择事件
 function handleSelect(key: string) {
   showDropdown.value = false
-  $message.info(`${String(key)},${currentClickKey.value}`)
   if (key === 'closeCurrent') {
     closeCurrent(currentClickKey.value)
   } else if (key === 'closeOthers') {
@@ -160,9 +168,6 @@ function handleSelect(key: string) {
 
 // 处理右键菜单事件
 function handleContextMenu(e: MouseEvent, key: string) {
-  if (tabStore.tabs.length <= 1) {
-    return
-  }
   currentClickKey.value = key
   e.preventDefault()
   showDropdown.value = false
