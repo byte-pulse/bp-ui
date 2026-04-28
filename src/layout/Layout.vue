@@ -31,7 +31,7 @@ onMounted(() => {})
 
       <!-- 内容区域，路由出口位置 -->
       <n-layout-content
-        class="p-4 w-full"
+        content-class="p-4 w-full"
         :class="{
           'h-[calc(100vh-60px)]': !layoutStore.showTabs,
           'h-[calc(100vh-100px)]': layoutStore.showTabs,
