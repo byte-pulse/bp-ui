@@ -136,7 +136,7 @@ const menuList: Menu[] = [
             parentId: 6,
             title: '图标选择',
             routeName: 'iconSelect',
-            component: 'workbench/Workspace',
+            component: 'components/examples/IconSelect',
             isGroup: false,
             icon: 'home',
             sort: 1,

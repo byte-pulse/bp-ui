@@ -64,6 +64,7 @@ declare global {
   const readonly: typeof import('vue').readonly
   const ref: typeof import('vue').ref
   const renderIconUtil: typeof import('../src/utils/icon').renderIconUtil
+  const renderIconUtilNoNIcon: typeof import('../src/utils/icon').renderIconUtilNoNIcon
   const resolveComponent: typeof import('vue').resolveComponent
   const setActivePinia: typeof import('pinia').setActivePinia
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix

@@ -43,3 +43,31 @@ export function renderIconUtil(icon?: string | unknown): Component {
 
   return () => h(NIcon, null, { default: () => h(iconComp) })
 }
+
+/**
+ * icon 字符串格式: lib/iconName
+ * 示例: ionicons5/AppsOutline
+ * 不使用 NIcon 包裹
+ */
+export function renderIconUtilNoNIcon(icon?: string | unknown): Component {
+  if (!icon) {
+    icon = 'antd/BarsOutlined'
+  }
+
+  if (typeof icon !== 'string') {
+    return () => h(iconMaps['ionicons5']?.['Apps'] as Component)
+  }
+
+  let [lib, iconName] = icon.split('/')
+  if (!lib || !iconName) {
+    lib = 'ionicons5'
+    iconName = 'Apps'
+  }
+
+  const iconComp = iconMaps[lib]?.[iconName]
+  if (!iconComp) {
+    return () => h(iconMaps['ionicons5']?.['Apps'] as Component)
+  }
+
+  return () => h(iconComp)
+}
