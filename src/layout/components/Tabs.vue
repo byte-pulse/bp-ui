@@ -265,6 +265,7 @@ onMounted(() => {
             <span class="mr-1 select-none">{{ item.label }}</span>
             <!-- 关闭按钮 -->
             <n-icon
+              v-if="tabStore.tabs.length > 1"
               @click.stop="closeCurrent(item.key)"
               :color="
                 hover && hoverKey === item.key && activeTab !== item.key
