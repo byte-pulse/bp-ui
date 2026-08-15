@@ -53,6 +53,7 @@ class HttpClient {
           return Promise.reject(response.data)
         }
         // 统一只返回 data
+        // 返回类型 AxiosResponseResult<any, T, any, any> => T
         if (response.config.returnRaw === true) {
           return response.data
         }
@@ -83,21 +84,21 @@ class HttpClient {
     return this.instance.get(url, {
       params,
       ...config,
-    })
+    }) as Promise<T>
   }
 
   /**
    * POST 请求
    */
   post<T, D>(url: string, data?: D, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.post(url, data, config)
+    return this.instance.post(url, data, config) as Promise<T>
   }
 
   /**
    * PUT 请求
    */
   put<T, D>(url: string, data?: D, config?: AxiosRequestConfig): Promise<T> {
-    return this.instance.put(url, data, config)
+    return this.instance.put(url, data, config) as Promise<T>
   }
 
   /**
@@ -111,7 +112,7 @@ class HttpClient {
     return this.instance.delete(url, {
       params,
       ...config,
-    })
+    }) as Promise<T>
   }
 
   // 文件上传
@@ -130,7 +131,7 @@ class HttpClient {
         const percent = Math.round((e.loaded / e.total) * 100)
         options?.$onUploadProgress?.(percent, e)
       },
-    })
+    }) as Promise<T>
   }
 
   // 文件下载
@@ -149,7 +150,7 @@ class HttpClient {
         const percent = Math.round((e.loaded / e.total) * 100)
         options?.$onDownloadProgress?.(percent, e)
       },
-    })
+    }) as Promise<T>
   }
 }
 

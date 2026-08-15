@@ -46,7 +46,7 @@
     "oxlint": "~1.78.0",
     "prettier": "3.8.1",
     "sass": "^1.99.0",
-    "typescript": "~7.0.2",
+    "typescript": "~6.0.3",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^32.0.0",
     "vfonts": "^0.1.0",
