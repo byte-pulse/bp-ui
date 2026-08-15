@@ -97,7 +97,7 @@ const menuList: Menu[] = [
             parentId: 6,
             title: '表单',
             routeName: 'form',
-            component: 'workbench/Workspace',
+            component: 'components/examples/FormExample',
             isGroup: false,
             icon: 'home',
             sort: 1,
