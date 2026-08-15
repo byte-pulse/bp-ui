@@ -4,6 +4,8 @@ const layoutStore = useLayoutStore()
 
 const clearToken = () => {
   authStore.token = ''
+  authStore.permission = []
+  authStore.role = []
   $message.info('清除token成功')
   $message.success('清除token成功')
   $message.error('清除token成功')
