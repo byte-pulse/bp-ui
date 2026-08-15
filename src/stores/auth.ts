@@ -12,6 +12,8 @@ export const useAuthStore = defineStore(
     return { token, role, permission }
   },
   {
-    persist: true,
+    persist: {
+      storage: sessionStorage,
+    },
   },
 )
