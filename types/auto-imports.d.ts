@@ -60,6 +60,7 @@ declare global {
   const onUnmounted: typeof import('vue').onUnmounted
   const onUpdated: typeof import('vue').onUpdated
   const onWatcherCleanup: typeof import('vue').onWatcherCleanup
+  const printBanner: typeof import('../src/utils/banner').printBanner
   const provide: typeof import('vue').provide
   const qs: typeof import('../src/utils/http').qs
   const reactive: typeof import('vue').reactive

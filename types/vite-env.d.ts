@@ -8,6 +8,8 @@ declare global {
   }
 
   interface ImportMetaEnv {
+    // 版本
+    readonly VITE_APP_VERSION: string
     // 标题
     readonly VITE_APP_TITLE: string
     // 公司名

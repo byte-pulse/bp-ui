@@ -32,6 +32,7 @@ setupDiscreteApiTheme(theme, themeOverrides)
 onMounted(() => {
   // app 挂载完成后获取动态路由
   // getDynamicRoutes()
+  printBanner()
 })
 </script>
 
