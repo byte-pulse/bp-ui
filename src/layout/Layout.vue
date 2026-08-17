@@ -7,12 +7,14 @@ onMounted(() => {})
 <template>
   <n-layout has-sider class="h-screen w-screen">
     <!-- 侧边栏区域 -->
+    <!--
+      show-trigger="arrow-circle"
+     -->
     <n-layout-sider
       v-model:collapsed="layoutStore.collapsed"
       collapse-mode="width"
       :collapsed-width="80"
       :width="220"
-      show-trigger="arrow-circle"
       class="h-screen"
     >
       <Sidebar />

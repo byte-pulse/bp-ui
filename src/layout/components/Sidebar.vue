@@ -142,7 +142,7 @@ onMounted(() => {
           'gap-2': !layoutStore.collapsed,
         }"
       >
-        <p>logo</p>
+        <img src="@/assets/images/logo.png" class="w-8 h-8 object-cover rounded-full" />
         <Transition enter-from-class="animate__animated animate__zoomIn animate__delay-2s">
           <p
             v-if="!layoutStore.collapsed"
@@ -159,6 +159,7 @@ onMounted(() => {
       <n-menu
         :theme-overrides="!layoutStore.isDark && layoutStore.darkMenu ? darkMenu : undefined"
         ref="menuInstRef"
+        :indent="20"
         v-model:value="activeKey"
         :collapsed="layoutStore.collapsed"
         :collapsed-width="80"

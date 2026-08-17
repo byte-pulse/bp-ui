@@ -7,7 +7,7 @@ export const useLayoutStore = defineStore(
     // 布局状态
     const collapsed = ref<boolean>(false)
     // 主题名称
-    const themeName = ref<'default' | 'blackWhite'>('default')
+    const themeName = ref<'dark' | 'default' | 'blackWhite' | string>('default')
     // 卡片背景颜色
     const cardColor = ref<string | undefined>('white')
     // 主题颜色
