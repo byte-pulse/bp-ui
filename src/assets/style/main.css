@@ -12,12 +12,6 @@
     sans-serif;
 }
 
-::selection {
-  background: var(--color-rose-200);
-  color: var(--color-orange-400);
-  text-shadow: none;
-}
-
 html,
 body,
 #app {

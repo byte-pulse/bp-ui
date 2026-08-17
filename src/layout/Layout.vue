@@ -21,7 +21,13 @@ onMounted(() => {})
     <!-- 主内容区域 -->
     <n-layout content-style="scrollbar-width: none">
       <!-- 头部区域 -->
-      <n-layout-header class="h-15 border-b w-full border-gray-200 px-4">
+      <n-layout-header
+        class="h-15 border-b w-full px-4"
+        :class="{
+          'border-gray-200': !layoutStore.isDark,
+          'border-zinc-500': layoutStore.isDark,
+        }"
+      >
         <Header />
       </n-layout-header>
       <div

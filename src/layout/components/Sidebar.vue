@@ -6,8 +6,21 @@ import { NIcon } from 'naive-ui'
 import type { VNodeChild } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 import { RouterLink } from 'vue-router'
+import { defaultDarkTheme } from '@/assets/themes/default'
+import { blackWhiteDarkTheme } from '@/assets/themes/blackWhite'
 
 const layoutStore = useLayoutStore()
+
+const darkMenu = computed(() => {
+  const theme = layoutStore.themeName
+  switch (theme) {
+    case 'blackWhite':
+      return blackWhiteDarkTheme
+    default:
+      return defaultDarkTheme
+  }
+})
+
 // 公司名称
 const company = ref('')
 
@@ -111,9 +124,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-screen w-full shadow-lg flex flex-col">
+  <div
+    class="h-screen w-full shadow-lg flex flex-col"
+    style="background-color: #18181c"
+    :style="{
+      backgroundColor: !layoutStore.isDark && layoutStore.darkMenu ? darkMenu.common?.actionColor : undefined,
+    }"
+  >
     <!-- logo -->
-    <div class="h-15 border-b border-gray-200 p-0">
+    <div class="h-15 p-0">
       <div
         class="w-full h-15 flex items-center justify-around"
         :class="{
@@ -125,12 +144,20 @@ onMounted(() => {
       >
         <p>logo</p>
         <Transition enter-from-class="animate__animated animate__zoomIn animate__delay-2s">
-          <p v-if="!layoutStore.collapsed">{{ company }}</p>
+          <p
+            v-if="!layoutStore.collapsed"
+            :style="{
+              color: !layoutStore.isDark && layoutStore.darkMenu ? darkMenu.common?.textColor2 : undefined,
+            }"
+          >
+            {{ company }}
+          </p>
         </Transition>
       </div>
     </div>
     <n-scrollbar class="shadow-2xl">
       <n-menu
+        :theme-overrides="!layoutStore.isDark && layoutStore.darkMenu ? darkMenu : undefined"
         ref="menuInstRef"
         v-model:value="activeKey"
         :collapsed="layoutStore.collapsed"

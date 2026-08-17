@@ -7,7 +7,7 @@ export const useLayoutStore = defineStore(
     // 布局状态
     const collapsed = ref<boolean>(false)
     // 主题名称
-    const themeName = ref<string>('default')
+    const themeName = ref<'default' | 'blackWhite'>('default')
     // 卡片背景颜色
     const cardColor = ref<string | undefined>('white')
     // 主题颜色
@@ -16,8 +16,10 @@ export const useLayoutStore = defineStore(
     const isDark = ref<boolean>(false)
     // 展示标签页
     const showTabs = ref<boolean>(false)
+    // 深色菜单
+    const darkMenu = ref<boolean>(false)
 
-    return { collapsed, themeName, cardColor, themeColor, isDark, showTabs }
+    return { collapsed, themeName, cardColor, themeColor, isDark, showTabs, darkMenu }
   },
   {
     persist: true,

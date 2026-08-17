@@ -48,4 +48,10 @@ onMounted(() => {
   </n-config-provider>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::selection {
+  background: v-bind('layoutStore.themeColor?.primaryColorSuppl');
+  color: v-bind('layoutStore.themeColor?.textColor1');
+  text-shadow: none;
+}
+</style>

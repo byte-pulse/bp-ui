@@ -232,7 +232,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <BackGround class="w-full h-full flex justify-center items-center border-b border-gray-200">
+  <BackGround
+    class="w-full h-full flex justify-center items-center border-b"
+    :class="{
+      'border-gray-200': !layoutStore.isDark,
+      'border-zinc-500': layoutStore.isDark,
+    }"
+  >
     <!-- 标签页列表 -->
     <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
       <n-dropdown
@@ -250,7 +256,7 @@ onMounted(() => {
       <TransitionGroup
         name="routes"
         tag="div"
-        class="w-full h-full whitespace-nowrap flex justify-start items-end gap-1 relative"
+        class="w-full h-full whitespace-nowrap flex justify-start items-end gap-2 relative"
         enter-active-class="animate__animated animate__backInUp animate__faster"
         leave-active-class="animate__animated animate__backOutDown animate__faster"
         @before-leave="beforeLeave"
@@ -259,11 +265,15 @@ onMounted(() => {
         <div
           v-for="item in tabStore.tabs"
           :key="item.key"
-          class="pt-2 pb-1 px-3 border border-b-0 border-gray-300 rounded-t-md cursor-pointer text-xs flex items-center"
+          class="pt-2 pb-1 px-3 border border-b-0 rounded-t-md cursor-pointer text-xs flex items-center"
+          :class="{
+            'border-gray-300': !layoutStore.isDark,
+            'border-zinc-500': layoutStore.isDark,
+          }"
           @contextmenu="handleContextMenu($event, item.key)"
           @click="setActiveTab(item.key)"
           :style="{
-            color: item.key === activeTab ? layoutStore.themeColor?.baseColor : layoutStore.themeColor?.textColorBase,
+            color: item.key === activeTab ? layoutStore.themeColor?.baseColor : layoutStore.themeColor?.textColor2,
             backgroundColor:
               item.key === activeTab ? layoutStore.themeColor?.primaryColor : layoutStore.themeColor?.bodyColor,
           }"
