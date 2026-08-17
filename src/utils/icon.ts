@@ -1,5 +1,5 @@
 // src/utils/iconUtils.ts
-import { h, type Component } from 'vue'
+import { h, type VNode } from 'vue'
 import { NIcon } from 'naive-ui'
 
 import * as ionicons5 from '@vicons/ionicons5'
@@ -15,9 +15,9 @@ const iconMaps: Record<string, Record<string, Component>> = {
  * icon 字符串格式: lib/iconName
  * 示例: ionicons5/AppsOutline
  */
-export function renderIconUtil(icon?: string | unknown): Component {
+export function renderIconUtil(icon?: string | unknown): () => VNode {
   if (!icon) {
-    icon = 'antd/BarsOutlined'
+    icon = 'ionicons5/Apps'
   }
 
   if (typeof icon !== 'string') {
@@ -34,10 +34,11 @@ export function renderIconUtil(icon?: string | unknown): Component {
   }
 
   const iconComp = iconMaps[lib]?.[iconName]
+
   if (!iconComp) {
     return () =>
       h(NIcon, null, {
-        default: () => h(iconMaps['ionicons5']?.['Apps'] as Component),
+        default: () => h(iconMaps['antd']?.['Apps'] as Component),
       })
   }
 
@@ -49,9 +50,9 @@ export function renderIconUtil(icon?: string | unknown): Component {
  * 示例: ionicons5/AppsOutline
  * 不使用 NIcon 包裹
  */
-export function renderIconUtilNoNIcon(icon?: string | unknown): Component {
+export function renderIconUtilNoNIcon(icon?: string | unknown): () => VNode {
   if (!icon) {
-    icon = 'antd/BarsOutlined'
+    icon = 'ionicons5/Apps'
   }
 
   if (typeof icon !== 'string') {

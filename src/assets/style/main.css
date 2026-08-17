@@ -40,6 +40,11 @@ body,
   display: none;
 }
 
+* {
+  -ms-overflow-style: none; /* IE 和 Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .no-scrollbar {
   -ms-overflow-style: none; /* IE 和 Edge */
   scrollbar-width: none; /* Firefox */

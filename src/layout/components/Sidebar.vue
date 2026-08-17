@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { MenuOption, MenuInst } from 'naive-ui'
+import { getMenuTree } from '@/api/menu'
+import { CaretDownOutline } from '@vicons/ionicons5'
+import type { MenuInst, MenuOption } from 'naive-ui'
+import { NIcon } from 'naive-ui'
 import type { VNodeChild } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
-import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
-import { NIcon } from 'naive-ui'
 import { RouterLink } from 'vue-router'
-import { getMenuTree } from '@/api/menu'
 
 const layoutStore = useLayoutStore()
 // 公司名称
@@ -28,15 +28,6 @@ function renderMenuLabel(option: MenuOption) {
     )
   }
   return option.label as VNodeChild
-}
-
-// 渲染菜单图标
-function renderMenuIcon(option: MenuOption) {
-  // 渲染图标占位符以保持缩进
-  if (option.type === 'sheep-man') return true
-  // 返回 falsy 值，不再渲染图标及占位符
-  if (option.type === 'food') return null
-  return h(NIcon, null, { default: () => h(BookmarkOutline) })
 }
 
 // 渲染展开图标
@@ -66,6 +57,7 @@ function transformMenu(list: Menu[], collapsed: boolean): MenuOption[] {
       key: item.routeName,
       show: item.hidden !== true,
       meta: rest,
+      icon: renderIconUtil(item.icon),
     }
 
     if (item.isGroup === true) {
@@ -132,7 +124,9 @@ onMounted(() => {
         }"
       >
         <p>logo</p>
-        <p v-if="!layoutStore.collapsed">{{ company }}</p>
+        <Transition enter-from-class="animate__animated animate__zoomIn animate__delay-2s">
+          <p v-if="!layoutStore.collapsed">{{ company }}</p>
+        </Transition>
       </div>
     </div>
     <n-scrollbar class="shadow-2xl">
@@ -144,7 +138,6 @@ onMounted(() => {
         :collapsed-icon-size="20"
         :options="menuOptions"
         :render-label="renderMenuLabel"
-        :render-icon="renderMenuIcon"
         :expand-icon="expandIcon"
       >
       </n-menu>

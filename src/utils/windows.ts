@@ -32,6 +32,7 @@ export function requestNotif() {
 
       $message.warning('', {
         duration: 3000,
+        closable: true,
         render: () => {
           return h(
             'div',
@@ -52,9 +53,8 @@ export function requestNotif() {
                     cursor: 'pointer',
                   },
                 },
-                ['点击查看如何开启通知'],
+                '点击查看如何开启通知',
               ),
-              '以获得更好体验',
             ],
           )
         },
