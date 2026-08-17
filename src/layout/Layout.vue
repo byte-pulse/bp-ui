@@ -19,22 +19,25 @@ onMounted(() => {})
     </n-layout-sider>
 
     <!-- 主内容区域 -->
-    <n-layout>
+    <n-layout content-style="scrollbar-width: none">
       <!-- 头部区域 -->
       <n-layout-header class="h-15 border-b w-full border-gray-200 px-4">
         <Header />
       </n-layout-header>
-      <Transition
-        enter-active-class="animate__animated animate__zoomIn animate__faster"
-        leave-active-class="animate__animated animate__zoomOut animate__faster"
+      <div
+        class="overflow-hidden shrink-0"
+        :style="{
+          height: layoutStore.showTabs ? '36px' : '0px',
+          opacity: layoutStore.showTabs ? 1 : 0,
+          transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease',
+        }"
       >
-        <div class="h-10 w-full" v-if="layoutStore.showTabs">
-          <Tabs />
-        </div>
-      </Transition>
+        <Tabs />
+      </div>
       <!-- 内容区域，路由出口位置 -->
       <n-layout-content
-        content-class="p-4 w-full"
+        content-class="p-4"
+        style="transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
         :class="{
           'h-[calc(100vh-60px)]': !layoutStore.showTabs,
           'h-[calc(100vh-100px)]': layoutStore.showTabs,
@@ -48,7 +51,7 @@ onMounted(() => {})
             enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
             leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
           >
-            <component :is="Component" :key="route.fullPath" />
+            <component :is="Component" style="width: 100%; height: 100%" :key="route.fullPath" />
           </transition>
         </RouterView>
       </n-layout-content>

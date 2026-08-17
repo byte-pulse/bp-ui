@@ -250,7 +250,7 @@ onMounted(() => {
       <TransitionGroup
         name="routes"
         tag="div"
-        class="w-full h-full whitespace-nowrap flex justify-start items-center gap-1 relative"
+        class="w-full h-full whitespace-nowrap flex justify-start items-end gap-1 relative"
         enter-active-class="animate__animated animate__backInUp animate__faster"
         leave-active-class="animate__animated animate__backOutDown animate__faster"
         @before-leave="beforeLeave"
