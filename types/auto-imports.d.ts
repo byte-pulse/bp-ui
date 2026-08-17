@@ -68,7 +68,9 @@ declare global {
   const ref: typeof import('vue').ref
   const renderIconUtil: typeof import('../src/utils/icon').renderIconUtil
   const renderIconUtilNoNIcon: typeof import('../src/utils/icon').renderIconUtilNoNIcon
+  const requestNotif: typeof import('../src/utils/windows').requestNotif
   const resolveComponent: typeof import('vue').resolveComponent
+  const sendSystemNotification: typeof import('../src/utils/windows').sendSystemNotification
   const setActivePinia: typeof import('pinia').setActivePinia
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
   const setupDiscreteApiTheme: typeof import('../src/utils/navie').setupDiscreteApiTheme

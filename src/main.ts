@@ -1,5 +1,7 @@
 import './assets/style/fonts.css'
 import './assets/style/main.css'
+import './assets/style/vTransition.css'
+import 'animate.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

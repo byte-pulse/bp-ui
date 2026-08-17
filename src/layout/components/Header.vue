@@ -30,19 +30,20 @@ const toggleTheme = (themeName: string) => {
 const toggleTabs = () => {
   layoutStore.showTabs = !layoutStore.showTabs
 }
+
+const reqNotif = () => {
+  requestNotif()
+}
 </script>
 
 <template>
   <div class="h-full w-full flex items-center gap-1.5">
     <n-button type="primary" @click="clearToken">清除token</n-button>
     <n-button type="primary" @click="toggleDark">切换暗色模式</n-button>
-    <n-button type="primary" @click="toggleTheme('default')">
-      默认主题
-    </n-button>
-    <n-button type="primary" @click="toggleTheme('blackWhite')">
-      黑白主题
-    </n-button>
+    <n-button type="primary" @click="toggleTheme('default')"> 默认主题 </n-button>
+    <n-button type="primary" @click="toggleTheme('blackWhite')"> 黑白主题 </n-button>
     <n-button type="primary" @click="toggleTabs"> 切换标签页显示 </n-button>
+    <n-button type="primary" @click="reqNotif"> 请求通知权限 </n-button>
   </div>
 </template>
 

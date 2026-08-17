@@ -70,7 +70,7 @@ const menuList: Menu[] = [
       {
         id: 6,
         parentId: 5,
-        title: '案例',
+        title: '组件案例',
         routeName: 'examples',
         component: undefined,
         isGroup: false,

@@ -10,7 +10,7 @@ onMounted(() => {})
     <n-layout-sider
       v-model:collapsed="layoutStore.collapsed"
       collapse-mode="width"
-      :collapsed-width="120"
+      :collapsed-width="80"
       :width="220"
       show-trigger="arrow-circle"
       class="h-screen"
@@ -24,11 +24,14 @@ onMounted(() => {})
       <n-layout-header class="h-15 border-b w-full border-gray-200 px-4">
         <Header />
       </n-layout-header>
-
-      <div class="h-10 w-full" v-if="layoutStore.showTabs">
-        <Tabs />
-      </div>
-
+      <Transition
+        enter-active-class="animate__animated animate__zoomIn animate__faster"
+        leave-active-class="animate__animated animate__zoomOut animate__faster"
+      >
+        <div class="h-10 w-full" v-if="layoutStore.showTabs">
+          <Tabs />
+        </div>
+      </Transition>
       <!-- 内容区域，路由出口位置 -->
       <n-layout-content
         content-class="p-4 w-full"
@@ -39,7 +42,12 @@ onMounted(() => {})
         ref="contentRef"
       >
         <RouterView v-slot="{ Component, route }">
-          <transition name="fade-slide" mode="out-in">
+          <transition
+            name="fade-slide"
+            mode="out-in"
+            enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
+            leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
+          >
             <component :is="Component" :key="route.fullPath" />
           </transition>
         </RouterView>

@@ -1,11 +1,7 @@
 <script lang="ts" setup>
 import { NButton, NIcon } from 'naive-ui'
 import { Close, CloseCircleOutline, CloseCircleSharp } from '@vicons/ionicons5'
-import {
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
-  CloseCircleOutlined,
-} from '@vicons/antd'
+import { ArrowRightOutlined, ArrowLeftOutlined, CloseCircleOutlined } from '@vicons/antd'
 import type { VNodeChild } from 'vue'
 
 const layoutStore = useLayoutStore()
@@ -207,6 +203,21 @@ const addTab = () => {
   })
 }
 
+// 移除前钩子, 防止布局错误
+const beforeLeave = (el: Element) => {
+  const div = el as HTMLDivElement
+  const container = el.parentElement
+  const rect = el.getBoundingClientRect()
+  const containerRect = container!.getBoundingClientRect()
+
+  // 锁定元素当前相对容器的位置
+  div.style.left = rect.left - containerRect.left + 'px'
+  div.style.top = rect.top - containerRect.top + 'px'
+  div.style.width = rect.width + 'px'
+  // 手动设置 absolute，确保 left/top 生效（leave-active 类稍后才会添加）
+  div.style.position = 'absolute'
+}
+
 // 监听路由变化, 当路由变化时, 更新 activeTab, 并判断是否需要添加标签页
 watch(
   () => route.name,
@@ -221,15 +232,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <BackGround
-    class="w-full h-full flex justify-center items-center border-b border-gray-200"
-  >
+  <BackGround class="w-full h-full flex justify-center items-center border-b border-gray-200">
     <!-- 标签页列表 -->
-    <div
-      ref="scrollRef"
-      class="h-full w-full px-4 overflow-x-scroll no-scrollbar"
-      @wheel.prevent="handleWheel"
-    >
+    <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
       <n-dropdown
         placement="bottom-start"
         trigger="manual"
@@ -242,44 +247,44 @@ onMounted(() => {
         @select="handleSelect"
       />
       <!-- 标签页列表 -->
-      <div
-        class="w-full h-full whitespace-nowrap flex justify-start items-end gap-1"
+      <TransitionGroup
+        name="routes"
+        tag="div"
+        class="w-full h-full whitespace-nowrap flex justify-start items-center gap-1 relative"
+        enter-active-class="animate__animated animate__backInUp animate__faster"
+        leave-active-class="animate__animated animate__backOutDown animate__faster"
+        @before-leave="beforeLeave"
       >
         <!-- 标签页列表项 -->
-        <template v-for="item in tabStore.tabs" :key="item.key">
-          <div
-            class="pt-2 pb-1 px-3 border border-b-0 border-gray-300 rounded-t-md cursor-pointer text-xs flex items-center"
-            @contextmenu="handleContextMenu($event, item.key)"
-            @click="setActiveTab(item.key)"
-            :style="{
-              color:
-                item.key === activeTab
-                  ? layoutStore.themeColor?.baseColor
-                  : layoutStore.themeColor?.textColorBase,
-              backgroundColor:
-                item.key === activeTab
-                  ? layoutStore.themeColor?.primaryColor
-                  : layoutStore.themeColor?.bodyColor,
-            }"
+        <div
+          v-for="item in tabStore.tabs"
+          :key="item.key"
+          class="pt-2 pb-1 px-3 border border-b-0 border-gray-300 rounded-t-md cursor-pointer text-xs flex items-center"
+          @contextmenu="handleContextMenu($event, item.key)"
+          @click="setActiveTab(item.key)"
+          :style="{
+            color: item.key === activeTab ? layoutStore.themeColor?.baseColor : layoutStore.themeColor?.textColorBase,
+            backgroundColor:
+              item.key === activeTab ? layoutStore.themeColor?.primaryColor : layoutStore.themeColor?.bodyColor,
+          }"
+        >
+          <span class="mr-1 select-none">{{ item.label }}</span>
+          <!-- 关闭按钮 -->
+          <n-icon
+            v-if="tabStore.tabs.length > 1"
+            @click.stop="closeCurrent(item.key)"
+            :color="
+              hover && hoverKey === item.key && activeTab !== item.key
+                ? layoutStore.themeColor?.primaryColor
+                : undefined
+            "
+            @mouseenter="handleHover(true, item.key)"
+            @mouseleave="handleHover(false, item.key)"
           >
-            <span class="mr-1 select-none">{{ item.label }}</span>
-            <!-- 关闭按钮 -->
-            <n-icon
-              v-if="tabStore.tabs.length > 1"
-              @click.stop="closeCurrent(item.key)"
-              :color="
-                hover && hoverKey === item.key && activeTab !== item.key
-                  ? layoutStore.themeColor?.primaryColor
-                  : undefined
-              "
-              @mouseenter="handleHover(true, item.key)"
-              @mouseleave="handleHover(false, item.key)"
-            >
-              <CloseCircleOutlined />
-            </n-icon>
-          </div>
-        </template>
-      </div>
+            <CloseCircleOutlined />
+          </n-icon>
+        </div>
+      </TransitionGroup>
     </div>
   </BackGround>
 </template>

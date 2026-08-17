@@ -1,0 +1,4 @@
+/* 路由标签组 */
+.routes-move {
+  transition: transform 0.5s ease;
+}

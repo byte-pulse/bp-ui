@@ -33,6 +33,10 @@ onMounted(() => {
   // app 挂载完成后获取动态路由
   // getDynamicRoutes()
   printBanner()
+  // 带图标和超链接的通知
+  sendSystemNotification('新消息提醒', {
+    body: '您收到一条新消息',
+  })
 })
 </script>
 

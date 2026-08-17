@@ -7,10 +7,14 @@ import { NIcon } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import { getMenuTree } from '@/api/menu'
 
+const layoutStore = useLayoutStore()
 // 公司名称
 const company = ref('')
 
-const menuOptions = ref<MenuOption[]>([])
+const menusRef = ref<Menu[]>([])
+const menuOptions = computed<MenuOption[]>(() => {
+  return transformMenu(menusRef.value, layoutStore.collapsed)
+})
 
 // 渲染菜单标签
 function renderMenuLabel(option: MenuOption) {
@@ -39,30 +43,49 @@ function renderMenuIcon(option: MenuOption) {
 function expandIcon() {
   return h(NIcon, null, { default: () => h(CaretDownOutline) })
 }
-const layoutStore = useLayoutStore()
 
 // 转换菜单
-function transformMenu(list: Menu[]): MenuOption[] {
-  return list.map((item) => {
-    // 1. 解构出 children，剩下的就是 meta
-    const { children, ...rest } = item
+function transformMenu(list: Menu[], collapsed: boolean): MenuOption[] {
+  const result: MenuOption[] = []
 
-    return {
-      label: item.title, // title -> label
-      key: item.routeName, // routeName -> key
-      show: item.hidden !== true, // hidden -> show
-      meta: rest, // 原始数据，但已经不包含 children
-      type: item.isGroup === true ? 'group' : 'item', // isGroup -> type
-      // 2. 递归处理 children
-      children: children?.length ? transformMenu(children) : undefined,
+  for (const item of list) {
+    // 如果当前项是分组且处于收起状态
+    if (collapsed && item.isGroup === true) {
+      // 递归处理其子菜单，并展开到当前层级
+      if (item.children?.length) {
+        const childOptions = transformMenu(item.children, collapsed)
+        result.push(...childOptions)
+      }
+      continue // 跳过分组本身
     }
-  })
+
+    // 非分组或展开状态：正常处理
+    const { children, ...rest } = item
+    const option: MenuOption = {
+      label: item.title,
+      key: item.routeName,
+      show: item.hidden !== true,
+      meta: rest,
+    }
+
+    if (item.isGroup === true) {
+      option.type = 'group'
+    }
+
+    if (children?.length) {
+      option.children = transformMenu(children, collapsed)
+    }
+
+    result.push(option)
+  }
+
+  return result
 }
 
 // 获取菜单
 const getMenuOptions = () => {
   getMenuTree().then((menus) => {
-    menuOptions.value = transformMenu(menus)
+    menusRef.value = menus
   })
 }
 
@@ -100,10 +123,12 @@ onMounted(() => {
     <!-- logo -->
     <div class="h-15 border-b border-gray-200 p-0">
       <div
-        class="w-full h-15 flex items-center"
+        class="w-full h-15 flex items-center justify-around"
         :class="{
           'justify-center': layoutStore.collapsed,
-          'justify-around': !layoutStore.collapsed,
+          'justify-start': !layoutStore.collapsed,
+          'pl-8': !layoutStore.collapsed,
+          'gap-2': !layoutStore.collapsed,
         }"
       >
         <p>logo</p>
