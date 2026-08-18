@@ -19,11 +19,7 @@ const props = defineProps<Prop>()
     <n-form>
       <template v-for="item in props.formItems" :key="item.fieldName">
         <!-- 输入框 -->
-        <n-form-item
-          :label="item.label"
-          :name="item.fieldName"
-          v-if="item.component === 'input'"
-        >
+        <n-form-item :label="item.label" :name="item.fieldName" v-if="item.component === 'input'">
           <n-input />
         </n-form-item>
       </template>

@@ -5,17 +5,11 @@
  * 因此无法自动继承主题配置，需要通过 configProviderProps 显式绑定。
  */
 import { createDiscreteApi } from 'naive-ui'
-import type {
-  DiscreteApiOptions,
-  GlobalTheme,
-  GlobalThemeOverrides,
-} from 'naive-ui'
+import type { DiscreteApiOptions, GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
 
 /** 主题 Ref 存储 */
 const themeRef = shallowRef<Ref<GlobalTheme | undefined> | undefined>()
-const themeOverridesRef = shallowRef<
-  Ref<GlobalThemeOverrides | undefined> | undefined
->()
+const themeOverridesRef = shallowRef<Ref<GlobalThemeOverrides | undefined> | undefined>()
 
 /** 计算属性：传递给 createDiscreteApi 的配置 */
 const configProviderPropsRef = computed(() => ({

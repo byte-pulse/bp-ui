@@ -1,21 +1,11 @@
 <template>
   <div class="w-full">
     <!-- 选择器 -->
-    <n-popover
-      trigger="click"
-      placement="bottom-start"
-      :show-arrow="false"
-      v-model:show="isShow"
-    >
+    <n-popover trigger="click" placement="bottom-start" :show-arrow="false" v-model:show="isShow">
       <!-- 触发 -->
       <template #trigger>
         <!-- <n-button>选择图标</n-button> -->
-        <n-input
-          :value="model"
-          type="text"
-          placeholder="选择图标"
-          :size="props.size"
-        >
+        <n-input :value="model" type="text" placeholder="选择图标" :size="props.size">
           <template #prefix v-if="props.preview === 'prefix'">
             <n-icon color="#323538" size="23">
               <component :is="IconComp" />
@@ -30,26 +20,12 @@
       </template>
       <!-- 弹出框 -->
       <div v-if="isShow" class="w-75 h-75 flex flex-col">
-        <n-input
-          v-model:value="keyword"
-          placeholder="搜索图标名称"
-          clearable
-          size="small"
-        />
+        <n-input v-model:value="keyword" placeholder="搜索图标名称" clearable size="small" />
 
         <n-tabs v-model:value="activeTab" animated size="small">
-          <n-tab-pane
-            v-for="lib in iconLibs"
-            :key="lib.key"
-            :name="lib.key"
-            :tab="lib.label"
-          >
+          <n-tab-pane v-for="lib in iconLibs" :key="lib.key" :name="lib.key" :tab="lib.label">
             <!-- 行级虚拟列表 -->
-            <n-virtual-list
-              :items="rowIcons(filteredIcons(lib.icons))"
-              :item-size="ROW_HEIGHT"
-              style="height: 220px"
-            >
+            <n-virtual-list :items="rowIcons(filteredIcons(lib.icons))" :item-size="ROW_HEIGHT" style="height: 220px">
               <template #default="{ item: row }">
                 <div class="h-10 grid grid-cols-6">
                   <div

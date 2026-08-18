@@ -1,9 +1,4 @@
-import axios, {
-  type AxiosInstance,
-  type AxiosRequestConfig,
-  type AxiosResponse,
-  type AxiosProgressEvent,
-} from 'axios'
+import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse, type AxiosProgressEvent } from 'axios'
 import qs from 'qs'
 import router from '@/router/index'
 
@@ -76,11 +71,7 @@ class HttpClient {
   /**
    * GET 请求
    */
-  get<T>(
-    url: string,
-    params?: QueryType,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  get<T>(url: string, params?: QueryType, config?: AxiosRequestConfig): Promise<T> {
     return this.instance.get(url, {
       params,
       ...config,
@@ -104,11 +95,7 @@ class HttpClient {
   /**
    * DELETE 请求
    */
-  delete<T>(
-    url: string,
-    params?: QueryType,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  delete<T>(url: string, params?: QueryType, config?: AxiosRequestConfig): Promise<T> {
     return this.instance.delete(url, {
       params,
       ...config,

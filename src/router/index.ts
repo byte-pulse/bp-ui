@@ -49,9 +49,7 @@ function generateRoutes(menus: Menu[], parentPath = ''): RouteRecordRaw[] {
 
   menus.forEach((menu) => {
     // 拼完整路径
-    const fullPath = parentPath
-      ? `${parentPath}/${menu.routeName}`
-      : `/${menu.routeName}`
+    const fullPath = parentPath ? `${parentPath}/${menu.routeName}` : `/${menu.routeName}`
 
     // 只要是页面（有 component）就生成路由
     if (menu.component) {

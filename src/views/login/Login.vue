@@ -54,48 +54,26 @@ onMounted(() => {
 <template>
   <!-- 登录背景装饰 -->
   <div class="bg-gray-100 absolute w-screen h-screen overflow-hidden z-[-1]">
-    <div
-      class="absolute opacity-20 rounded-full -top-25 -right-25 size-75 bg-blue-500"
-    ></div>
-    <div
-      class="absolute opacity-20 rounded-full -bottom-12.5 -left-12.5 size-50 bg-teal-500"
-    ></div>
-    <div
-      class="absolute opacity-20 rounded-full bottom-55 right-65 size-37.5 bg-amber-500"
-    ></div>
+    <div class="absolute opacity-20 rounded-full -top-25 -right-25 size-75 bg-blue-500"></div>
+    <div class="absolute opacity-20 rounded-full -bottom-12.5 -left-12.5 size-50 bg-teal-500"></div>
+    <div class="absolute opacity-20 rounded-full bottom-55 right-65 size-37.5 bg-amber-500"></div>
   </div>
   <!-- 登录容器 -->
-  <div
-    class="login-container w-screen h-screen flex items-center justify-center bg-transparent"
-  >
+  <div class="login-container w-screen h-screen flex items-center justify-center bg-transparent">
     <!-- 登录内容容器 -->
-    <div
-      class="size-full md:max-w-250 md:max-h-[95%] shadow-lg flex flex-col md:flex-row md:rounded-xl"
-    >
-      <div
-        class="w-full h-[50%] md:flex-1 md:h-full bg-blue-400 hidden md:block md:rounded-l-xl"
-      ></div>
-      <div
-        class="w-full h-full md:w-[55%] md:h-full px-13 py-16 flex flex-col bg-white md:rounded-r-xl"
-      >
+    <div class="size-full md:max-w-250 md:max-h-[95%] shadow-lg flex flex-col md:flex-row md:rounded-xl">
+      <div class="w-full h-[50%] md:flex-1 md:h-full bg-blue-400 hidden md:block md:rounded-l-xl"></div>
+      <div class="w-full h-full md:w-[55%] md:h-full px-13 py-16 flex flex-col bg-white md:rounded-r-xl">
         <span class="font-bold text-4xl mb-3">欢迎回来 👋</span>
         <span class="text-gray-500 text-base mb-8"
           >使用您的账号登录{{ companyName }}管理系统，开启高效工作的一天！</span
         >
         <!-- 登录表单容器 -->
         <n-space vertical>
-          <n-form
-            :model="formValue"
-            size="large"
-            ref="formRef"
-            :rules="rules"
-            autocomplete="off"
-          >
+          <n-form :model="formValue" size="large" ref="formRef" :rules="rules" autocomplete="off">
             <n-form-item path="username">
               <template #label>
-                <span class="font-bold text-slate-600 text-base"
-                  >用户名 / 邮箱</span
-                >
+                <span class="font-bold text-slate-600 text-base">用户名 / 邮箱</span>
               </template>
               <n-input
                 v-model:value="formValue.username"
@@ -119,10 +97,7 @@ onMounted(() => {
             </n-form-item>
           </n-form>
           <!-- 登录按钮容器 -->
-          <n-space
-            justify="space-between"
-            class="w-full flex items-center justify-between mb-10"
-          >
+          <n-space justify="space-between" class="w-full flex items-center justify-between mb-10">
             <n-checkbox>
               <span class="text-slate-600 text-sm">保持登录状态</span>
             </n-checkbox>
@@ -157,22 +132,9 @@ onMounted(() => {
         <!-- 登录方式按钮容器 -->
         <div class="w-full flex justify-between align-center gap-5">
           <!-- 微信登陆按钮 -->
-          <n-button
-            type="success"
-            ghost
-            size="large"
-            block
-            style="flex: 1"
-            color="#03db6b"
-          >
+          <n-button type="success" ghost size="large" block style="flex: 1" color="#03db6b">
             <span class="font-bold flex items-center gap-2">
-              <svg
-                t=" 1776084525989"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                p-id="6830"
-                class="w-6 h-6"
-              >
+              <svg t=" 1776084525989" viewBox="0 0 1024 1024" version="1.1" p-id="6830" class="w-6 h-6">
                 <path
                   d="M337.387283 341.82659c-17.757225 0-35.514451 11.83815-35.514451 29.595375s17.757225 29.595376 35.514451 29.595376 29.595376-11.83815 29.595376-29.595376c0-18.49711-11.83815-29.595376-29.595376-29.595375zM577.849711 513.479769c-11.83815 0-22.936416 12.578035-22.936416 23.6763 0 12.578035 11.83815 23.676301 22.936416 23.676301 17.757225 0 29.595376-11.83815 29.595376-23.676301s-11.83815-23.676301-29.595376-23.6763zM501.641618 401.017341c17.757225 0 29.595376-12.578035 29.595376-29.595376 0-17.757225-11.83815-29.595376-29.595376-29.595375s-35.514451 11.83815-35.51445 29.595375 17.757225 29.595376 35.51445 29.595376zM706.589595 513.479769c-11.83815 0-22.936416 12.578035-22.936416 23.6763 0 12.578035 11.83815 23.676301 22.936416 23.676301 17.757225 0 29.595376-11.83815 29.595376-23.676301s-11.83815-23.676301-29.595376-23.6763z"
                   fill="currentColor"
@@ -188,22 +150,9 @@ onMounted(() => {
             </span>
           </n-button>
           <!-- 钉钉登陆按钮 -->
-          <n-button
-            type="info"
-            ghost
-            size="large"
-            block
-            style="flex: 1"
-            color="#50a2ff"
-          >
+          <n-button type="info" ghost size="large" block style="flex: 1" color="#50a2ff">
             <span class="font-bold flex items-center gap-2">
-              <svg
-                t="1776084473309"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                p-id="5775"
-                class="w-6 h-6"
-              >
+              <svg t="1776084473309" viewBox="0 0 1024 1024" version="1.1" p-id="5775" class="w-6 h-6">
                 <path
                   d="M512.003 79C272.855 79 79 272.855 79 512.003 79 751.145 272.855 945 512.003 945 751.145 945 945 751.145 945 512.003 945 272.855 751.145 79 512.003 79z m200.075 375.014c-0.867 3.764-3.117 9.347-6.234 16.012h0.087l-0.347 0.648c-18.183 38.86-65.631 115.108-65.631 115.108l-0.215-0.52-13.856 24.147h66.8L565.063 779l29.002-115.368h-52.598l18.27-76.29c-14.76 3.55-32.253 8.436-52.945 15.1 0 0-27.967 16.36-80.607-31.5 0 0-35.501-31.29-14.891-39.078 8.744-3.33 42.466-7.573 69.004-11.122 35.93-4.845 57.965-7.441 57.965-7.441s-110.607 1.643-136.841-2.468c-26.237-4.11-59.525-47.905-66.626-86.377 0 0-10.953-21.117 23.595-11.122 34.547 10 177.535 38.95 177.535 38.95s-185.933-56.992-198.36-70.929c-12.381-13.846-36.406-75.902-33.289-113.981 0 0 1.343-9.521 11.127-6.926 0 0 137.49 62.75 231.475 97.152 94.028 34.403 175.76 51.885 165.2 96.414z"
                   fill="currentColor"
@@ -218,16 +167,13 @@ onMounted(() => {
         <div class="w-full flex justify-center align-center mt-12">
           <span class="text-slate-500"
             >还没有账号？
-            <a href="javascript:void(0)" class="underline text-indigo-500"
-              >立即申请体验</a
-            >
+            <a href="javascript:void(0)" class="underline text-indigo-500">立即申请体验</a>
           </span>
         </div>
         <!-- 版权信息容器 -->
         <div class="w-full flex justify-center align-center mt-3">
           <span class="text-slate-500 text-xs"
-            >&copy; {{ currentYear }} {{ companyName }} 版权所有 |
-            为年轻企业而生</span
+            >&copy; {{ currentYear }} {{ companyName }} 版权所有 | 为年轻企业而生</span
           >
         </div>
       </div>
