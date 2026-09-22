@@ -1,6 +1,6 @@
 # BP Admin UI
 
-由 [字节脉动科技](https://github.com/jiejiebiezheyang) 出品的现代化中后台管理系统启动模板，开箱即用，为年轻企业而生。
+由 [字节脉动](https://gitee.com/byte-pulse) 出品的现代化中后台管理系统启动模板，开箱即用，为年轻企业而生。
 
 ## 特性
 
