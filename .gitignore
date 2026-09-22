@@ -37,3 +37,6 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# 忽略自动生成的类型文件
+types/auto-*.d.ts
