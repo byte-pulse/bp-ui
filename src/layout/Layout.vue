@@ -14,7 +14,7 @@ onMounted(() => {})
       v-model:collapsed="layoutStore.collapsed"
       collapse-mode="width"
       :collapsed-width="80"
-      :width="220"
+      :width="260"
       class="h-screen"
     >
       <Sidebar />
@@ -59,7 +59,7 @@ onMounted(() => {})
             enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
             leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
           >
-            <component :is="Component" style="width: 100%; height: 100%" :key="route.fullPath" />
+            <component :is="Component" style="width: 100%; height: 100%; border-radius: 4px" :key="route.fullPath" />
           </transition>
         </RouterView>
       </n-layout-content>
