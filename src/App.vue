@@ -1,57 +1,32 @@
 <script lang="ts" setup>
-import { darkTheme } from 'naive-ui'
-import type { GlobalThemeOverrides } from 'naive-ui'
-import { defaultTheme } from '@/assets/themes/default'
-import { blackWhiteTheme } from '@/assets/themes/blackWhite'
-import { setupDiscreteApiTheme } from '@/utils/navie'
-
 const layoutStore = useLayoutStore()
 
-const theme = computed(() => (layoutStore.isDark ? darkTheme : undefined))
+// 监听主题变化,立即执行一次
+watch(
+  () => layoutStore.themeName,
+  (newVal) => {
+    if (newVal === 'dark') {
+      document.body.setAttribute('arco-theme', 'dark')
+    } else {
+      document.body.removeAttribute('arco-theme')
+    }
+  },
+  { immediate: true },
+)
 
-const themeOverrides = computed<GlobalThemeOverrides>(() => {
-  if (layoutStore.isDark === true) {
-    layoutStore.cardColor = darkTheme.common.cardColor
-    layoutStore.themeColor = darkTheme.common || {}
-    return {}
-  }
-  switch (layoutStore.themeName) {
-    case 'blackWhite':
-      layoutStore.cardColor = blackWhiteTheme?.common?.cardColor
-      layoutStore.themeColor = blackWhiteTheme?.common || {}
-      return blackWhiteTheme
-    default:
-      layoutStore.cardColor = defaultTheme?.common?.cardColor
-      layoutStore.themeColor = defaultTheme?.common || {}
-      return defaultTheme
-  }
-})
-
-setupDiscreteApiTheme(theme, themeOverrides)
-
-onMounted(() => {
-  // app 挂载完成后获取动态路由
-  // getDynamicRoutes()
-  printBanner()
-  // 带图标和超链接的通知
-  sendSystemNotification('新消息提醒', {
-    body: '您收到一条新消息',
-  })
-})
+onMounted(() => {})
 </script>
 
 <template>
-  <n-config-provider :theme="theme" :theme-overrides="themeOverrides">
-    <div class="app-container w-screen h-screen scroll-smooth">
-      <RouterView />
-    </div>
-  </n-config-provider>
+  <div class="app-container w-screen h-screen scroll-smooth">
+    <RouterView />
+  </div>
 </template>
 
 <style lang="scss" scoped>
-::selection {
-  background: v-bind('layoutStore.themeColor?.primaryColorSuppl');
-  color: v-bind('layoutStore.themeColor?.textColor1');
+body ::selection {
+  background: var(--primary-6);
+  color: var(--primary-1);
   text-shadow: none;
 }
 </style>

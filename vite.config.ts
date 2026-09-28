@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 // 配置 naive-ui 组件自动导入
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vite.dev/config/
@@ -40,6 +40,7 @@ export default defineConfig(({ command }) => {
       }),
       // 函数自动导入
       AutoImport({
+        resolvers: [ArcoResolver()],
         imports: ['vue', 'vue-router', 'pinia'],
         dirs: ['./src/stores/**', './src/utils/**'],
         dts: './types/auto-imports.d.ts',
@@ -47,7 +48,20 @@ export default defineConfig(({ command }) => {
       }),
       // 组件自动导入
       Components({
-        resolvers: [NaiveUiResolver()],
+        resolvers: [
+          ArcoResolver({ sideEffect: true }),
+          {
+            type: 'component',
+            resolve: (name) => {
+              if (name === 'IIcon') {
+                return {
+                  name: 'Icon',
+                  from: '@iconify/vue',
+                }
+              }
+            },
+          },
+        ],
         dirs: ['./src/components/**', './src/layout/components/**'],
         dts: './types/auto-components.d.ts',
         syncMode: 'overwrite',
@@ -59,20 +73,10 @@ export default defineConfig(({ command }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    // 配置 scss 变量
-    css: {
-      preprocessorOptions: {
-        scss: {
-          // 配置 scss 变量
-          additionalData: `
-          @use "@/assets/style/variables.scss" as vv;
-        `,
-        },
-      },
-    },
     // 配置服务器
     server: {
       // 配置服务器端口
+      host: '0.0.0.0',
       port: envPort || 5173,
       proxy: {
         '/api': {

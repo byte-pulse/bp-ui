@@ -5,66 +5,48 @@ onMounted(() => {})
 </script>
 
 <template>
-  <n-layout has-sider class="h-screen w-screen">
+  <a-layout>
     <!-- 侧边栏区域 -->
-    <!--
-      show-trigger="arrow-circle"
-     -->
-    <n-layout-sider
-      v-model:collapsed="layoutStore.collapsed"
-      collapse-mode="width"
-      :collapsed-width="80"
-      :width="260"
-      class="h-screen"
+    <a-layout-sider
+      breakpoint="lg"
+      :collapsed-width="layoutStore.collapsedCollapsedWidth"
+      :width="layoutStore.sidebarWidth"
+      collapsible
+      :collapsed="layoutStore.collapsed"
+      hide-trigger
     >
       <Sidebar />
-    </n-layout-sider>
-
+    </a-layout-sider>
     <!-- 主内容区域 -->
-    <n-layout content-style="scrollbar-width: none">
+    <a-layout>
       <!-- 头部区域 -->
-      <n-layout-header
-        class="h-15 border-b w-full px-4"
-        :class="{
-          'border-gray-200': !layoutStore.isDark,
-          'border-zinc-500': layoutStore.isDark,
-        }"
-      >
+      <a-layout-header>
         <Header />
-      </n-layout-header>
-      <div
-        class="overflow-hidden shrink-0"
-        :style="{
-          height: layoutStore.showTabs ? '36px' : '0px',
-          opacity: layoutStore.showTabs ? 1 : 0,
-          transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease',
-        }"
-      >
-        <Tabs />
-      </div>
+      </a-layout-header>
       <!-- 内容区域，路由出口位置 -->
-      <n-layout-content
-        content-class="p-4"
-        style="transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
-        :class="{
-          'h-[calc(100vh-60px)]': !layoutStore.showTabs,
-          'h-[calc(100vh-100px)]': layoutStore.showTabs,
-        }"
-        ref="contentRef"
-      >
-        <RouterView v-slot="{ Component, route }">
-          <transition
-            name="fade-slide"
-            mode="out-in"
-            enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
-            leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
-          >
-            <component :is="Component" style="width: 100%; height: 100%; border-radius: 4px" :key="route.fullPath" />
-          </transition>
-        </RouterView>
-      </n-layout-content>
-    </n-layout>
-  </n-layout>
+      <a-layout style="padding: 12px 24px; background-color: var(--color-bg-4)">
+        <a-layout-content>
+          <a-layout> <Tabs /></a-layout>
+
+          <RouterView v-slot="{ Component, route }">
+            <transition
+              name="fade-slide"
+              mode="out-in"
+              enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
+              leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
+            >
+              <component
+                :is="Component"
+                style="width: 100%; border-radius: 4px"
+                :style="{ height: layoutStore.showTabs ? 'calc(100% - 32px - 12px)' : '100%' }"
+                :key="route.fullPath"
+              />
+            </transition>
+          </RouterView>
+        </a-layout-content>
+      </a-layout>
+    </a-layout>
+  </a-layout>
 </template>
 
 <style lang="scss" scoped></style>

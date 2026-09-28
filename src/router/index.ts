@@ -96,8 +96,7 @@ const router = createRouter({
 })
 
 // 前置守卫
-router.beforeEach(async (to, _) => {
-  $loadingBar.start()
+router.beforeEach(async (to) => {
   const path = to.path
 
   if (!isLoaded) {
@@ -132,12 +131,10 @@ router.beforeEach(async (to, _) => {
 })
 
 // 后置守卫
-router.afterEach((to, _) => {
+router.afterEach((to) => {
   if (to.path === '/404' || to.path === '/403') {
-    $loadingBar.error()
     return
   }
-  $loadingBar.finish()
 })
 
 export default router

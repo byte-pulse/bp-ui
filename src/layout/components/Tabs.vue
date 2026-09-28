@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import { NButton, NIcon } from 'naive-ui'
-import { Close, CloseCircleOutline, CloseCircleSharp } from '@vicons/ionicons5'
-import { ArrowRightOutlined, ArrowLeftOutlined, CloseCircleOutlined } from '@vicons/antd'
-import type { VNodeChild } from 'vue'
-
 const layoutStore = useLayoutStore()
 
 const tabStore = useTabStore()
@@ -34,44 +29,6 @@ const handleWheel = (e: WheelEvent) => {
     scrollRef.value.scrollLeft += e.deltaY
   }
 }
-
-// 菜单选项生成函数
-function generateMenuOptions(label: string, icon: Component): VNodeChild {
-  return h(
-    NButton,
-    {
-      bordered: false,
-    },
-    {
-      default: () => label,
-      icon: () => h(NIcon, {}, () => h(icon)),
-    },
-  )
-}
-
-// 右键菜单列表
-const options = [
-  {
-    label: () => generateMenuOptions('关闭当前标签', Close),
-    key: 'closeCurrent',
-  },
-  {
-    label: () => generateMenuOptions('关闭其他标签', CloseCircleOutline),
-    key: 'closeOthers',
-  },
-  {
-    label: () => generateMenuOptions('关闭右侧标签', ArrowRightOutlined),
-    key: 'closeRight',
-  },
-  {
-    label: () => generateMenuOptions('关闭左侧标签', ArrowLeftOutlined),
-    key: 'closeLeft',
-  },
-  {
-    label: () => generateMenuOptions('关闭全部标签', CloseCircleSharp),
-    key: 'closeAll',
-  },
-]
 
 // 关闭当前标签页
 const closeCurrent = (key: string) => {
@@ -139,16 +96,11 @@ const closeAll = () => {
   })
 }
 
-// 处理右键菜单事件
-const showDropdown = ref(false)
-const x = ref(0)
-const y = ref(0)
 // 当前右键的标签页
 const currentClickKey = ref('')
 
 // 处理右键菜单选择事件
-function handleSelect(key: string) {
-  showDropdown.value = false
+function handleSelect(key: string | number | Record<string, unknown> | undefined) {
   if (key === 'closeCurrent') {
     closeCurrent(currentClickKey.value)
   } else if (key === 'closeOthers') {
@@ -166,17 +118,6 @@ function handleSelect(key: string) {
 function handleContextMenu(e: MouseEvent, key: string) {
   currentClickKey.value = key
   e.preventDefault()
-  showDropdown.value = false
-  nextTick().then(() => {
-    showDropdown.value = true
-    x.value = e.clientX
-    y.value = e.clientY
-  })
-}
-
-// 处理点击外部事件
-function onClickoutside() {
-  showDropdown.value = false
 }
 
 // 设置切换标签页
@@ -232,71 +173,78 @@ onMounted(() => {
 </script>
 
 <template>
-  <BackGround
-    class="w-full h-full flex justify-center items-center border-b"
-    :class="{
-      'border-gray-200': !layoutStore.isDark,
-      'border-zinc-500': layoutStore.isDark,
-    }"
-  >
-    <!-- 标签页列表 -->
-    <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
-      <n-dropdown
-        placement="bottom-start"
-        trigger="manual"
-        :x="x"
-        :y="y"
-        :options="options"
-        :show="showDropdown"
-        :on-clickoutside="onClickoutside"
-        @update:show="(v) => (showDropdown = v)"
-        @select="handleSelect"
-      />
+  <Transition name="tabs">
+    <BackGround
+      v-if="layoutStore.showTabs"
+      class="w-full h-8 mb-3 flex justify-center items-center border-b bg-(--color-bg-4)"
+    >
       <!-- 标签页列表 -->
-      <TransitionGroup
-        name="routes"
-        tag="div"
-        class="w-full h-full whitespace-nowrap flex justify-start items-end gap-2 relative"
-        enter-active-class="animate__animated animate__backInUp animate__faster"
-        leave-active-class="animate__animated animate__backOutDown animate__faster"
-        @before-leave="beforeLeave"
-      >
-        <!-- 标签页列表项 -->
-        <div
-          v-for="item in tabStore.tabs"
-          :key="item.key"
-          class="pt-2 pb-1 px-3 border border-b-0 rounded-t-md cursor-pointer text-xs flex items-center"
-          :class="{
-            'border-gray-300': !layoutStore.isDark,
-            'border-zinc-500': layoutStore.isDark,
-          }"
-          @contextmenu="handleContextMenu($event, item.key)"
-          @click="setActiveTab(item.key)"
-          :style="{
-            color: item.key === activeTab ? layoutStore.themeColor?.baseColor : layoutStore.themeColor?.textColor2,
-            backgroundColor:
-              item.key === activeTab ? layoutStore.themeColor?.primaryColor : layoutStore.themeColor?.bodyColor,
-          }"
+      <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
+        <!-- 标签页列表 -->
+        <TransitionGroup
+          name="routes"
+          tag="div"
+          class="w-full h-full whitespace-nowrap flex justify-start items-end gap-2 relative"
+          enter-active-class="animate__animated animate__backInUp animate__faster"
+          leave-active-class="animate__animated animate__backOutDown animate__faster"
+          @before-leave="beforeLeave"
         >
-          <span class="mr-1 select-none">{{ item.label }}</span>
-          <!-- 关闭按钮 -->
-          <n-icon
-            v-if="tabStore.tabs.length > 1"
-            @click.stop="closeCurrent(item.key)"
-            :color="
-              hover && hoverKey === item.key && activeTab !== item.key
-                ? layoutStore.themeColor?.primaryColor
-                : undefined
-            "
-            @mouseenter="handleHover(true, item.key)"
-            @mouseleave="handleHover(false, item.key)"
-          >
-            <CloseCircleOutlined />
-          </n-icon>
-        </div>
-      </TransitionGroup>
-    </div>
-  </BackGround>
+          <!-- 标签页列表项 -->
+          <div v-for="item in tabStore.tabs" :key="item.key">
+            <a-dropdown trigger="contextMenu" alignPoint @select="handleSelect" :style="{ display: 'block' }">
+              <div
+                class="pt-2 pb-1 px-3 border border-b-0 rounded-t-md cursor-pointer text-xs flex items-center"
+                @contextmenu="handleContextMenu($event, item.key)"
+                @click="setActiveTab(item.key)"
+              >
+                <span class="mr-1 select-none">{{ item.label }}</span>
+                <!-- 关闭按钮 -->
+                <IIcon
+                  icon="ant-design:close-circle-outlined"
+                  v-if="tabStore.tabs.length > 1"
+                  @click.stop="closeCurrent(item.key)"
+                  @mouseenter="handleHover(true, item.key)"
+                  @mouseleave="handleHover(false, item.key)"
+                ></IIcon>
+              </div>
+              <template #content>
+                <a-doption value="closeCurrent">
+                  <template #icon>
+                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                  </template>
+                  关闭当前标签
+                </a-doption>
+                <a-doption value="closeOthers">
+                  <template #icon>
+                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                  </template>
+                  关闭其他标签页
+                </a-doption>
+                <a-doption value="closeRight">
+                  <template #icon>
+                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                  </template>
+                  关闭右侧标签页
+                </a-doption>
+                <a-doption value="closeLeft">
+                  <template #icon>
+                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                  </template>
+                  关闭左侧标签页
+                </a-doption>
+                <a-doption value="closeAll">
+                  <template #icon>
+                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                  </template>
+                  关闭所有标签页
+                </a-doption>
+              </template>
+            </a-dropdown>
+          </div>
+        </TransitionGroup>
+      </div>
+    </BackGround>
+  </Transition>
 </template>
 
 <style lang="scss" scoped></style>

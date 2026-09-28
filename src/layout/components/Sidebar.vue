@@ -1,120 +1,67 @@
 <script lang="ts" setup>
 import { getMenuTree } from '@/api/menu'
-import { CaretDownOutline } from '@vicons/ionicons5'
-import type { MenuInst, MenuOption } from 'naive-ui'
-import { NIcon } from 'naive-ui'
-import type { VNodeChild } from 'vue'
-import type { RouteLocationRaw } from 'vue-router'
-import { RouterLink } from 'vue-router'
-import { defaultDarkTheme } from '@/assets/themes/default'
-import { blackWhiteDarkTheme } from '@/assets/themes/blackWhite'
 
 const layoutStore = useLayoutStore()
+const router = useRouter()
+const route = useRoute()
 
-const darkMenu = computed(() => {
-  const theme = layoutStore.themeName
-  switch (theme) {
-    case 'blackWhite':
-      return blackWhiteDarkTheme
-    default:
-      return defaultDarkTheme
-  }
+const isMenuDark = computed(() => {
+  if (layoutStore.themeName === 'dark') return false
+  return layoutStore.darkMenu
 })
 
 // 公司名称
 const company = ref('')
 
 const menusRef = ref<Menu[]>([])
-const menuOptions = computed<MenuOption[]>(() => {
-  return transformMenu(menusRef.value, layoutStore.collapsed)
-})
 
-// 渲染菜单标签
-function renderMenuLabel(option: MenuOption) {
-  if ((option.meta as Menu)?.type === 'M') {
-    return h(
-      RouterLink,
-      { to: { name: option.key } as RouteLocationRaw },
-      {
-        default: () => option.label as VNodeChild,
-      },
-    )
-  }
-  return option.label as VNodeChild
+// 菜单点击
+const handleMenuItemClick = (key: string) => {
+  router.push({ name: key })
 }
 
-// 渲染展开图标
-function expandIcon() {
-  return h(NIcon, null, { default: () => h(CaretDownOutline) })
-}
-
-// 转换菜单
-function transformMenu(list: Menu[], collapsed: boolean): MenuOption[] {
-  const result: MenuOption[] = []
-
-  for (const item of list) {
-    // 如果当前项是分组且处于收起状态
-    if (collapsed && item.isGroup === true) {
-      // 递归处理其子菜单，并展开到当前层级
-      if (item.children?.length) {
-        const childOptions = transformMenu(item.children, collapsed)
-        result.push(...childOptions)
-      }
-      continue // 跳过分组本身
+const findAncestorRouteNames = (menus: Menu[], targetRouteName: string, path: string[] = []): string[] | null => {
+  for (const menu of menus) {
+    // 命中：直接返回祖先链（path 里没有自己）
+    if (menu.routeName === targetRouteName) {
+      return path
     }
 
-    // 非分组或展开状态：正常处理
-    const { children, ...rest } = item
-    const option: MenuOption = {
-      label: item.title,
-      key: item.routeName,
-      show: item.hidden !== true,
-      meta: rest,
-      icon: renderIconUtil(item.icon),
+    // 没命中：把自己加进 path，继续往子树找
+    if (menu.children && menu.children.length > 0) {
+      const found = findAncestorRouteNames(menu.children, targetRouteName, [...path, menu.routeName])
+      if (found !== null) return found
     }
-
-    if (item.isGroup === true) {
-      option.type = 'group'
-    }
-
-    if (children?.length) {
-      option.children = transformMenu(children, collapsed)
-    }
-
-    result.push(option)
   }
-
-  return result
+  return null
 }
 
 // 获取菜单
 const getMenuOptions = () => {
   getMenuTree().then((menus) => {
     menusRef.value = menus
+    activeParentKey.value = findAncestorRouteNames(menusRef.value, route.name as string) || []
   })
 }
-
+// 当前激活的父菜单
+const activeParentKey = ref<string[]>([])
 // 当前激活的菜单
-const activeKey = ref('')
-const menuInstRef = ref<MenuInst>()
+const activeKey = ref<string[]>([])
 
 // 监听 route 变化
-const route = useRoute()
-// 尝试展开菜单
-const tryExpand = async () => {
-  const name = route.name as string
-  if (!name || !menuOptions.value.length) return
-
-  activeKey.value = name
-
-  // 等待菜单实例挂载完成
-  await nextTick()
-  menuInstRef.value?.showOption(name)
-}
-// 监听 route 变化
-watch(() => route.name, tryExpand, { immediate: true })
-// 监听 menuOptions 变化 ,防止菜单实例未挂载完成时展开菜单
-watch(menuOptions, tryExpand)
+watch(
+  () => route.name as string,
+  (name) => {
+    if (name) {
+      activeKey.value = [name]
+      // 展开的菜单数组
+      activeParentKey.value = [
+        ...new Set([...activeParentKey.value, ...(findAncestorRouteNames(menusRef.value, name) || [])]),
+      ]
+    }
+  },
+  { immediate: true },
+)
 
 onMounted(() => {
   // 从环境变量中获取公司名称
@@ -125,11 +72,8 @@ onMounted(() => {
 
 <template>
   <div
-    class="h-screen w-full shadow-lg flex flex-col"
-    style="background-color: #18181c"
-    :style="{
-      backgroundColor: !layoutStore.isDark && layoutStore.darkMenu ? darkMenu.common?.actionColor : undefined,
-    }"
+    :arco-theme="isMenuDark ? 'dark' : undefined"
+    class="h-screen w-full shadow-lg flex flex-col overflow-hidden bg-(--color-bg-2)"
   >
     <!-- logo -->
     <div class="h-15 p-0">
@@ -144,32 +88,26 @@ onMounted(() => {
       >
         <img src="@/assets/images/logo.png" class="w-8 h-8 object-cover rounded-full" />
         <Transition enter-from-class="animate__animated animate__zoomIn animate__delay-2s">
-          <p
-            v-if="!layoutStore.collapsed"
-            :style="{
-              color: !layoutStore.isDark && layoutStore.darkMenu ? darkMenu.common?.textColor2 : undefined,
-            }"
-          >
+          <p v-if="!layoutStore.collapsed" class="text-(--color-text-1)">
             {{ company }}
           </p>
         </Transition>
       </div>
     </div>
-    <n-scrollbar class="shadow-2xl">
-      <n-menu
-        :theme-overrides="!layoutStore.isDark && layoutStore.darkMenu ? darkMenu : undefined"
-        ref="menuInstRef"
-        :indent="20"
-        v-model:value="activeKey"
-        :collapsed="layoutStore.collapsed"
-        :collapsed-width="80"
-        :collapsed-icon-size="20"
-        :options="menuOptions"
-        :render-label="renderMenuLabel"
-        :expand-icon="expandIcon"
+    <a-scrollbar class="h-[calc(100vh-60px)] overflow-auto">
+      <a-menu
+        v-model:collapsed="layoutStore.collapsed"
+        :collapsed-width="layoutStore.collapsedCollapsedWidth"
+        breakpoint="lg"
+        :theme="isMenuDark ? 'dark' : 'light'"
+        v-model:selected-keys="activeKey"
+        v-model:open-keys="activeParentKey"
+        :auto-open-selected="true"
+        @menu-item-click="handleMenuItemClick"
       >
-      </n-menu>
-    </n-scrollbar>
+        <RecursiveMenu :menus="menusRef" />
+      </a-menu>
+    </a-scrollbar>
   </div>
 </template>
 

@@ -1,15 +1,12 @@
 <script lang="ts" setup>
-import { DoubleLeftOutlined, DoubleRightOutlined } from '@vicons/antd'
-import { type DropdownMixedOption } from 'naive-ui/es/dropdown/src/interface'
-import { MailOutline, SettingsOutline, Moon, SunnyOutline } from '@vicons/ionicons5'
-
 const authStore = useAuthStore()
 const layoutStore = useLayoutStore()
 const router = useRouter()
 
 const toggleDark = () => {
-  layoutStore.isDark = !layoutStore.isDark
-  if (layoutStore.isDark === true) {
+  if (layoutStore.themeName === 'dark') {
+    layoutStore.themeName = 'light'
+  } else {
     layoutStore.themeName = 'dark'
   }
 }
@@ -25,29 +22,9 @@ const openPageSettings = () => {
   pageSettingsActive.value = true
 }
 
-// 头像下拉选项
-const avatarOptions = ref<DropdownMixedOption[]>([
-  {
-    label: '个人中心',
-    key: '个人中心',
-  },
-  {
-    label: '用户设置',
-    key: '用户设置',
-  },
-  {
-    type: 'divider',
-    key: 'd1',
-  },
-  {
-    label: '退出登录',
-    key: '退出登录',
-  },
-])
-
 // 头像下拉选择
-const avatarHandleSelect = (op: string) => {
-  switch (op) {
+const avatarHandleSelect = (value: string | number | Record<string, unknown> | undefined) => {
+  switch (value) {
     case '退出登录':
       logout()
       break
@@ -65,54 +42,47 @@ const logout = () => {
 </script>
 
 <template>
-  <div class="h-full w-full flex items-center justify-between gap-1.5">
+  <div
+    class="h-15 w-full px-4 pr-6 flex items-center justify-between gap-1.5 bg-(--color-bg-2) border-b border-(--color-border-1)"
+  >
     <div class="h-full flex items-center">
-      <n-button @click="toggleCollapse" :focusable="false">
-        <template #icon>
-          <n-icon v-if="layoutStore.collapsed"><DoubleRightOutlined /></n-icon>
-          <n-icon v-else><DoubleLeftOutlined /></n-icon>
-        </template>
-      </n-button>
+      <a-button @click="toggleCollapse" :focusable="false">
+        <template #icon> </template>
+      </a-button>
     </div>
     <div class="h-full flex items-center gap-3">
       <!-- 明暗切换 -->
-      <n-button @click="toggleDark" v-if="layoutStore.isDark" quaternary circle :focusable="false">
-        <template #icon>
-          <n-icon><Moon /></n-icon>
-        </template>
-      </n-button>
-      <n-button @click="toggleDark" v-else quaternary circle :focusable="false">
-        <template #icon>
-          <n-icon><SunnyOutline /></n-icon>
-        </template>
-      </n-button>
+      <a-button @click="toggleDark" v-if="layoutStore.themeName === 'dark'" quaternary circle :focusable="false">
+        <template #icon> </template>
+      </a-button>
+      <a-button @click="toggleDark" v-else quaternary circle :focusable="false">
+        <template #icon> </template>
+      </a-button>
       <!-- 消息 -->
-      <n-badge :value="14" :max="99">
-        <n-button quaternary circle :focusable="false">
-          <template #icon>
-            <n-icon><MailOutline /></n-icon>
-          </template>
-        </n-button>
-      </n-badge>
+      <a-badge dot :count="9" :max-count="99">
+        <a-button quaternary circle :focusable="false">
+          <template #icon> </template>
+        </a-button>
+      </a-badge>
       <!-- 设置 -->
-      <n-button @click="openPageSettings" quaternary circle :focusable="false">
-        <template #icon>
-          <n-icon><SettingsOutline /></n-icon>
-        </template>
-      </n-button>
+      <a-button @click="openPageSettings" quaternary circle :focusable="false">
+        <template #icon> </template>
+      </a-button>
       <!-- 头像 -->
-      <n-dropdown trigger="hover" :options="avatarOptions" placement="bottom-start" @select="avatarHandleSelect">
-        <n-avatar
+      <a-dropdown trigger="hover" position="bl" @select="avatarHandleSelect">
+        <a-avatar
           object-fit="cover"
-          round
           :size="40"
-          :src="`https://www.dmoe.cc/random.php?t=${new Date().getTime()}`"
+          :image-url="`https://www.dmoe.cc/random.php?t=${new Date().getTime()}`"
         />
-      </n-dropdown>
+        <template #content>
+          <a-doption>个人中心</a-doption>
+          <a-doption>用户设置</a-doption>
+          <a-doption>退出登录</a-doption>
+        </template>
+      </a-dropdown>
     </div>
     <PageSettings v-model="pageSettingsActive" />
-    <!-- <n-button type="primary" @click="toggleTheme('default')"> 默认主题 </n-button>
-    <n-button type="primary" @click="toggleTheme('blackWhite')"> 黑白主题 </n-button> -->
   </div>
 </template>
 
