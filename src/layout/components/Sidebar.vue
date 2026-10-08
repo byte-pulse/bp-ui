@@ -86,7 +86,12 @@ onMounted(() => {
           'gap-2': !layoutStore.collapsed,
         }"
       >
-        <img src="@/assets/images/logo.png" class="w-8 h-8 object-cover rounded-full" />
+        <img
+          v-if="layoutStore.themeName === 'dark'"
+          src="@/assets/images/logo-dark.png"
+          class="w-8 h-8 object-cover rounded-full"
+        />
+        <img v-else src="@/assets/images/logo.png" class="w-8 h-8 object-cover rounded-full" />
         <Transition enter-from-class="animate__animated animate__zoomIn animate__delay-2s">
           <p v-if="!layoutStore.collapsed" class="text-(--color-text-1)">
             {{ company }}
@@ -96,7 +101,7 @@ onMounted(() => {
     </div>
     <a-scrollbar class="h-[calc(100vh-60px)] overflow-auto">
       <a-menu
-        v-model:collapsed="layoutStore.collapsed"
+        :collapsed="layoutStore.collapsed"
         :collapsed-width="layoutStore.collapsedCollapsedWidth"
         breakpoint="lg"
         :theme="isMenuDark ? 'dark' : 'light'"
@@ -111,4 +116,17 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.arco-menu-collapsed .arco-menu-title) {
+  display: none;
+}
+:deep(.arco-menu-collapsed .arco-menu-has-icon) {
+  height: 40px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+:deep(.arco-menu-collapsed .arco-menu-icon) {
+  margin: 0;
+}
+</style>
