@@ -26,14 +26,14 @@ const darkMenu = (flag: boolean) => {
                 width="100"
                 src="@/assets/images/menus/white.png"
                 class="cursor-pointer"
-                :class="!layoutStore.darkMenu ? 'border-2 border-blue-400 ring-4 ring-blue-400/60' : 'border-gray-300'"
+                :class="!layoutStore.darkMenu ? 'border-2 border-blue-600 ring-4 ring-blue-600/60' : 'border-gray-300'"
                 @click="darkMenu(false)"
               />
               <img
                 width="100"
                 src="@/assets/images/menus/black.png"
                 class="cursor-pointer"
-                :class="layoutStore.darkMenu ? 'border-2 border-blue-400 ring-4 ring-blue-400/60' : 'border-gray-300'"
+                :class="layoutStore.darkMenu ? 'border-2 border-blue-600 ring-4 ring-blue-600/60' : 'border-gray-300'"
                 @click="darkMenu(true)"
               />
             </div>
