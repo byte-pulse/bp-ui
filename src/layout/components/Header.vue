@@ -46,28 +46,49 @@ const logout = () => {
     class="h-15 w-full px-4 pr-6 flex items-center justify-between gap-1.5 bg-(--color-bg-2) border-b border-(--color-border-1)"
   >
     <div class="h-full flex items-center">
-      <a-button @click="toggleCollapse" :focusable="false">
-        <template #icon> </template>
-      </a-button>
+      <IIcon
+        :width="18"
+        @click="toggleCollapse"
+        icon="ant-design:menu-unfold-outlined"
+        class="text-(--color-text-2) hover:cursor-pointer"
+        v-if="layoutStore.collapsed"
+      />
+      <IIcon
+        :width="18"
+        @click="toggleCollapse"
+        icon="ant-design:menu-fold-outlined"
+        class="text-(--color-text-2) hover:cursor-pointer"
+        v-else
+      />
     </div>
-    <div class="h-full flex items-center gap-3">
+    <div class="h-full flex items-center gap-5">
       <!-- 明暗切换 -->
-      <a-button @click="toggleDark" v-if="layoutStore.themeName === 'dark'" quaternary circle :focusable="false">
-        <template #icon> </template>
-      </a-button>
-      <a-button @click="toggleDark" v-else quaternary circle :focusable="false">
-        <template #icon> </template>
-      </a-button>
+      <IIcon
+        :width="18"
+        @click="toggleDark"
+        icon="ant-design:sun-outlined"
+        class="text-(--color-text-2) hover:cursor-pointer"
+        v-if="layoutStore.themeName === 'dark'"
+      />
+
+      <IIcon
+        :width="18"
+        @click="toggleDark"
+        icon="ant-design:moon-outlined"
+        class="text-(--color-text-2) hover:cursor-pointer"
+        v-else
+      />
       <!-- 消息 -->
       <a-badge dot :count="9" :max-count="99">
-        <a-button quaternary circle :focusable="false">
-          <template #icon> </template>
-        </a-button>
+        <IIcon :width="18" icon="ant-design:bell-outlined" class="text-(--color-text-2) hover:cursor-pointer" />
       </a-badge>
       <!-- 设置 -->
-      <a-button @click="openPageSettings" quaternary circle :focusable="false">
-        <template #icon> </template>
-      </a-button>
+      <IIcon
+        :width="18"
+        @click="openPageSettings"
+        icon="ant-design:setting-outlined"
+        class="text-(--color-text-2) hover:cursor-pointer"
+      />
       <!-- 头像 -->
       <a-dropdown trigger="hover" position="bl" @select="avatarHandleSelect">
         <a-avatar

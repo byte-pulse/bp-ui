@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+// 图标大小
+const iconSize = ref(18)
+
 const props = defineProps({
   menus: {
     type: Array as PropType<Menu[]>,
@@ -13,7 +16,7 @@ const props = defineProps({
     <template v-if="m.children && m.children.length">
       <a-sub-menu :key="m.routeName">
         <template v-if="m.icon" #icon>
-          <IIcon :width="24" :icon="m.icon" />
+          <IIcon :width="iconSize" :icon="m.icon" />
         </template>
         <template #title>
           {{ m.title }}
@@ -26,7 +29,7 @@ const props = defineProps({
     <template v-else>
       <a-menu-item :key="m.routeName">
         <template v-if="m.icon" #icon>
-          <IIcon :width="24" :icon="m.icon" />
+          <IIcon :width="iconSize" :icon="m.icon" />
         </template>
         {{ m.title }}
       </a-menu-item>
