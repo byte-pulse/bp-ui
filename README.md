@@ -1,6 +1,29 @@
+<div align="center">
+
+<img src="./src/assets/images/logo.png" alt="BP Admin UI" width="120" height="120" />
+
 # BP Admin UI
 
-由 [字节脉动](https://gitee.com/byte-pulse) 出品的现代化中后台管理系统启动模板，开箱即用，为年轻企业而生。
+由 [字节脉动](https://github.com/byte-pulse) 出品的现代化中后台管理系统启动模板，开箱即用，为年轻企业而生。
+
+[![License][license-badge]][license-link]
+[![Stars][stars-badge]][stars-link]
+[![Forks][forks-badge]][forks-link]
+[![Issues][issues-badge]][issues-link]
+[![Last Commit][commit-badge]][commit-link]
+
+[![Vue][vue-badge]][vue-link]
+[![Vite][vite-badge]][vite-link]
+[![TypeScript][ts-badge]][ts-link]
+[![Arco Design Vue][arco-badge]][arco-link]
+[![Tailwind CSS][tailwind-badge]][tailwind-link]
+[![Pinia][pinia-badge]][pinia-link]
+[![Vue Router][router-badge]][router-link]
+[![Node][node-badge]][node-link]
+[![pnpm][pnpm-badge]][pnpm-link]
+[![Code Style][style-badge]][style-link]
+
+</div>
 
 ## 特性
 
@@ -257,3 +280,36 @@ server: {
 ## License
 
 [MIT](./LICENSE)
+
+<!-- badge 链接定义 -->
+
+[license-badge]: https://img.shields.io/badge/License-MIT-20bcca?logo=opensourceinitiative&logoColor=white
+[license-link]: ./LICENSE
+[stars-badge]: https://img.shields.io/github/stars/byte-pulse/bp-ui?color=20bcca&logo=github
+[stars-link]: https://github.com/byte-pulse/bp-ui/stargazers
+[forks-badge]: https://img.shields.io/github/forks/byte-pulse/bp-ui?color=20bcca&logo=github
+[forks-link]: https://github.com/byte-pulse/bp-ui/forks
+[issues-badge]: https://img.shields.io/github/issues/byte-pulse/bp-ui?color=20bcca&logo=github
+[issues-link]: https://github.com/byte-pulse/bp-ui/issues
+[commit-badge]: https://img.shields.io/github/last-commit/byte-pulse/bp-ui?color=20bcca&logo=github
+[commit-link]: https://github.com/byte-pulse/bp-ui/commits
+[vue-badge]: https://img.shields.io/badge/Vue-3.5-42b883?logo=vuedotjs&logoColor=white
+[vue-link]: https://vuejs.org
+[vite-badge]: https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white
+[vite-link]: https://vite.dev
+[ts-badge]: https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white
+[ts-link]: https://www.typescriptlang.org
+[arco-badge]: https://img.shields.io/badge/Arco%20Design%20Vue-2.58-165DFF
+[arco-link]: https://arco.design
+[tailwind-badge]: https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?logo=tailwindcss&logoColor=white
+[tailwind-link]: https://tailwindcss.com
+[pinia-badge]: https://img.shields.io/badge/Pinia-4-FFD859?logo=pinia&logoColor=black
+[pinia-link]: https://pinia.vuejs.org
+[router-badge]: https://img.shields.io/badge/Vue%20Router-5-42b883?logo=vuedotjs&logoColor=white
+[router-link]: https://router.vuejs.org
+[node-badge]: https://img.shields.io/badge/Node-%5E20.19%20%7C%7C%20%3E%3D22.12-339933?logo=nodedotjs&logoColor=white
+[node-link]: https://nodejs.org
+[pnpm-badge]: https://img.shields.io/badge/pnpm-ready-F69220?logo=pnpm&logoColor=white
+[pnpm-link]: https://pnpm.io
+[style-badge]: https://img.shields.io/badge/Code%20Style-ESLint%20%2B%20OxLint%20%2B%20Prettier-4B32C3?logo=eslint&logoColor=white
+[style-link]: ./eslint.config.ts
