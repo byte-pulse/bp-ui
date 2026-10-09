@@ -1,7 +1,0 @@
-<script lang="ts" setup></script>
-
-<template>
-  <div class="w-full h-full">表单案例</div>
-</template>
-
-<style lang="scss" scoped></style>
