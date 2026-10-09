@@ -24,25 +24,23 @@ onMounted(() => {})
         <Header />
       </a-layout-header>
       <!-- 内容区域，路由出口位置 -->
-      <a-layout style="padding: 12px 24px; background-color: var(--color-bg-4)">
+      <a-layout :style="{ backgroundColor: layoutStore.themeName === 'dark' ? 'var(--color-bg-4)' : '#f2f3f5' }">
         <a-layout-content>
-          <a-layout> <Tabs /></a-layout>
-
-          <RouterView v-slot="{ Component, route }">
-            <transition
-              name="fade-slide"
-              mode="out-in"
-              enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
-              leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
-            >
-              <component
-                :is="Component"
-                style="width: 100%; border-radius: 4px"
-                :style="{ height: layoutStore.showTabs ? 'calc(100% - 32px - 12px)' : '100%' }"
-                :key="route.fullPath"
-              />
-            </transition>
-          </RouterView>
+          <Transition name="tabs">
+            <a-layout class="h-8" v-if="layoutStore.showTabs"> <Tabs /></a-layout>
+          </Transition>
+          <div class="w-full px-6 py-3" :style="{ height: layoutStore.showTabs ? 'calc(100% - 32px)' : '100%' }">
+            <RouterView v-slot="{ Component, route }">
+              <transition
+                name="fade-slide"
+                mode="out-in"
+                enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
+                leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
+              >
+                <component :is="Component" style="width: 100%; border-radius: 4px" :key="route.fullPath" />
+              </transition>
+            </RouterView>
+          </div>
         </a-layout-content>
       </a-layout>
     </a-layout>

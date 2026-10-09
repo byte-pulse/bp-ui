@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-const layoutStore = useLayoutStore()
-
 const tabStore = useTabStore()
 
 const router = useRouter()
@@ -10,16 +8,6 @@ const route = useRoute()
 const scrollRef = ref<HTMLDivElement>()
 
 const activeTab = ref('')
-
-// 关闭按钮悬浮
-const hover = ref(false)
-// 悬浮的按钮
-const hoverKey = ref('')
-
-const handleHover = (isHover: boolean, key: string) => {
-  hoverKey.value = key
-  hover.value = isHover
-}
 
 // 处理横向滚动事件
 const handleWheel = (e: WheelEvent) => {
@@ -173,78 +161,68 @@ onMounted(() => {
 </script>
 
 <template>
-  <Transition name="tabs">
-    <BackGround
-      v-if="layoutStore.showTabs"
-      class="w-full h-8 mb-3 flex justify-center items-center border-b bg-(--color-bg-4)"
-    >
+  <div class="w-full h-8 mb-3 flex justify-center items-center bg-(--color-bg-4)">
+    <!-- 标签页列表 -->
+    <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
       <!-- 标签页列表 -->
-      <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
-        <!-- 标签页列表 -->
-        <TransitionGroup
-          name="routes"
-          tag="div"
-          class="w-full h-full whitespace-nowrap flex justify-start items-end gap-2 relative"
-          enter-active-class="animate__animated animate__backInUp animate__faster"
-          leave-active-class="animate__animated animate__backOutDown animate__faster"
-          @before-leave="beforeLeave"
-        >
-          <!-- 标签页列表项 -->
-          <div v-for="item in tabStore.tabs" :key="item.key">
-            <a-dropdown trigger="contextMenu" alignPoint @select="handleSelect" :style="{ display: 'block' }">
-              <div
-                class="pt-2 pb-1 px-3 border border-b-0 rounded-t-md cursor-pointer text-xs flex items-center"
-                @contextmenu="handleContextMenu($event, item.key)"
-                @click="setActiveTab(item.key)"
-              >
-                <span class="mr-1 select-none">{{ item.label }}</span>
-                <!-- 关闭按钮 -->
-                <IIcon
-                  icon="ant-design:close-circle-outlined"
-                  v-if="tabStore.tabs.length > 1"
-                  @click.stop="closeCurrent(item.key)"
-                  @mouseenter="handleHover(true, item.key)"
-                  @mouseleave="handleHover(false, item.key)"
-                ></IIcon>
-              </div>
-              <template #content>
-                <a-doption value="closeCurrent">
-                  <template #icon>
-                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
-                  </template>
-                  关闭当前标签
-                </a-doption>
-                <a-doption value="closeOthers">
-                  <template #icon>
-                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
-                  </template>
-                  关闭其他标签页
-                </a-doption>
-                <a-doption value="closeRight">
-                  <template #icon>
-                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
-                  </template>
-                  关闭右侧标签页
-                </a-doption>
-                <a-doption value="closeLeft">
-                  <template #icon>
-                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
-                  </template>
-                  关闭左侧标签页
-                </a-doption>
-                <a-doption value="closeAll">
-                  <template #icon>
-                    <IIcon icon="ant-design:close-circle-outlined"></IIcon>
-                  </template>
-                  关闭所有标签页
-                </a-doption>
-              </template>
-            </a-dropdown>
-          </div>
-        </TransitionGroup>
-      </div>
-    </BackGround>
-  </Transition>
+      <TransitionGroup
+        name="routes"
+        tag="div"
+        class="w-full h-full whitespace-nowrap flex justify-start items-end gap-2 relative py-1"
+        enter-active-class="animate__animated animate__backInUp animate__faster"
+        leave-active-class="animate__animated animate__backOutDown animate__faster"
+        @before-leave="beforeLeave"
+      >
+        <!-- 标签页列表项 -->
+        <div v-for="item in tabStore.tabs" :key="item.key">
+          <a-dropdown trigger="contextMenu" alignPoint @select="handleSelect" :style="{ display: 'block' }">
+            <a-tag
+              class="hover:cursor-pointer"
+              @click="setActiveTab(item.key)"
+              @close.stop="closeCurrent(item.key)"
+              :closable="tabStore.tabs && tabStore.tabs.length > 1"
+              :color="item.key === activeTab ? 'arcoblue' : undefined"
+              @contextmenu="handleContextMenu($event, item.key)"
+            >
+              {{ item.label }}
+            </a-tag>
+            <template #content>
+              <a-doption value="closeCurrent">
+                <template #icon>
+                  <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                </template>
+                关闭当前标签
+              </a-doption>
+              <a-doption value="closeOthers">
+                <template #icon>
+                  <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                </template>
+                关闭其他标签页
+              </a-doption>
+              <a-doption value="closeRight">
+                <template #icon>
+                  <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                </template>
+                关闭右侧标签页
+              </a-doption>
+              <a-doption value="closeLeft">
+                <template #icon>
+                  <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                </template>
+                关闭左侧标签页
+              </a-doption>
+              <a-doption value="closeAll">
+                <template #icon>
+                  <IIcon icon="ant-design:close-circle-outlined"></IIcon>
+                </template>
+                关闭所有标签页
+              </a-doption>
+            </template>
+          </a-dropdown>
+        </div>
+      </TransitionGroup>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>
