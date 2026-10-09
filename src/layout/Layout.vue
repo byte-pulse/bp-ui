@@ -44,7 +44,7 @@ onMounted(() => {})
                 enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
                 leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
               >
-                <component :is="Component" style="width: 100%" :key="route.fullPath" />
+                <component :is="Component" style="width: 100%; height: 100%" :key="route.fullPath" />
               </transition>
             </RouterView>
           </div>
