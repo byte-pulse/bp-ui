@@ -23,42 +23,14 @@ export function requestNotif() {
   Notification.requestPermission().then(() => {
     if (Notification.permission === 'denied') {
       // 被拒绝，提示用户
-      const guideUrl = getBrowserGuideUrl()
+      const _guideUrl = getBrowserGuideUrl()
       const browserName = navigator.userAgent.toLowerCase().includes('edg')
         ? 'Edge'
         : navigator.userAgent.toLowerCase().includes('chrome')
           ? 'Chrome'
           : '您的浏览器'
 
-      $message.warning('', {
-        duration: 3000,
-        closable: true,
-        render: () => {
-          return h(
-            'div',
-            {
-              class: ['n-message', 'n-message--info-type'],
-            },
-            [
-              `当前 ${browserName} 浏览器拒绝通知权限，`,
-              h(
-                'a',
-                {
-                  href: guideUrl,
-                  target: '_blank',
-                  style: {
-                    color: '#18a058',
-                    fontWeight: 'bold',
-                    textDecoration: 'underline',
-                    cursor: 'pointer',
-                  },
-                },
-                '点击查看如何开启通知',
-              ),
-            ],
-          )
-        },
-      })
+      $message.warning(`当前 ${browserName} 浏览器拒绝通知权限`)
     }
   })
 }
