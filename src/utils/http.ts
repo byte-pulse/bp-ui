@@ -36,6 +36,10 @@ class HttpClient {
     // 响应拦截器
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
+        // 文件流响应（blob / arraybuffer）没有业务 code，直接透传交给调用方处理
+        if (response.config.responseType === 'blob' || response.config.responseType === 'arraybuffer') {
+          return response.data
+        }
         if (response.data.code === 401) {
           router.replace({
             path: '/login',
