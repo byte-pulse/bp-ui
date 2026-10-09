@@ -34,11 +34,6 @@ body,
   display: none;
 }
 
-* {
-  -ms-overflow-style: none; /* IE 和 Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 .no-scrollbar {
   -ms-overflow-style: none; /* IE 和 Edge */
   scrollbar-width: none; /* Firefox */
@@ -96,4 +91,49 @@ div[arco-theme='dark'] {
   --color-menu-light-bg: #232324;
   --color-menu-dark-hover: var(--color-fill-2);
   --color-mask-bg: rgba(23, 23, 26, 0.6);
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.65);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* 关键: 隐藏两端上下/左右箭头 */
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 角落 */
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
