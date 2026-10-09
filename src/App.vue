@@ -6,8 +6,10 @@ watch(
   () => layoutStore.themeName,
   (newVal) => {
     if (newVal === 'dark') {
+      document.documentElement.setAttribute('arco-theme', 'dark')
       document.body.setAttribute('arco-theme', 'dark')
     } else {
+      document.documentElement.setAttribute('arco-theme', 'light')
       document.body.removeAttribute('arco-theme')
     }
   },

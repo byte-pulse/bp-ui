@@ -3,12 +3,36 @@ const authStore = useAuthStore()
 const layoutStore = useLayoutStore()
 const router = useRouter()
 
-const toggleDark = () => {
-  if (layoutStore.themeName === 'dark') {
-    layoutStore.themeName = 'light'
-  } else {
-    layoutStore.themeName = 'dark'
+const toggleDark = (event: MouseEvent) => {
+  if (!document.startViewTransition) {
+    layoutStore.themeName = layoutStore.themeName === 'dark' ? 'light' : 'dark'
+    return
   }
+  const x = event.clientX
+  const y = event.clientY
+
+  const maxX = Math.max(x, window.innerWidth - x)
+  const maxY = Math.max(y, window.innerHeight - y)
+  const radius = Math.hypot(maxX, maxY)
+
+  const transition = document.startViewTransition(() => {
+    layoutStore.themeName = layoutStore.themeName === 'dark' ? 'light' : 'dark'
+  })
+
+  transition.ready.then(() => {
+    // Light → Dark
+    // 新画面从点击位置向外展开
+    document.documentElement.animate(
+      {
+        clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+      },
+      {
+        duration: 500,
+        easing: 'ease-in-out',
+        pseudoElement: '::view-transition-new(root)',
+      },
+    )
+  })
 }
 
 // 页面设置
@@ -45,8 +69,8 @@ const logout = () => {
       <!-- 明暗切换 -->
       <IIcon
         :width="18"
-        @click="toggleDark"
-        icon="ant-design:sun-outlined"
+        icon="ant-design:moon-outlined"
+        @click="toggleDark($event)"
         class="text-(--color-text-2) hover:cursor-pointer"
         v-if="layoutStore.themeName === 'dark'"
       />
@@ -54,7 +78,7 @@ const logout = () => {
       <IIcon
         :width="18"
         @click="toggleDark"
-        icon="ant-design:moon-outlined"
+        icon="ant-design:sun-outlined"
         class="text-(--color-text-2) hover:cursor-pointer"
         v-else
       />
