@@ -137,3 +137,7 @@ div[arco-theme='dark'] {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+svg.iconify {
+  outline: none;
+}
