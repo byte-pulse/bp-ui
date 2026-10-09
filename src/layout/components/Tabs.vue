@@ -161,7 +161,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-8 mb-3 flex justify-center items-center bg-(--color-bg-4)">
+  <div class="w-full h-8 mb-3 flex justify-center items-center bg-(--color-bg-2)">
     <!-- 标签页列表 -->
     <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
       <!-- 标签页列表 -->

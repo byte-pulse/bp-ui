@@ -29,7 +29,14 @@ onMounted(() => {})
           <Transition name="tabs">
             <a-layout class="h-8" v-if="layoutStore.showTabs"> <Tabs /></a-layout>
           </Transition>
-          <div class="w-full px-4 py-2" :style="{ height: layoutStore.showTabs ? 'calc(100% - 32px)' : '100%' }">
+          <div
+            class="w-full px-4 py-2"
+            :style="{
+              height: layoutStore.showTabs ? 'calc(100vh - 60px -  32px)' : 'calc(100vh - 60px)',
+              maxHeight: layoutStore.showTabs ? 'calc(100vh - 60px -  32px)' : 'calc(100vh - 60px)',
+              overflowY: 'scroll',
+            }"
+          >
             <RouterView v-slot="{ Component, route }">
               <transition
                 name="fade-slide"
@@ -37,11 +44,7 @@ onMounted(() => {})
                 enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
                 leave-active-class="animate__animated animate__fadeOutLeftBig animate__faster"
               >
-                <component
-                  :is="Component"
-                  style="width: 100%; height: 100%; border-radius: 4px"
-                  :key="route.fullPath"
-                />
+                <component :is="Component" style="width: 100%" :key="route.fullPath" />
               </transition>
             </RouterView>
           </div>
