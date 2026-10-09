@@ -14,7 +14,7 @@ export const useLayoutStore = defineStore(
     // 侧边栏宽度
     const sidebarWidth = ref<number>(250)
     // 侧边栏收起宽度
-    const collapsedCollapsedWidth = ref<number>(80)
+    const collapsedCollapsedWidth = ref<number>(48)
 
     return { collapsed, themeName, showTabs, darkMenu, sidebarWidth, collapsedCollapsedWidth }
   },

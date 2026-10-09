@@ -53,12 +53,6 @@ const darkMenu = (flag: boolean) => {
           <a-col :span="16">
             <a-input-number v-model="layoutStore.sidebarWidth" :min="layoutStore.collapsedCollapsedWidth" :max="500" />
           </a-col>
-          <a-col :span="8">
-            <span class="text-sm font-bold">侧边栏收起宽度</span>
-          </a-col>
-          <a-col :span="16">
-            <a-input-number v-model="layoutStore.collapsedCollapsedWidth" :min="80" :max="layoutStore.sidebarWidth" />
-          </a-col>
         </a-row>
       </a-space>
     </div>

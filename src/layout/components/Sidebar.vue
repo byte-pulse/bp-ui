@@ -101,7 +101,9 @@ onMounted(() => {
     </div>
     <a-scrollbar class="h-[calc(100vh-60px)] overflow-auto">
       <a-menu
-        :collapsed="layoutStore.collapsed"
+        show-collapse-button
+        style="height: calc(100vh - 60px)"
+        v-model:collapsed="layoutStore.collapsed"
         :collapsed-width="layoutStore.collapsedCollapsedWidth"
         breakpoint="lg"
         :theme="isMenuDark ? 'dark' : 'light'"

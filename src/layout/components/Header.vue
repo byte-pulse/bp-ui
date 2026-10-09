@@ -11,11 +11,6 @@ const toggleDark = () => {
   }
 }
 
-// 菜单折叠
-const toggleCollapse = () => {
-  layoutStore.collapsed = !layoutStore.collapsed
-}
-
 // 页面设置
 const pageSettingsActive = ref(false)
 const openPageSettings = () => {
@@ -45,22 +40,7 @@ const logout = () => {
   <div
     class="h-15 w-full px-4 pr-6 flex items-center justify-between gap-1.5 bg-(--color-bg-2) border-b border-(--color-border-1)"
   >
-    <div class="h-full flex items-center">
-      <IIcon
-        :width="18"
-        @click="toggleCollapse"
-        icon="ant-design:menu-unfold-outlined"
-        class="text-(--color-text-2) hover:cursor-pointer"
-        v-if="layoutStore.collapsed"
-      />
-      <IIcon
-        :width="18"
-        @click="toggleCollapse"
-        icon="ant-design:menu-fold-outlined"
-        class="text-(--color-text-2) hover:cursor-pointer"
-        v-else
-      />
-    </div>
+    <div class="h-full flex items-center"></div>
     <div class="h-full flex items-center gap-5">
       <!-- 明暗切换 -->
       <IIcon
