@@ -95,11 +95,7 @@ const logout = () => {
       />
       <!-- 头像 -->
       <a-dropdown trigger="hover" position="bl" @select="avatarHandleSelect">
-        <a-avatar
-          object-fit="cover"
-          :size="40"
-          :image-url="`https://www.dmoe.cc/random.php?t=${new Date().getTime()}`"
-        />
+        <a-avatar object-fit="cover" :size="40" :image-url="`https://www.dmoe.cc/random.php`" />
         <template #content>
           <a-doption>个人中心</a-doption>
           <a-doption>用户设置</a-doption>
