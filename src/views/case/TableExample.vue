@@ -125,7 +125,6 @@ const handleDelete = (record: TableRecord) => $message.warning(`删除：${Strin
       <template #toolbar>
         <a-tag color="arcoblue">配置驱动</a-tag>
         <a-tag v-if="selectedCount" color="green">已选 {{ selectedCount }}</a-tag>
-        <a-button>新增</a-button>
       </template>
 
       <!-- 状态列插槽 -->
