@@ -200,8 +200,8 @@ const targets = [
       <a-card :bordered="false" class="rounded-xl">
         <template #title>访问来源</template>
         <div class="flex flex-col items-center gap-5 pt-2">
-          <div class="relative h-[150px] w-[150px] rounded-full" :style="{ background: conicGradient }">
-            <div class="absolute inset-[24px] flex flex-col items-center justify-center rounded-full bg-(--color-bg-2)">
+          <div class="relative h-37.5 w-37.5 rounded-full" :style="{ background: conicGradient }">
+            <div class="absolute inset-6 flex flex-col items-center justify-center rounded-full bg-(--color-bg-2)">
               <span class="text-xl font-semibold text-(--color-text-1)">8,846</span>
               <span class="text-xs text-(--color-text-3)">总访问</span>
             </div>
