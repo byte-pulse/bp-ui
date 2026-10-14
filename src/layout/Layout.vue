@@ -31,8 +31,8 @@ onMounted(() => {})
               class="h-8"
               v-if="layoutStore.showTabs"
             >
-              <Tabs
-            /></a-layout>
+              <Tabs />
+            </a-layout>
           </Transition>
           <div
             class="w-full px-4 py-2"
