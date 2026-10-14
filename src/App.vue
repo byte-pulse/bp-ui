@@ -16,7 +16,19 @@ watch(
   { immediate: true }
 )
 
-onMounted(() => {})
+const route = useRoute()
+
+watch(
+  () => route.meta,
+  (newVal) => {
+    document.title = newVal.title ? `管理后台 - ${newVal.title}` : import.meta.env.VITE_APP_COMPANY_NAME
+  },
+  { immediate: true }
+)
+
+onMounted(() => {
+  printBanner()
+})
 </script>
 
 <template>
