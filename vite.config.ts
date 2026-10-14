@@ -6,20 +6,22 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-// 配置 naive-ui 组件自动导入
+// 配置 arco 组件自动导入
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
-  let envPort
+  let envPort: number | undefined
   let useMock = false
+  let apiHost: string | undefined
   if (command === 'serve') {
     const devEnv = loadEnv('dev', './')
     // 从环境变量中获取端口
     envPort = Number(devEnv['VITE_APP_PORT'])
     // 从环境变量中获取是否启用 mock 数据
     useMock = devEnv['VITE_APP_USE_MOCK'] === 'true'
+    apiHost = devEnv['VITE_APP_API_HOST']
   }
 
   /** @type {import('vite').UserConfig} */
@@ -80,7 +82,7 @@ export default defineConfig(({ command }) => {
       port: envPort || 5173,
       proxy: {
         '/api': {
-          target: 'http://localhost:8080', // 后端地址
+          target: apiHost || 'http://localhost:8080', // 后端地址
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }

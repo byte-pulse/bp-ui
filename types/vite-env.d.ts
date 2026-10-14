@@ -22,6 +22,8 @@ declare global {
     readonly VITE_APP_API_BASE_URL: string
     // 是否启用 mock 数据
     readonly VITE_APP_USE_MOCK: boolean
+    // 接口地址
+    readonly VITE_APP_API_HOST: string
   }
 
   interface ImportMeta {
