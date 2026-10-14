@@ -47,3 +47,19 @@ declare module 'axios' {
     returnRaw?: boolean // 是否返回原始结构
   }
 }
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    id: number
+    parentId: number
+    title: string
+    routeName: string
+    component?: string
+    icon?: string
+    sort: number
+    hidden: boolean
+    tabShow?: boolean
+    type: 'C' | 'M' | 'B'
+    permission?: string
+  }
+}
