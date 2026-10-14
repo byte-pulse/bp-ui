@@ -36,7 +36,7 @@ export default defineConfig(({ command }) => {
         enable: command === 'serve' && useMock, // 仅在开发环境下启用 mock 数据
         watchFiles: true,
         logger: true,
-        cors: true,
+        cors: true
       }),
       // 函数自动导入
       AutoImport({
@@ -44,7 +44,7 @@ export default defineConfig(({ command }) => {
         imports: ['vue', 'vue-router', 'pinia'],
         dirs: ['./src/stores/**', './src/utils/**'],
         dts: './types/auto-imports.d.ts',
-        dtsMode: 'overwrite',
+        dtsMode: 'overwrite'
       }),
       // 组件自动导入
       Components({
@@ -56,22 +56,22 @@ export default defineConfig(({ command }) => {
               if (name === 'IIcon') {
                 return {
                   name: 'Icon',
-                  from: '@iconify/vue',
+                  from: '@iconify/vue'
                 }
               }
-            },
-          },
+            }
+          }
         ],
         dirs: ['./src/components/**', './src/layout/components/**'],
         dts: './types/auto-components.d.ts',
-        syncMode: 'overwrite',
-      }),
+        syncMode: 'overwrite'
+      })
     ],
     // 配置路径别名
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-      },
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
     },
     // 配置服务器
     server: {
@@ -82,9 +82,9 @@ export default defineConfig(({ command }) => {
         '/api': {
           target: 'http://localhost:8080', // 后端地址
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
-    },
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
+    }
   }
 })
