@@ -47,7 +47,7 @@ const config: FormConfig = {
           field: 'name',
           label: '姓名',
           type: 'input',
-          rules: [{ required: true, message: '请输入姓名' }],
+          rules: [{ required: true, message: '请输入姓名' }]
         },
         {
           field: 'level',
@@ -56,12 +56,12 @@ const config: FormConfig = {
           defaultValue: 'normal',
           options: [
             { label: '普通', value: 'normal' },
-            { label: '高级', value: 'senior' },
-          ],
-        },
-      ],
-    },
-  ],
+            { label: '高级', value: 'senior' }
+          ]
+        }
+      ]
+    }
+  ]
 }
 
 const submit = async () => {
@@ -72,9 +72,17 @@ const submit = async () => {
 </script>
 
 <template>
-  <IForm ref="formRef" v-model="model" :config="config">
+  <IForm
+    ref="formRef"
+    v-model="model"
+    :config="config"
+  >
     <template #footer>
-      <a-button type="primary" @click="submit">提交</a-button>
+      <a-button
+        type="primary"
+        @click="submit"
+        >提交</a-button
+      >
       <a-button @click="formRef?.reset()">重置</a-button>
     </template>
   </IForm>

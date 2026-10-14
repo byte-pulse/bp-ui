@@ -11,12 +11,12 @@ const formRef = ref<FormInstance | null>(null)
 // 登录表单数据
 const formValue = ref({
   username: 'SDFASF',
-  password: 'AMSRGIJ3J0FM()jWSDF',
+  password: 'AMSRGIJ3J0FM()jWSDF'
 })
 // 登录表单验证规则
 const rules: Record<string, FieldRule<unknown> | FieldRule<unknown>[]> = {
   username: [{ required: true, message: '请输入用户名或邮箱' }],
-  password: [{ required: true, message: '请输入密码' }],
+  password: [{ required: true, message: '请输入密码' }]
 }
 
 const router = useRouter()
@@ -81,7 +81,10 @@ onMounted(() => {
               <span
                 class="inline-flex size-9.5 flex-none items-center justify-center rounded-[10px] bg-[linear-gradient(140deg,#4080ff_0%,#165dff_52%,#0e42d2_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.24),0_8px_18px_-8px_rgba(22,93,255,0.9)]"
               >
-                <IIcon :width="20" icon="mdi:view-dashboard-outline" />
+                <IIcon
+                  :width="20"
+                  icon="mdi:view-dashboard-outline"
+                />
               </span>
               <span class="text-[15px] font-semibold tracking-[0.2px] text-white/92">BP Admin UI</span>
             </div>
@@ -97,7 +100,10 @@ onMounted(() => {
                   <span
                     class="inline-flex size-7 flex-none items-center justify-center rounded-lg border border-white/10 bg-white/6 text-[#94bfff]"
                   >
-                    <IIcon :width="16" icon="mdi:routes" />
+                    <IIcon
+                      :width="16"
+                      icon="mdi:routes"
+                    />
                   </span>
                   <span>动态路由 · 菜单驱动</span>
                 </li>
@@ -105,7 +111,10 @@ onMounted(() => {
                   <span
                     class="inline-flex size-7 flex-none items-center justify-center rounded-lg border border-white/10 bg-white/6 text-[#94bfff]"
                   >
-                    <IIcon :width="16" icon="mdi:table-large" />
+                    <IIcon
+                      :width="16"
+                      icon="mdi:table-large"
+                    />
                   </span>
                   <span>表格与表单 · 配置化</span>
                 </li>
@@ -113,7 +122,10 @@ onMounted(() => {
                   <span
                     class="inline-flex size-7 flex-none items-center justify-center rounded-lg border border-white/10 bg-white/6 text-[#94bfff]"
                   >
-                    <IIcon :width="16" icon="mdi:theme-light-dark" />
+                    <IIcon
+                      :width="16"
+                      icon="mdi:theme-light-dark"
+                    />
                   </span>
                   <span>亮暗主题 · 一键切换</span>
                 </li>
@@ -132,7 +144,10 @@ onMounted(() => {
               <span
                 class="inline-flex size-8.5 flex-none items-center justify-center rounded-[10px] bg-[linear-gradient(140deg,#4080ff_0%,#165dff_52%,#0e42d2_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.24),0_6px_16px_-6px_rgba(22,93,255,0.9)]"
               >
-                <IIcon :width="18" icon="mdi:view-dashboard-outline" />
+                <IIcon
+                  :width="18"
+                  icon="mdi:view-dashboard-outline"
+                />
               </span>
               <span class="text-[15px] font-semibold text-(--color-text-1)">BP Admin UI</span>
             </div>
@@ -146,7 +161,13 @@ onMounted(() => {
               </p>
             </div>
 
-            <a-form ref="formRef" :model="formValue" :rules="rules" layout="vertical" size="large">
+            <a-form
+              ref="formRef"
+              :model="formValue"
+              :rules="rules"
+              layout="vertical"
+              size="large"
+            >
               <a-form-item field="username">
                 <template #label>
                   <span class="text-[13px] font-medium text-(--color-text-2)">用户名 / 邮箱</span>
@@ -182,22 +203,43 @@ onMounted(() => {
               </a-link>
             </div>
 
-            <a-button class="h-11! font-medium!" type="primary" size="large" long @click="toLogin">登录系统</a-button>
+            <a-button
+              class="h-11! font-medium!"
+              type="primary"
+              size="large"
+              long
+              @click="toLogin"
+              >登录系统</a-button
+            >
 
             <a-divider :margin="24">
               <span class="text-xs text-(--color-text-3)">或通过其他方式登录</span>
             </a-divider>
 
             <div class="flex gap-3 max-[380px]:flex-col">
-              <a-button class="h-11! flex-1" type="outline" size="large">
+              <a-button
+                class="h-11! flex-1"
+                type="outline"
+                size="large"
+              >
                 <template #icon>
-                  <IIcon :width="18" icon="ant-design:wechat-filled" />
+                  <IIcon
+                    :width="18"
+                    icon="ant-design:wechat-filled"
+                  />
                 </template>
                 微信登录
               </a-button>
-              <a-button class="h-11! flex-1" type="outline" size="large">
+              <a-button
+                class="h-11! flex-1"
+                type="outline"
+                size="large"
+              >
                 <template #icon>
-                  <IIcon :width="18" icon="ant-design:dingding-outlined" />
+                  <IIcon
+                    :width="18"
+                    icon="ant-design:dingding-outlined"
+                  />
                 </template>
                 钉钉登录
               </a-button>

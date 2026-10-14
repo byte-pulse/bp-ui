@@ -22,7 +22,7 @@ const menuList: Menu[] = [
         sort: 1,
         hidden: false,
         tabShow: true,
-        type: 'M',
+        type: 'M'
       },
       {
         id: 4,
@@ -34,9 +34,9 @@ const menuList: Menu[] = [
         sort: 1,
         hidden: false,
         tabShow: true,
-        type: 'M',
-      },
-    ],
+        type: 'M'
+      }
+    ]
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ const menuList: Menu[] = [
         sort: 1,
         hidden: false,
         tabShow: true,
-        type: 'M',
+        type: 'M'
       },
       {
         id: 8,
@@ -71,10 +71,10 @@ const menuList: Menu[] = [
         sort: 1,
         hidden: false,
         tabShow: true,
-        type: 'M',
-      },
-    ],
-  },
+        type: 'M'
+      }
+    ]
+  }
 ]
 
 // 导出 mock 接口数组
@@ -85,9 +85,9 @@ export default [
     response: () => {
       return {
         code: 200,
-        data: menuList,
+        data: menuList
       }
-    },
+    }
   },
   {
     url: '/api/routes', // 请求地址
@@ -95,8 +95,8 @@ export default [
     response: () => {
       return {
         code: 200,
-        data: menuList,
+        data: menuList
       }
-    },
-  },
+    }
+  }
 ] as MockMethod[]

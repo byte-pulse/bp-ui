@@ -76,7 +76,7 @@ const closeAll = () => {
   const key = firstRoute.routeName as string
   tabStore.tabs.push({
     label,
-    key,
+    key
   })
   nextTick(() => {
     // 一般你会跳首页, 不然会空白
@@ -128,7 +128,7 @@ const addTab = () => {
   // 添加标签页
   tabStore.tabs.push({
     label: meta.title as string,
-    key: route.name as string,
+    key: route.name as string
   })
 }
 
@@ -152,7 +152,7 @@ watch(
   () => route.name,
   () => {
     addTab()
-  },
+  }
 )
 
 onMounted(() => {
@@ -163,7 +163,11 @@ onMounted(() => {
 <template>
   <div class="w-full h-8 mb-3 flex justify-center items-center bg-(--color-bg-2)">
     <!-- 标签页列表 -->
-    <div ref="scrollRef" class="h-full w-full px-4 overflow-x-scroll no-scrollbar" @wheel.prevent="handleWheel">
+    <div
+      ref="scrollRef"
+      class="h-full w-full px-4 overflow-x-scroll no-scrollbar"
+      @wheel.prevent="handleWheel"
+    >
       <!-- 标签页列表 -->
       <TransitionGroup
         name="routes"
@@ -174,8 +178,16 @@ onMounted(() => {
         @before-leave="beforeLeave"
       >
         <!-- 标签页列表项 -->
-        <div v-for="item in tabStore.tabs" :key="item.key">
-          <a-dropdown trigger="contextMenu" alignPoint @select="handleSelect" :style="{ display: 'block' }">
+        <div
+          v-for="item in tabStore.tabs"
+          :key="item.key"
+        >
+          <a-dropdown
+            trigger="contextMenu"
+            alignPoint
+            @select="handleSelect"
+            :style="{ display: 'block' }"
+          >
             <a-tag
               class="hover:cursor-pointer"
               @click="setActiveTab(item.key)"

@@ -10,7 +10,7 @@ const stats = [
     icon: 'ant-design:eye-outlined',
     trend: 12.5,
     color: 'rgb(var(--primary-6))',
-    bg: 'rgba(var(--primary-6), 0.12)',
+    bg: 'rgba(var(--primary-6), 0.12)'
   },
   {
     label: '活跃用户',
@@ -19,7 +19,7 @@ const stats = [
     icon: 'ant-design:team-outlined',
     trend: 8.2,
     color: 'rgb(var(--success-6))',
-    bg: 'rgba(var(--success-6), 0.12)',
+    bg: 'rgba(var(--success-6), 0.12)'
   },
   {
     label: '新增订单',
@@ -28,7 +28,7 @@ const stats = [
     icon: 'ant-design:shopping-cart-outlined',
     trend: -3.1,
     color: 'rgb(var(--warning-6))',
-    bg: 'rgba(var(--warning-6), 0.12)',
+    bg: 'rgba(var(--warning-6), 0.12)'
   },
   {
     label: '转化率',
@@ -37,8 +37,8 @@ const stats = [
     icon: 'ant-design:rise-outlined',
     trend: 4.6,
     color: 'rgb(var(--danger-6))',
-    bg: 'rgba(var(--danger-6), 0.12)',
-  },
+    bg: 'rgba(var(--danger-6), 0.12)'
+  }
 ]
 
 /* --------------------------- 访问来源占比 --------------------------- */
@@ -46,7 +46,7 @@ const sources = [
   { name: '直接访问', value: 42, color: 'rgb(var(--primary-6))' },
   { name: '搜索引擎', value: 28, color: 'rgb(var(--success-6))' },
   { name: '社交媒体', value: 18, color: 'rgb(var(--warning-6))' },
-  { name: '其他来源', value: 12, color: 'rgb(var(--danger-6))' },
+  { name: '其他来源', value: 12, color: 'rgb(var(--danger-6))' }
 ]
 
 // 由各项占比拼接环形渐变
@@ -74,7 +74,7 @@ const dotsVisit = [
   { x: 330, y: 49 },
   { x: 427, y: 62 },
   { x: 523, y: 26 },
-  { x: 620, y: 39 },
+  { x: 620, y: 39 }
 ]
 
 /* --------------------------- 热门页面排行 --------------------------- */
@@ -83,7 +83,7 @@ const topPages = [
   { name: '/workbench/workspace', value: '21,360', percent: 74, color: 'rgb(var(--success-6))' },
   { name: '/case/table', value: '15,820', percent: 58, color: 'rgb(var(--warning-6))' },
   { name: '/case/form', value: '9,640', percent: 36, color: 'rgb(var(--danger-6))' },
-  { name: '/login', value: '4,210', percent: 18, color: 'rgb(var(--primary-6))' },
+  { name: '/login', value: '4,210', percent: 18, color: 'rgb(var(--primary-6))' }
 ]
 
 /* --------------------------- 最近动态 --------------------------- */
@@ -91,14 +91,14 @@ const activities = [
   { title: '张伟 发布了新版本 v1.4.0', time: '10 分钟前', color: 'rgb(var(--primary-6))' },
   { title: '李娜 提交了 3 个代码评审', time: '1 小时前', color: 'rgb(var(--success-6))' },
   { title: '系统完成每日数据备份', time: '3 小时前', color: 'rgb(var(--warning-6))' },
-  { title: '王强 更新了项目文档', time: '昨天 18:20', color: 'rgb(var(--danger-6))' },
+  { title: '王强 更新了项目文档', time: '昨天 18:20', color: 'rgb(var(--danger-6))' }
 ]
 
 /* --------------------------- 目标完成度 --------------------------- */
 const targets = [
   { label: '季度营收目标', value: 78 },
   { label: '用户增长目标', value: 64 },
-  { label: '内容产出目标', value: 46 },
+  { label: '内容产出目标', value: 46 }
 ]
 </script>
 
@@ -118,7 +118,12 @@ const targets = [
 
     <!-- 概览指标 -->
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-      <a-card v-for="item in stats" :key="item.label" :bordered="false" class="rounded-xl">
+      <a-card
+        v-for="item in stats"
+        :key="item.label"
+        :bordered="false"
+        class="rounded-xl"
+      >
         <div class="flex items-start justify-between gap-3">
           <div class="min-w-0">
             <div class="text-sm text-(--color-text-3)">{{ item.label }}</div>
@@ -131,7 +136,10 @@ const targets = [
             class="h-11 w-11 shrink-0 rounded-lg flex items-center justify-center"
             :style="{ backgroundColor: item.bg, color: item.color }"
           >
-            <IIcon :icon="item.icon" :width="22" />
+            <IIcon
+              :icon="item.icon"
+              :width="22"
+            />
           </div>
         </div>
         <div class="mt-3 flex items-center gap-1.5 text-xs">
@@ -152,7 +160,10 @@ const targets = [
 
     <!-- 趋势图 + 来源占比 -->
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
-      <a-card :bordered="false" class="rounded-xl xl:col-span-2">
+      <a-card
+        :bordered="false"
+        class="rounded-xl xl:col-span-2"
+      >
         <template #title>访问趋势</template>
         <template #extra>
           <div class="flex items-center gap-4">
@@ -171,44 +182,103 @@ const targets = [
           </div>
         </template>
 
-        <svg viewBox="0 0 660 215" class="w-full">
+        <svg
+          viewBox="0 0 660 215"
+          class="w-full"
+        >
           <defs>
-            <linearGradient id="dashboardAreaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" class="chart-grad-start" />
-              <stop offset="100%" class="chart-grad-end" />
+            <linearGradient
+              id="dashboardAreaGrad"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1"
+            >
+              <stop
+                offset="0%"
+                class="chart-grad-start"
+              />
+              <stop
+                offset="100%"
+                class="chart-grad-end"
+              />
             </linearGradient>
           </defs>
 
           <!-- 网格 -->
-          <line v-for="y in gridY" :key="y" x1="40" :y1="y" x2="620" :y2="y" class="chart-grid" />
+          <line
+            v-for="y in gridY"
+            :key="y"
+            x1="40"
+            :y1="y"
+            x2="620"
+            :y2="y"
+            class="chart-grid"
+          />
 
           <!-- 面积 + 折线 -->
-          <path :d="areaVisit" fill="url(#dashboardAreaGrad)" />
-          <path :d="lineOrder" class="chart-line-2" />
-          <path :d="lineVisit" class="chart-line" />
+          <path
+            :d="areaVisit"
+            fill="url(#dashboardAreaGrad)"
+          />
+          <path
+            :d="lineOrder"
+            class="chart-line-2"
+          />
+          <path
+            :d="lineVisit"
+            class="chart-line"
+          />
 
           <!-- 数据点 -->
-          <circle v-for="dot in dotsVisit" :key="dot.x" :cx="dot.x" :cy="dot.y" r="3.5" class="chart-dot" />
+          <circle
+            v-for="dot in dotsVisit"
+            :key="dot.x"
+            :cx="dot.x"
+            :cy="dot.y"
+            r="3.5"
+            class="chart-dot"
+          />
 
           <!-- 横轴 -->
-          <text v-for="(tick, index) in xTicks" :key="tick" :x="tick" y="206" text-anchor="middle" class="chart-axis">
+          <text
+            v-for="(tick, index) in xTicks"
+            :key="tick"
+            :x="tick"
+            y="206"
+            text-anchor="middle"
+            class="chart-axis"
+          >
             {{ weekLabels[index] }}
           </text>
         </svg>
       </a-card>
 
-      <a-card :bordered="false" class="rounded-xl">
+      <a-card
+        :bordered="false"
+        class="rounded-xl"
+      >
         <template #title>访问来源</template>
         <div class="flex flex-col items-center gap-5 pt-2">
-          <div class="relative h-37.5 w-37.5 rounded-full" :style="{ background: conicGradient }">
+          <div
+            class="relative h-37.5 w-37.5 rounded-full"
+            :style="{ background: conicGradient }"
+          >
             <div class="absolute inset-6 flex flex-col items-center justify-center rounded-full bg-(--color-bg-2)">
               <span class="text-xl font-semibold text-(--color-text-1)">8,846</span>
               <span class="text-xs text-(--color-text-3)">总访问</span>
             </div>
           </div>
           <div class="w-full flex flex-col gap-2.5">
-            <div v-for="item in sources" :key="item.name" class="flex items-center gap-2 text-sm">
-              <span class="h-2.5 w-2.5 rounded-sm" :style="{ background: item.color }"></span>
+            <div
+              v-for="item in sources"
+              :key="item.name"
+              class="flex items-center gap-2 text-sm"
+            >
+              <span
+                class="h-2.5 w-2.5 rounded-sm"
+                :style="{ background: item.color }"
+              ></span>
               <span class="flex-1 text-(--color-text-2)">{{ item.name }}</span>
               <span class="text-(--color-text-3)">{{ item.value }}%</span>
             </div>
@@ -219,15 +289,22 @@ const targets = [
 
     <!-- 排行 + 动态 + 目标 -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-      <a-card :bordered="false" class="rounded-xl">
+      <a-card
+        :bordered="false"
+        class="rounded-xl"
+      >
         <template #title>热门页面排行</template>
         <div class="flex flex-col gap-3 pt-1">
-          <div v-for="(item, index) in topPages" :key="item.name" class="flex items-center gap-3">
+          <div
+            v-for="(item, index) in topPages"
+            :key="item.name"
+            class="flex items-center gap-3"
+          >
             <span
               class="flex h-5 w-5 shrink-0 items-center justify-center rounded text-xs font-medium"
               :style="{
                 color: index < 3 ? 'rgb(var(--primary-6))' : 'rgb(var(--color-text-3))',
-                backgroundColor: index < 3 ? 'rgba(var(--primary-6), 0.12)' : 'transparent',
+                backgroundColor: index < 3 ? 'rgba(var(--primary-6), 0.12)' : 'transparent'
               }"
             >
               {{ index + 1 }}
@@ -237,19 +314,37 @@ const targets = [
                 <span class="truncate text-(--color-text-2)">{{ item.name }}</span>
                 <span class="shrink-0 text-xs text-(--color-text-3)">{{ item.value }}</span>
               </div>
-              <a-progress :percent="item.percent" :show-text="false" size="small" :color="item.color" />
+              <a-progress
+                :percent="item.percent"
+                :show-text="false"
+                size="small"
+                :color="item.color"
+              />
             </div>
           </div>
         </div>
       </a-card>
 
-      <a-card :bordered="false" class="rounded-xl">
+      <a-card
+        :bordered="false"
+        class="rounded-xl"
+      >
         <template #title>最近动态</template>
         <div class="flex flex-col pt-1">
-          <div v-for="(item, index) in activities" :key="item.title" class="flex gap-3">
+          <div
+            v-for="(item, index) in activities"
+            :key="item.title"
+            class="flex gap-3"
+          >
             <div class="flex flex-col items-center">
-              <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" :style="{ background: item.color }"></span>
-              <span v-if="index < activities.length - 1" class="my-1 w-px flex-1 bg-(--color-border-2)"></span>
+              <span
+                class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
+                :style="{ background: item.color }"
+              ></span>
+              <span
+                v-if="index < activities.length - 1"
+                class="my-1 w-px flex-1 bg-(--color-border-2)"
+              ></span>
             </div>
             <div class="pb-4">
               <div class="text-sm text-(--color-text-2)">{{ item.title }}</div>
@@ -259,15 +354,25 @@ const targets = [
         </div>
       </a-card>
 
-      <a-card :bordered="false" class="rounded-xl md:col-span-2 xl:col-span-1">
+      <a-card
+        :bordered="false"
+        class="rounded-xl md:col-span-2 xl:col-span-1"
+      >
         <template #title>目标完成度</template>
         <div class="flex flex-col gap-5 pt-2">
-          <div v-for="item in targets" :key="item.label">
+          <div
+            v-for="item in targets"
+            :key="item.label"
+          >
             <div class="mb-2 flex items-center justify-between text-sm">
               <span class="text-(--color-text-2)">{{ item.label }}</span>
               <span class="text-(--color-text-3)">{{ item.value }}%</span>
             </div>
-            <a-progress :percent="item.value" :show-text="false" :stroke-width="8" />
+            <a-progress
+              :percent="item.value"
+              :show-text="false"
+              :stroke-width="8"
+            />
           </div>
         </div>
       </a-card>

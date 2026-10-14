@@ -16,7 +16,7 @@ function useTypedModel<T>() {
     get: () => value.value as T | undefined,
     set: (val) => {
       value.value = val
-    },
+    }
   })
 }
 
@@ -82,21 +82,48 @@ const placeholder = computed(() => {
       allow-clear
       v-bind="item.props"
     >
-      <a-option v-for="opt in item.options" :key="String(opt.value)" :value="opt.value" :disabled="opt.disabled">
+      <a-option
+        v-for="opt in item.options"
+        :key="String(opt.value)"
+        :value="opt.value"
+        :disabled="opt.disabled"
+      >
         {{ opt.label }}
       </a-option>
     </a-select>
-    <a-radio-group v-else-if="item.type === 'radio'" v-model="scalarValue" v-bind="item.props">
-      <a-radio v-for="opt in item.options" :key="String(opt.value)" :value="opt.value" :disabled="opt.disabled">
+    <a-radio-group
+      v-else-if="item.type === 'radio'"
+      v-model="scalarValue"
+      v-bind="item.props"
+    >
+      <a-radio
+        v-for="opt in item.options"
+        :key="String(opt.value)"
+        :value="opt.value"
+        :disabled="opt.disabled"
+      >
         {{ opt.label }}
       </a-radio>
     </a-radio-group>
-    <a-checkbox-group v-else-if="item.type === 'checkbox'" v-model="arrayValue" v-bind="item.props">
-      <a-checkbox v-for="opt in item.options" :key="String(opt.value)" :value="opt.value" :disabled="opt.disabled">
+    <a-checkbox-group
+      v-else-if="item.type === 'checkbox'"
+      v-model="arrayValue"
+      v-bind="item.props"
+    >
+      <a-checkbox
+        v-for="opt in item.options"
+        :key="String(opt.value)"
+        :value="opt.value"
+        :disabled="opt.disabled"
+      >
         {{ opt.label }}
       </a-checkbox>
     </a-checkbox-group>
-    <a-switch v-else-if="item.type === 'switch'" v-model="scalarValue" v-bind="item.props" />
+    <a-switch
+      v-else-if="item.type === 'switch'"
+      v-model="scalarValue"
+      v-bind="item.props"
+    />
     <a-date-picker
       v-else-if="item.type === 'date'"
       v-model="dateValue"
@@ -117,8 +144,16 @@ const placeholder = computed(() => {
       class="w-full"
       v-bind="item.props"
     />
-    <a-slider v-else-if="item.type === 'slider'" v-model="sliderValue" v-bind="item.props" />
-    <a-rate v-else-if="item.type === 'rate'" v-model="numberValue" v-bind="item.props" />
+    <a-slider
+      v-else-if="item.type === 'slider'"
+      v-model="sliderValue"
+      v-bind="item.props"
+    />
+    <a-rate
+      v-else-if="item.type === 'rate'"
+      v-model="numberValue"
+      v-bind="item.props"
+    />
   </a-form-item>
 </template>
 

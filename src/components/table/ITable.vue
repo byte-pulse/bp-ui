@@ -9,7 +9,7 @@ import type {
   TableRecord,
   TableRequestParams,
   TableResponse,
-  TableToolbarConfig,
+  TableToolbarConfig
 } from './types'
 
 defineOptions({ name: 'BpTable' })
@@ -35,7 +35,7 @@ const showSearch = computed(() => (searchConfig.value?.fields.length ?? 0) > 0)
 const searchColumns = computed(() => searchConfig.value?.columns ?? 4)
 // 字段超过一行时可折叠，也可由配置强制指定
 const collapsible = computed(
-  () => searchConfig.value?.collapsible ?? (searchConfig.value?.fields.length ?? 0) > searchColumns.value,
+  () => searchConfig.value?.collapsible ?? (searchConfig.value?.fields.length ?? 0) > searchColumns.value
 )
 const visibleSearchFields = computed<FormFieldConfig[]>(() => {
   const fields = searchConfig.value?.fields ?? []
@@ -84,7 +84,7 @@ const pageSize = computed({
     (typeof props.config.pagination === 'object' ? (props.config.pagination.pageSize ?? 15) : 15),
   set: (value: number) => {
     tableStore.pageSize = value
-  },
+  }
 })
 const pageSizeOptions = computed(() => paginationConfig.value?.pageSizeOptions ?? [15, 30, 50])
 
@@ -101,22 +101,22 @@ const size = computed({
   get: () => tableStore.size ?? props.config.size ?? 'large',
   set: (value: 'mini' | 'small' | 'medium' | 'large') => {
     tableStore.size = value
-  },
+  }
 })
 const bordered = computed<boolean | TableBorder>({
   get: () => tableStore.bordered ?? props.config.bordered ?? true,
   set: (value) => {
     tableStore.bordered = value
-  },
+  }
 })
 const stripe = computed({
   get: () => tableStore.stripe ?? props.config.stripe ?? true,
   set: (value: boolean) => {
     tableStore.stripe = value
-  },
+  }
 })
 const columnVisible = ref<Record<string, boolean>>(
-  Object.fromEntries(props.config.columns.map((column) => [column.dataIndex, true])),
+  Object.fromEntries(props.config.columns.map((column) => [column.dataIndex, true]))
 )
 
 // a-checkbox 只接受布尔值，这里把边框开关收敛为布尔读写
@@ -124,18 +124,18 @@ const borderedToggle = computed({
   get: () => bordered.value === true,
   set: (value: boolean) => {
     bordered.value = value
-  },
+  }
 })
 
 // 工具栏内置功能开关：toolbar 传 false 全部隐藏，传对象则按字段覆盖默认（全开）
 const toolbarOptions = computed<TableToolbarConfig>(() =>
-  typeof props.config.toolbar === 'object' && props.config.toolbar !== null ? props.config.toolbar : {},
+  typeof props.config.toolbar === 'object' && props.config.toolbar !== null ? props.config.toolbar : {}
 )
 const toolbarEnabled = computed(() => props.config.toolbar !== false)
 const showSettings = computed(() => toolbarEnabled.value && (toolbarOptions.value.settings ?? true))
 const showRefresh = computed(() => toolbarEnabled.value && (toolbarOptions.value.refresh ?? true))
 const showSelectionTools = computed(
-  () => toolbarEnabled.value && (toolbarOptions.value.selection ?? true) && Boolean(rowSelectionConfig.value),
+  () => toolbarEnabled.value && (toolbarOptions.value.selection ?? true) && Boolean(rowSelectionConfig.value)
 )
 
 // 组装 Arco 列配置：补充序号列、排序状态，并把简化配置映射为 Arco 需要的结构
@@ -151,7 +151,7 @@ const tableColumns = computed<TableColumnData[]>(() => {
       fixed: hasLeftFixed ? 'left' : undefined,
       ...props.config.indexColumn,
       // 序号始终由组件计算，避免被 indexColumn.render 覆盖
-      render: (data) => (current.value - 1) * pageSize.value + data.rowIndex + 1,
+      render: (data) => (current.value - 1) * pageSize.value + data.rowIndex + 1
     })
   }
   props.config.columns
@@ -162,9 +162,9 @@ const tableColumns = computed<TableColumnData[]>(() => {
         sortable: column.sortable
           ? {
               sortDirections: ['ascend', 'descend'],
-              sortOrder: sortField.value === column.dataIndex ? (sortOrder.value ?? '') : '',
+              sortOrder: sortField.value === column.dataIndex ? (sortOrder.value ?? '') : ''
             }
-          : undefined,
+          : undefined
       })
     })
   return columns
@@ -172,7 +172,7 @@ const tableColumns = computed<TableColumnData[]>(() => {
 
 // 需要透传给外部插槽的自定义列
 const slotColumnNames = computed(() =>
-  props.config.columns.filter((column) => column.slotName && !column.render).map((column) => column.slotName as string),
+  props.config.columns.filter((column) => column.slotName && !column.render).map((column) => column.slotName as string)
 )
 
 const compareValue = (prev: unknown, next: unknown) => {
@@ -192,7 +192,7 @@ const buildQuery = (): TableExportParams => {
 const buildParams = (): TableRequestParams => ({
   pageNum: current.value,
   pageSize: pageSize.value,
-  ...buildQuery(),
+  ...buildQuery()
 })
 
 // 本地数据模式：前端排序 + 前端分页
@@ -253,7 +253,7 @@ const exporting = ref(false)
 
 // 是否存在任意内置工具栏按钮，用于决定与右侧插槽之间的分隔线
 const hasBuiltinToolbar = computed(() =>
-  Boolean(exportConfig.value || showSettings.value || showSelectionTools.value || showRefresh.value),
+  Boolean(exportConfig.value || showSettings.value || showSelectionTools.value || showRefresh.value)
 )
 
 // 携带当前搜索条件走后端导出接口：有勾选则导出选中主键，否则按条件导出全部
@@ -263,7 +263,7 @@ const handleExport = async () => {
   try {
     await exportConfig.value.request({
       ...buildQuery(),
-      keys: selectedKeys.value.length ? [...selectedKeys.value] : undefined,
+      keys: selectedKeys.value.length ? [...selectedKeys.value] : undefined
     })
   } finally {
     exporting.value = false
@@ -317,7 +317,12 @@ onMounted(() => {
 <template>
   <div class="flex h-full min-h-0 flex-col gap-3">
     <!-- 头部搜索区 -->
-    <a-card v-if="showSearch" :bordered="false" class="shrink-0 rounded-lg" :body-style="{ paddingBottom: '8px' }">
+    <a-card
+      v-if="showSearch"
+      :bordered="false"
+      class="shrink-0 rounded-lg"
+      :body-style="{ paddingBottom: '8px' }"
+    >
       <a-form
         ref="searchFormRef"
         :model="searchModel"
@@ -327,13 +332,25 @@ onMounted(() => {
         size="medium"
       >
         <a-row :gutter="[16, 0]">
-          <a-col v-for="field in visibleSearchFields" :key="field.field" :xs="24" :sm="12" :md="searchColSpan(field)">
-            <IFormField v-model="searchModel[field.field]" :item="field" />
+          <a-col
+            v-for="field in visibleSearchFields"
+            :key="field.field"
+            :xs="24"
+            :sm="12"
+            :md="searchColSpan(field)"
+          >
+            <IFormField
+              v-model="searchModel[field.field]"
+              :item="field"
+            />
           </a-col>
         </a-row>
       </a-form>
       <div class="flex items-center justify-end gap-2">
-        <a-button type="primary" @click="search">
+        <a-button
+          type="primary"
+          @click="search"
+        >
           <template #icon><IIcon icon="ant-design:search-outlined" /></template>
           {{ searchConfig?.searchText ?? '查询' }}
         </a-button>
@@ -341,7 +358,11 @@ onMounted(() => {
           <template #icon><IIcon icon="ant-design:reload-outlined" /></template>
           {{ searchConfig?.resetText ?? '重置' }}
         </a-button>
-        <a-button v-if="collapsible" type="text" @click="collapsed = !collapsed">
+        <a-button
+          v-if="collapsible"
+          type="text"
+          @click="collapsed = !collapsed"
+        >
           <template #icon>
             <IIcon :icon="collapsed ? 'ant-design:down-outlined' : 'ant-design:up-outlined'" />
           </template>
@@ -377,15 +398,26 @@ onMounted(() => {
             </a-button>
 
             <!-- 内置设置：密度 / 边框 / 斑马纹 / 列显隐 -->
-            <a-tooltip v-if="showSettings" content="表格设置">
-              <a-dropdown trigger="click" position="br">
+            <a-tooltip
+              v-if="showSettings"
+              content="表格设置"
+            >
+              <a-dropdown
+                trigger="click"
+                position="br"
+              >
                 <a-button size="small">
                   <template #icon><IIcon icon="ant-design:setting-outlined" /></template>
                 </a-button>
                 <template #content>
                   <div class="w-60 p-1">
                     <div class="mb-2 text-xs text-(--color-text-3)">密度</div>
-                    <a-radio-group v-model="size" type="button" size="small" class="mb-3">
+                    <a-radio-group
+                      v-model="size"
+                      type="button"
+                      size="small"
+                      class="mb-3"
+                    >
                       <a-radio value="small">紧凑</a-radio>
                       <a-radio value="medium">默认</a-radio>
                       <a-radio value="large">宽松</a-radio>
@@ -413,27 +445,44 @@ onMounted(() => {
             <!-- 内置选择操作：查看选中 / 清空选择 -->
             <template v-if="showSelectionTools">
               <a-tooltip content="查看选中">
-                <a-button size="small" @click="viewSelectedKeys">
+                <a-button
+                  size="small"
+                  @click="viewSelectedKeys"
+                >
                   <template #icon><IIcon icon="ant-design:eye-outlined" /></template>
                 </a-button>
               </a-tooltip>
               <a-tooltip content="清空选择">
-                <a-button size="small" @click="clearSelectedKeys">
+                <a-button
+                  size="small"
+                  @click="clearSelectedKeys"
+                >
                   <template #icon><IIcon icon="ant-design:clear-outlined" /></template>
                 </a-button>
               </a-tooltip>
             </template>
 
             <!-- 内置刷新 -->
-            <a-tooltip v-if="showRefresh" content="刷新">
-              <a-button size="small" type="primary" @click="reload">
+            <a-tooltip
+              v-if="showRefresh"
+              content="刷新"
+            >
+              <a-button
+                size="small"
+                type="primary"
+                @click="reload"
+              >
                 <template #icon><IIcon icon="ant-design:reload-outlined" /></template>
               </a-button>
             </a-tooltip>
 
             <!-- 业务补充：右侧工具栏插槽 -->
             <template v-if="hasToolbarRightSlot">
-              <a-divider v-if="hasBuiltinToolbar" :margin="0" direction="vertical" />
+              <a-divider
+                v-if="hasBuiltinToolbar"
+                :margin="0"
+                direction="vertical"
+              />
               <slot name="toolbar-right" />
             </template>
           </div>
@@ -459,8 +508,15 @@ onMounted(() => {
             <template #empty>
               <a-empty :description="config.emptyText ?? '暂无数据'" />
             </template>
-            <template v-for="name in slotColumnNames" :key="name" #[name]="scope">
-              <slot :name="name" v-bind="scope" />
+            <template
+              v-for="name in slotColumnNames"
+              :key="name"
+              #[name]="scope"
+            >
+              <slot
+                :name="name"
+                v-bind="scope"
+              />
             </template>
           </a-table>
         </div>

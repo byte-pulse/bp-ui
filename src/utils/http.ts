@@ -30,7 +30,7 @@ class HttpClient {
         }
         return config
       },
-      (error) => Promise.reject(error),
+      (error) => Promise.reject(error)
     )
 
     // 响应拦截器
@@ -44,8 +44,8 @@ class HttpClient {
           router.replace({
             path: '/login',
             query: {
-              redirect: router.currentRoute.value.fullPath,
-            },
+              redirect: router.currentRoute.value.fullPath
+            }
           })
         } else if (response.data.code !== 200) {
           $message.error(response.data.message || '服务器错误')
@@ -68,7 +68,7 @@ class HttpClient {
           $message.error('网络异常')
         }
         return Promise.reject(error)
-      },
+      }
     )
   }
 
@@ -78,7 +78,7 @@ class HttpClient {
   get<T>(url: string, params?: QueryType, config?: AxiosRequestConfig): Promise<T> {
     return this.instance.get(url, {
       params,
-      ...config,
+      ...config
     }) as Promise<T>
   }
 
@@ -102,7 +102,7 @@ class HttpClient {
   delete<T>(url: string, params?: QueryType, config?: AxiosRequestConfig): Promise<T> {
     return this.instance.delete(url, {
       params,
-      ...config,
+      ...config
     }) as Promise<T>
   }
 
@@ -112,7 +112,7 @@ class HttpClient {
     data?: D,
     options?: {
       $onUploadProgress?: ProgressCallback
-    } & AxiosRequestConfig,
+    } & AxiosRequestConfig
   ): Promise<T> {
     return this.instance.post(url, data, {
       ...options,
@@ -121,7 +121,7 @@ class HttpClient {
         if (!e.total) return
         const percent = Math.round((e.loaded / e.total) * 100)
         options?.$onUploadProgress?.(percent, e)
-      },
+      }
     }) as Promise<T>
   }
 
@@ -130,7 +130,7 @@ class HttpClient {
     url: string,
     options?: {
       $onDownloadProgress?: ProgressCallback
-    } & AxiosRequestConfig,
+    } & AxiosRequestConfig
   ): Promise<T> {
     return this.instance.get(url, {
       ...options,
@@ -140,7 +140,7 @@ class HttpClient {
         if (!e.total) return
         const percent = Math.round((e.loaded / e.total) * 100)
         options?.$onDownloadProgress?.(percent, e)
-      },
+      }
     }) as Promise<T>
   }
 }
@@ -152,15 +152,15 @@ const baseConfig: AxiosRequestConfig = {
   // 自定义参数序列化器
   paramsSerializer: (params): string => {
     return qs.stringify(params, {
-      arrayFormat: 'repeat', // arr=1&arr=2
+      arrayFormat: 'repeat' // arr=1&arr=2
     })
-  },
+  }
 }
 
 // 正常使用
 export const fetchAxios = new HttpClient({
   ...baseConfig,
-  adapter: 'fetch', // 使用 fetch 适配器
+  adapter: 'fetch' // 使用 fetch 适配器
 })
 
 // 文件上传下载使用

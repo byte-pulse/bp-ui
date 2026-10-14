@@ -24,13 +24,13 @@ const toggleDark = (event: MouseEvent) => {
     // 新画面从点击位置向外展开
     document.documentElement.animate(
       {
-        clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+        clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`]
       },
       {
         duration: 500,
         easing: 'ease-in-out',
-        pseudoElement: '::view-transition-new(root)',
-      },
+        pseudoElement: '::view-transition-new(root)'
+      }
     )
   })
 }
@@ -83,8 +83,16 @@ const logout = () => {
         v-else
       />
       <!-- 消息 -->
-      <a-badge dot :count="9" :max-count="99">
-        <IIcon :width="18" icon="ant-design:bell-outlined" class="text-(--color-text-2) hover:cursor-pointer" />
+      <a-badge
+        dot
+        :count="9"
+        :max-count="99"
+      >
+        <IIcon
+          :width="18"
+          icon="ant-design:bell-outlined"
+          class="text-(--color-text-2) hover:cursor-pointer"
+        />
       </a-badge>
       <!-- 设置 -->
       <IIcon
@@ -94,8 +102,16 @@ const logout = () => {
         class="text-(--color-text-2) hover:cursor-pointer"
       />
       <!-- 头像 -->
-      <a-dropdown trigger="hover" position="bl" @select="avatarHandleSelect">
-        <a-avatar object-fit="cover" :size="40" :image-url="`https://www.dmoe.cc/random.php`" />
+      <a-dropdown
+        trigger="hover"
+        position="bl"
+        @select="avatarHandleSelect"
+      >
+        <a-avatar
+          object-fit="cover"
+          :size="40"
+          :image-url="`https://www.dmoe.cc/random.php`"
+        />
         <template #content>
           <a-doption>个人中心</a-doption>
           <a-doption>用户设置</a-doption>

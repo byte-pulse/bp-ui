@@ -43,7 +43,7 @@ const tableRef = ref<TableExpose>()
 const columns: TableColumn[] = [
   { dataIndex: 'name', title: '姓名', width: 120 },
   { dataIndex: 'age', title: '年龄', width: 90, sortable: true },
-  { dataIndex: 'status', title: '状态', slotName: 'status' },
+  { dataIndex: 'status', title: '状态', slotName: 'status' }
 ]
 
 const searchFields: FormField[] = [
@@ -54,9 +54,9 @@ const searchFields: FormField[] = [
     type: 'select',
     options: [
       { label: '启用', value: 1 },
-      { label: '禁用', value: 0 },
-    ],
-  },
+      { label: '禁用', value: 0 }
+    ]
+  }
 ]
 
 const fetchTable = (params: TableRequestParams): Promise<TableResponse> => getTableList(params)
@@ -69,13 +69,16 @@ const config: TableConfig = {
   search: { fields: searchFields, columns: 4 },
   showIndex: true,
   rowSelection: true,
-  pagination: { pageSize: 15 },
+  pagination: { pageSize: 15 }
 }
 </script>
 
 <template>
   <div class="h-full min-h-0">
-    <ITable ref="tableRef" :config="config">
+    <ITable
+      ref="tableRef"
+      :config="config"
+    >
       <template #status="{ record }">
         <a-tag :color="record.status === 1 ? 'green' : 'gray'">
           {{ record.status === 1 ? '启用' : '禁用' }}
@@ -153,10 +156,10 @@ const columns: TableColumn[] = [
     dataIndex: 'score',
     title: '评分',
     sortable: true,
-    render: ({ record }) => h(Progress, { percent: Number(record.score) / 100, size: 'small' }),
+    render: ({ record }) => h(Progress, { percent: Number(record.score) / 100, size: 'small' })
   },
   // 或使用具名插槽（slotName 与 <template #xxx> 对应）
-  { dataIndex: 'status', title: '状态', slotName: 'status' },
+  { dataIndex: 'status', title: '状态', slotName: 'status' }
 ]
 ```
 
@@ -180,7 +183,7 @@ const columns: TableColumn[] = [
 const searchFields: FormField[] = [
   { field: 'keyword', label: '关键字', type: 'input', props: { placeholder: '姓名 / 邮箱' } },
   { field: 'dept', label: '部门', type: 'select', options: DEPT_OPTIONS },
-  { field: 'joinDate', label: '入职日期', type: 'date', props: { valueFormat: 'YYYY-MM-DD' } },
+  { field: 'joinDate', label: '入职日期', type: 'date', props: { valueFormat: 'YYYY-MM-DD' } }
 ]
 ```
 
@@ -230,7 +233,7 @@ const handleExport = async (params: TableExportParams) => {
 
 const config: TableConfig = {
   // ...
-  export: { text: '导出', request: handleExport },
+  export: { text: '导出', request: handleExport }
 }
 ```
 
@@ -247,7 +250,7 @@ const config: TableConfig = {
 ```ts
 const config: TableConfig = {
   // ...
-  toolbar: { settings: true, refresh: true, selection: false },
+  toolbar: { settings: true, refresh: true, selection: false }
 }
 ```
 

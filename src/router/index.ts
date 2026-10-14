@@ -10,13 +10,13 @@ const baseRoutes: RouteRecordRaw[] = [
   {
     path: '/404',
     name: '404',
-    component: () => import('@/components/exception/NotFound.vue'),
+    component: () => import('@/components/exception/NotFound.vue')
   },
   {
     path: '/403',
     name: '403',
-    component: () => import('@/components/exception/ForbiddenPage.vue'),
-  },
+    component: () => import('@/components/exception/ForbiddenPage.vue')
+  }
 ]
 
 // 是否加载完成
@@ -59,8 +59,8 @@ function generateRoutes(menus: Menu[], parentPath = ''): RouteRecordRaw[] {
         component: modules[`/src/views/${menu.component}.vue`],
         meta: {
           ...menu,
-          children: undefined,
-        },
+          children: undefined
+        }
       } as RouteRecordRaw)
     }
 
@@ -80,19 +80,19 @@ const router = createRouter({
       path: '/',
       name: 'layout',
       component: () => import('@/layout/Layout.vue'),
-      children: baseRoutes,
+      children: baseRoutes
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/login/Login.vue'),
+      component: () => import('@/views/login/Login.vue')
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'ereryPath',
-      redirect: '/404',
-    },
-  ],
+      redirect: '/404'
+    }
+  ]
 })
 
 // 前置守卫

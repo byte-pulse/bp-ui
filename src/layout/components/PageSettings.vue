@@ -10,12 +10,22 @@ const darkMenu = (flag: boolean) => {
 </script>
 
 <template>
-  <a-drawer v-model:visible="active" :width="300" placement="right" :closable="false" hide-cancel>
+  <a-drawer
+    v-model:visible="active"
+    :width="300"
+    placement="right"
+    :closable="false"
+    hide-cancel
+  >
     <template #title>
       <span>页面设置</span>
     </template>
     <div class="h-full w-full">
-      <a-space direction="vertical" :size="16" style="display: block">
+      <a-space
+        direction="vertical"
+        :size="16"
+        style="display: block"
+      >
         <a-row :gutter="[20, 16]">
           <a-col>
             <a-divider orientation="center"> 菜单风格 </a-divider>
@@ -51,7 +61,11 @@ const darkMenu = (flag: boolean) => {
             <span class="text-sm font-bold">侧边栏宽度</span>
           </a-col>
           <a-col :span="16">
-            <a-input-number v-model="layoutStore.sidebarWidth" :min="layoutStore.collapsedCollapsedWidth" :max="500" />
+            <a-input-number
+              v-model="layoutStore.sidebarWidth"
+              :min="layoutStore.collapsedCollapsedWidth"
+              :max="500"
+            />
           </a-col>
         </a-row>
       </a-space>

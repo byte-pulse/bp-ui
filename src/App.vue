@@ -13,7 +13,7 @@ watch(
       document.body.removeAttribute('arco-theme')
     }
   },
-  { immediate: true },
+  { immediate: true }
 )
 
 onMounted(() => {})

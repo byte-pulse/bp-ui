@@ -10,6 +10,6 @@ export function printBanner() {
   console.info(
     `%c${companyName} %c${version}`,
     'padding: 2px 6px; border-radius: 3px 0 0 3px; color: #fff; background: #20bcca; font-weight: bold;',
-    'padding: 2px 6px; border-radius: 0 3px 3px 0; color: #fff; background: #26dff0; font-weight: bold;',
+    'padding: 2px 6px; border-radius: 0 3px 3px 0; color: #fff; background: #26dff0; font-weight: bold;'
   )
 }

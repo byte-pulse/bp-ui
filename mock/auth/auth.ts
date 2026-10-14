@@ -10,9 +10,9 @@ export default [
       return {
         code: 200,
         data: Mock.mock({
-          token: '@string(10,20)',
-        }),
+          token: '@string(10,20)'
+        })
       }
-    },
-  },
+    }
+  }
 ] as MockMethod[]

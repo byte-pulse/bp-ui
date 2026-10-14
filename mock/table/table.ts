@@ -20,7 +20,7 @@ const SURNAMES = [
   '胡',
   '林',
   '郭',
-  '何',
+  '何'
 ]
 
 // 生成固定数据集，保证分页 / 排序结果稳定
@@ -34,7 +34,7 @@ const buildRow = (id: number): TableRow => ({
   email: Mock.mock('@email'),
   phone: Mock.mock(/^1[3-9]\d{9}$/),
   joinDate: Mock.mock('@date("yyyy-MM-dd")'),
-  score: Mock.mock('@integer(60, 100)') as number,
+  score: Mock.mock('@integer(60, 100)') as number
 })
 
 const ALL_ROWS: TableRow[] = Array.from({ length: 86 }, (_, index) => buildRow(index + 1))
@@ -92,9 +92,9 @@ export default [
 
       return {
         code: 200,
-        data: { pageNum, pageSize, total, list: pageList },
+        data: { pageNum, pageSize, total, list: pageList }
       }
-    },
+    }
   },
   {
     url: '/api/table/export', // 请求地址
@@ -118,7 +118,7 @@ export default [
         row.email,
         row.phone,
         row.joinDate,
-        row.score,
+        row.score
       ])
       const csv = [header, ...rows].map((row) => row.join(',')).join('\r\n')
 
@@ -127,6 +127,6 @@ export default [
       res.setHeader('Content-Disposition', 'attachment; filename="users.csv"')
       // 前置 BOM，保证 Excel 打开中文不乱码
       res.end(`\uFEFF${csv}`)
-    },
-  },
+    }
+  }
 ] as MockMethod[]

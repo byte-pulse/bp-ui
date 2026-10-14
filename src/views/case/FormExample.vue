@@ -22,7 +22,7 @@ const model = ref<Record<string, unknown>>({
   enabled: true,
   score: 60,
   star: 3,
-  remark: '',
+  remark: ''
 })
 
 // 表单配置：分组、列数、字段类型全部由配置对象描述
@@ -41,7 +41,7 @@ const config = computed<FormConfig>(() => ({
           label: '姓名',
           type: 'input',
           rules: [{ required: true, message: '请输入姓名' }],
-          props: { maxLength: 20 },
+          props: { maxLength: 20 }
         },
         { field: 'age', label: '年龄', type: 'number', props: { min: 0, max: 120 } },
         {
@@ -51,8 +51,8 @@ const config = computed<FormConfig>(() => ({
           defaultValue: 'male',
           options: [
             { label: '男', value: 'male' },
-            { label: '女', value: 'female' },
-          ],
+            { label: '女', value: 'female' }
+          ]
         },
         {
           field: 'level',
@@ -62,8 +62,8 @@ const config = computed<FormConfig>(() => ({
           options: [
             { label: '普通', value: 'normal' },
             { label: '高级', value: 'senior' },
-            { label: '管理员', value: 'admin' },
-          ],
+            { label: '管理员', value: 'admin' }
+          ]
         },
         {
           field: 'remark',
@@ -71,9 +71,9 @@ const config = computed<FormConfig>(() => ({
           type: 'textarea',
           // span: 24 让字段独占一行，不受列数影响
           span: 24,
-          placeholder: '请输入备注信息',
-        },
-      ],
+          placeholder: '请输入备注信息'
+        }
+      ]
     },
     {
       title: '联系方式',
@@ -84,13 +84,13 @@ const config = computed<FormConfig>(() => ({
           field: 'phone',
           label: '手机号',
           type: 'input',
-          rules: [{ match: /^1[3-9]\d{9}$/, message: '手机号格式不正确' }],
+          rules: [{ match: /^1[3-9]\d{9}$/, message: '手机号格式不正确' }]
         },
         {
           field: 'email',
           label: '邮箱',
           type: 'input',
-          rules: [{ type: 'email', message: '邮箱格式不正确' }],
+          rules: [{ type: 'email', message: '邮箱格式不正确' }]
         },
         {
           field: 'region',
@@ -100,11 +100,11 @@ const config = computed<FormConfig>(() => ({
             { label: '北京', value: 'beijing' },
             { label: '上海', value: 'shanghai' },
             { label: '广州', value: 'guangzhou' },
-            { label: '深圳', value: 'shenzhen' },
-          ],
+            { label: '深圳', value: 'shenzhen' }
+          ]
         },
-        { field: 'birthday', label: '出生日期', type: 'date' },
-      ],
+        { field: 'birthday', label: '出生日期', type: 'date' }
+      ]
     },
     {
       title: '其他信息',
@@ -118,15 +118,15 @@ const config = computed<FormConfig>(() => ({
             { label: '阅读', value: 'read' },
             { label: '运动', value: 'sport' },
             { label: '音乐', value: 'music' },
-            { label: '旅行', value: 'travel' },
-          ],
+            { label: '旅行', value: 'travel' }
+          ]
         },
         { field: 'enabled', label: '启用账号', type: 'switch' },
         { field: 'score', label: '评分', type: 'slider' },
-        { field: 'star', label: '推荐指数', type: 'rate' },
-      ],
-    },
-  ],
+        { field: 'star', label: '推荐指数', type: 'rate' }
+      ]
+    }
+  ]
 }))
 
 // 提交
@@ -147,12 +147,19 @@ const reset = () => {
 
 <template>
   <div class="w-full pb-4">
-    <a-card :bordered="false" class="rounded-lg">
+    <a-card
+      :bordered="false"
+      class="rounded-lg"
+    >
       <template #title>配置化表单</template>
       <template #extra>
         <a-space :size="8">
           <span class="text-(--color-text-3) text-sm">列数：</span>
-          <a-radio-group v-model="columns" type="button" size="small">
+          <a-radio-group
+            v-model="columns"
+            type="button"
+            size="small"
+          >
             <a-radio :value="1">单列</a-radio>
             <a-radio :value="2">两列</a-radio>
             <a-radio :value="3">三列</a-radio>
@@ -160,9 +167,17 @@ const reset = () => {
         </a-space>
       </template>
 
-      <IForm ref="formRef" v-model="model" :config="config">
+      <IForm
+        ref="formRef"
+        v-model="model"
+        :config="config"
+      >
         <template #footer>
-          <a-button type="primary" @click="submit">提交</a-button>
+          <a-button
+            type="primary"
+            @click="submit"
+            >提交</a-button
+          >
           <a-button @click="reset">重置</a-button>
         </template>
       </IForm>

@@ -56,11 +56,11 @@ watch(
       activeKey.value = [name]
       // 展开的菜单数组
       activeParentKey.value = [
-        ...new Set([...activeParentKey.value, ...(findAncestorRouteNames(menusRef.value, name) || [])]),
+        ...new Set([...activeParentKey.value, ...(findAncestorRouteNames(menusRef.value, name) || [])])
       ]
     }
   },
-  { immediate: true },
+  { immediate: true }
 )
 
 onMounted(() => {
@@ -83,7 +83,7 @@ onMounted(() => {
           'justify-center': layoutStore.collapsed,
           'justify-start': !layoutStore.collapsed,
           'pl-8': !layoutStore.collapsed,
-          'gap-2': !layoutStore.collapsed,
+          'gap-2': !layoutStore.collapsed
         }"
       >
         <img
@@ -91,9 +91,16 @@ onMounted(() => {
           src="@/assets/images/logo-dark.png"
           class="w-8 h-8 object-cover rounded-full"
         />
-        <img v-else src="@/assets/images/logo.png" class="w-8 h-8 object-cover rounded-full" />
+        <img
+          v-else
+          src="@/assets/images/logo.png"
+          class="w-8 h-8 object-cover rounded-full"
+        />
         <Transition enter-from-class="animate__animated animate__zoomIn animate__delay-2s">
-          <p v-if="!layoutStore.collapsed" class="text-(--color-text-1)">
+          <p
+            v-if="!layoutStore.collapsed"
+            class="text-(--color-text-1)"
+          >
             {{ company }}
           </p>
         </Transition>

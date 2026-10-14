@@ -57,18 +57,36 @@ defineExpose<FormExpose>({ validate, reset, clearValidate, getValues })
     :auto-label-width="config.layout === 'horizontal'"
     class="w-full"
   >
-    <template v-for="(group, groupIndex) in config.groups" :key="groupIndex">
-      <a-divider v-if="group.title" orientation="left" :margin="14">
+    <template
+      v-for="(group, groupIndex) in config.groups"
+      :key="groupIndex"
+    >
+      <a-divider
+        v-if="group.title"
+        orientation="left"
+        :margin="14"
+      >
         {{ group.title }}
       </a-divider>
       <a-row :gutter="[20, 0]">
-        <a-col v-for="item in visibleFields(group)" :key="item.field" :xs="24" :md="colSpan(item, group)">
-          <IFormField v-model="model[item.field]" :item="item" />
+        <a-col
+          v-for="item in visibleFields(group)"
+          :key="item.field"
+          :xs="24"
+          :md="colSpan(item, group)"
+        >
+          <IFormField
+            v-model="model[item.field]"
+            :item="item"
+          />
         </a-col>
       </a-row>
     </template>
 
-    <div v-if="$slots.footer" class="mt-2 flex items-center gap-3">
+    <div
+      v-if="$slots.footer"
+      class="mt-2 flex items-center gap-3"
+    >
       <slot name="footer" />
     </div>
   </a-form>

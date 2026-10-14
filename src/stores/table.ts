@@ -21,6 +21,6 @@ export const useTableStore = defineStore(
     return { size, bordered, stripe, pageSize }
   },
   {
-    persist: true,
-  },
+    persist: true
+  }
 )

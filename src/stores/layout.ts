@@ -19,6 +19,6 @@ export const useLayoutStore = defineStore(
     return { collapsed, themeName, showTabs, darkMenu, sidebarWidth, collapsedCollapsedWidth }
   },
   {
-    persist: true,
-  },
+    persist: true
+  }
 )
